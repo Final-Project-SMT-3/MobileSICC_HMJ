@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_navigation" />
+
+    <LinearLayout
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="4"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:elevation="15dp"
+        android:background="@color/colorOnPrimary"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:baselineAligned="false">
+
+        <LinearLayout
+            android:id="@+id/home_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:background="@drawable/round_hover">
+
+            <ImageView
+                android:id="@+id/icon_home"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_home"
+                android:contentDescription="Icon Home" />
+
+            <TextView
+                android:id="@+id/text_home"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:text="Home"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:fontFamily="@font/poppinsregular"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="2dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/timeline_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:background="@android:color/transparent">
+
+            <ImageView
+                android:id="@+id/icon_timeline"
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_task"
+                android:contentDescription="Icon Timeline" />
+
+            <TextView
+                android:id="@+id/text_timeline"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:text="Timeline"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:fontFamily="@font/poppinsregular"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="2dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/bookmark_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:background="@android:color/transparent">
+
+            <ImageView
+                android:id="@+id/icon_save"
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_save"
+                android:contentDescription="Icon Bookmark" />
+
+            <TextView
+                android:id="@+id/text_save"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:text="Bookmark"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:fontFamily="@font/poppinsregular"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="2dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/setting_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:background="@android:color/transparent">
+
+            <ImageView
+                android:id="@+id/icon_setting"
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_setting"
+                android:contentDescription="Icon Setting" />
+
+            <TextView
+                android:id="@+id/text_setting"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:text="Profile"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:fontFamily="@font/poppinsregular"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="2dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
