@@ -42,7 +42,7 @@ public class HomeFragment extends Fragment {
     private void addData() {
         arrayList = new ArrayList<>();
         arrayList.add(new Lomba("PKM", "PKM-C (Teknologi)"));
-        arrayList.add(new Lomba("PKM", "PKM-C (Teknologi)"));
-        arrayList.add(new Lomba("PKM", "PKM-C (Teknologi)"));
+        arrayList.add(new Lomba("KMIPN", "Hackathon"));
+        arrayList.add(new Lomba("PILMAPRES", "Pilmapres"));
     }
 }
