@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
-import com.example.sicc.authentication.LoginActivity;
 
 import com.example.sicc.R;
 
