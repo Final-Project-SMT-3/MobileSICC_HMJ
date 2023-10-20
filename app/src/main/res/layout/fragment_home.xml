@@ -93,151 +93,159 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
-                android:orientation="horizontal">
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    app:cardCornerRadius="10dp">
-
-                    <ImageView
-                        android:id="@+id/logo_kelompok"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:src="@mipmap/ic_sicc"
-                        android:contentDescription="Logo Kelompok" />
-
-                </androidx.cardview.widget.CardView>
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@drawable/gradient_card">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginStart="20dp">
+                    android:layout_marginTop="15dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/nama_kelompok"
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        app:cardCornerRadius="10dp">
+
+                        <ImageView
+                            android:id="@+id/logo_kelompok"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:src="@mipmap/ic_sicc"
+                            android:contentDescription="Logo Kelompok" />
+
+                    </androidx.cardview.widget.CardView>
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="MAJU MAPAN"
-                        android:textSize="20sp"
-                        android:textColor="@color/white"
-                        android:layout_marginTop="5dp"
-                        android:fontFamily="@font/poppinssemibold" />
+                        android:orientation="vertical"
+                        android:layout_marginStart="20dp">
 
-                    <TextView
-                        android:id="@+id/nama_ketua_kelompok"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Mamat Sucamat"
-                        android:textSize="16sp"
-                        android:textColor="@color/white_gray"
-                        android:layout_marginTop="-5dp"
-                        android:fontFamily="@font/poppinsregular"/>
+                        <TextView
+                            android:id="@+id/nama_kelompok"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="MAJU MAPAN"
+                            android:textSize="20sp"
+                            android:textColor="@color/white"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/poppinssemibold" />
+
+                        <TextView
+                            android:id="@+id/nama_ketua_kelompok"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Mamat Sucamat"
+                            android:textSize="16sp"
+                            android:textColor="@color/white_gray"
+                            android:layout_marginTop="-5dp"
+                            android:fontFamily="@font/poppinsregular"/>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
-            </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:gravity="center"
-                android:layout_marginTop="85dp"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
-                android:orientation="horizontal">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="125dp"
+                        android:layout_height="40dp"
+                        app:cardElevation="5dp"
+                        app:cardCornerRadius="20dp"
+                        android:layout_marginEnd="10dp"
+                        app:cardBackgroundColor="#804876A3">
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="125dp"
-                    android:layout_height="40dp"
-                    app:cardElevation="5dp"
-                    app:cardCornerRadius="20dp"
-                    android:layout_marginEnd="10dp"
-                    app:cardBackgroundColor="@color/blue_card_item">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:gravity="center">
-
-                        <TextView
-                            android:id="@+id/jenis_lomba"
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="PKM-C"
-                            android:textSize="17sp"
-                            android:textColor="@color/white_gray"
-                            android:textAlignment="center"
-                            android:fontFamily="@font/poppinsregular"
-                            android:layout_marginTop="5dp"/>
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:gravity="center">
 
-                    </LinearLayout>
+                            <TextView
+                                android:id="@+id/jenis_lomba"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="PKM-C"
+                                android:textSize="17sp"
+                                android:textColor="@color/white_gray"
+                                android:textAlignment="center"
+                                android:fontFamily="@font/poppinsregular"
+                                android:layout_marginTop="5dp"/>
 
-                </androidx.cardview.widget.CardView>
+                        </LinearLayout>
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="125dp"
-                    android:layout_height="40dp"
-                    app:cardElevation="5dp"
-                    app:cardCornerRadius="20dp"
-                    android:layout_marginStart="10dp"
-                    app:cardBackgroundColor="@color/blue_card_item">
+                    </androidx.cardview.widget.CardView>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:gravity="center">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="125dp"
+                        android:layout_height="40dp"
+                        app:cardElevation="5dp"
+                        app:cardCornerRadius="20dp"
+                        android:layout_marginStart="10dp"
+                        app:cardBackgroundColor="#804876A3">
 
-                        <TextView
-                            android:id="@+id/anggota_kelompok"
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="5 Anggota"
-                            android:textSize="17sp"
-                            android:textColor="@color/white_gray"
-                            android:textAlignment="center"
-                            android:fontFamily="@font/poppinsregular"
-                            android:layout_marginTop="5dp"/>
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:gravity="center">
 
-                    </LinearLayout>
+                            <TextView
+                                android:id="@+id/anggota_kelompok"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="5 Anggota"
+                                android:textSize="17sp"
+                                android:textColor="@color/white_gray"
+                                android:textAlignment="center"
+                                android:fontFamily="@font/poppinsregular"
+                                android:layout_marginTop="5dp"/>
+
+                        </LinearLayout>
 
 
-                </androidx.cardview.widget.CardView>
+                    </androidx.cardview.widget.CardView>
 
-            </LinearLayout>
+                </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginTop="152dp"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
-                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Pembimbing :"
-                    android:textSize="17sp"
-                    android:textColor="@color/white_gray"
-                    android:fontFamily="@font/poppinsmedium" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pembimbing :"
+                        android:textSize="17sp"
+                        android:textColor="@color/white_gray"
+                        android:fontFamily="@font/poppinsmedium" />
 
-                <TextView
-                    android:id="@+id/nama_dospem"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Jio Sujiono"
-                    android:textSize="17sp"
-                    android:textColor="@color/white_gray"
-                    android:fontFamily="@font/poppinsmedium"
-                    android:layout_marginStart="5dp"/>
+                    <TextView
+                        android:id="@+id/nama_dospem"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Jio Sujiono"
+                        android:textSize="17sp"
+                        android:textColor="@color/white_gray"
+                        android:fontFamily="@font/poppinsmedium"
+                        android:layout_marginStart="5dp"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -277,7 +285,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_below="@id/layout_titleListCard">

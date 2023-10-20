@@ -1,17 +1,19 @@
-package com.example.sicc;
+package com.example.sicc.Authentication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.method.HideReturnsTransformationMethod;
-import android.text.method.PasswordTransformationMethod;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.sicc.MainActivity;
+import com.example.sicc.R;
+
 public class LoginActivity extends AppCompatActivity {
+    private TextView btn_lupaPassword;
     private EditText txt_email, txt_password;
     private Button btn_login;
     private long backPressedTime = 0;
@@ -28,9 +30,15 @@ public class LoginActivity extends AppCompatActivity {
         txt_email = findViewById(R.id.txt_email);
         txt_password = findViewById(R.id.txt_password);
         btn_login = findViewById(R.id.btn_login);
+        btn_lupaPassword = findViewById(R.id.lupa_password);
 
         btn_login.setOnClickListener(v-> {
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            finish();
+        });
+
+        btn_lupaPassword.setOnClickListener(v-> {
+            startActivity(new Intent(LoginActivity.this, LupaPasswordActivity.class));
             finish();
         });
     }
