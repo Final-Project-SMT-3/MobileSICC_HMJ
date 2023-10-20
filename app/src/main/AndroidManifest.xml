@@ -13,10 +13,14 @@
         android:theme="@style/Theme.SICC"
         tools:targetApi="31">
         <activity
-            android:name=".Authentication.LupaPasswordActivity"
+            android:name=".authentication.KodeOTPActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"/>
+        <activity
+            android:name=".authentication.LupaPasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".Authentication.LoginActivity"
+            android:name=".authentication.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorOnPrimary"
-    tools:context=".authentication.LupaPasswordActivity">
+    tools:context=".authentication.KodeOTPActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -36,7 +36,7 @@
             android:id="@+id/welcome_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Lupa Password"
+            android:text="Kode OTP"
             android:textSize="25sp"
             android:textAlignment="center"
             android:fontFamily="@font/poppinssemibold"
@@ -48,7 +48,7 @@
             android:id="@+id/desc_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Masukan Email Anda, Kami Akan Mengirim Kode Verifikasi"
+            android:text="Masukan Kode OTP Anda, Yang Kami Kirimkan Melalui Email"
             android:textSize="16sp"
             android:textAlignment="center"
             android:fontFamily="@font/poppinsregular"
@@ -56,42 +56,42 @@
             android:layout_marginEnd="20dp"
             android:layout_below="@id/welcome_text"/>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/email_input_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="80dp"
+        <com.chaos.view.PinView
+            android:id="@+id/txt_codeOTP"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            style="@style/PinWidget.PinView"
+            android:cursorVisible="true"
+            android:hint="Hint."
+            android:textSize="23sp"
+            android:inputType="number"
+            android:fontFamily="@font/poppinssemibold"
+            android:layout_marginTop="70dp"
+            android:layout_centerHorizontal="true"
+            android:elevation="10dp"
+            app:itemWidth="70dp"
+            app:itemHeight="70dp"
+            app:itemRadius="10dp"
+            app:itemSpacing="15dp"
+            app:lineColor="@color/white_gray"
+            app:viewType="rectangle"
             android:layout_below="@id/desc_text">
 
-            <EditText
-                android:id="@+id/txt_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="E-Mail"
-                android:drawableStart="@drawable/ic_email"
-                android:drawablePadding="15dp"
-                android:inputType="textEmailAddress"
-                android:textSize="16sp"
-                android:fontFamily="@font/poppinsregular"
-                android:autofillHints="" />
-
-        </com.google.android.material.textfield.TextInputLayout>
+        </com.chaos.view.PinView>
 
 
         <Button
-            android:id="@+id/btn_sendCode"
+            android:id="@+id/btn_Confirm"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:text="Kirim Kode"
+            android:text="Konfirmasi"
             android:textSize="18sp"
             android:fontFamily="@font/poppinsregular"
             android:layout_marginTop="100dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="30dp"
-            android:layout_below="@id/email_input_layout">
+            android:layout_below="@id/txt_codeOTP">
         </Button>
 
     </RelativeLayout>
