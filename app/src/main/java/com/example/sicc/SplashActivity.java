@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-import com.example.sicc.Authentication.LoginActivity;
+import com.example.sicc.authentication.LoginActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
