@@ -31,7 +31,7 @@ public class HomeFragment extends Fragment {
         addData();
 
         recyclerView = view.findViewById(R.id.recyclerView_Lomba);
-        adapter = new LombaAdapter(arrayList);
+        adapter = new LombaAdapter(getContext(), arrayList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
@@ -41,8 +41,8 @@ public class HomeFragment extends Fragment {
 
     private void addData() {
         arrayList = new ArrayList<>();
-        arrayList.add(new Lomba("PKM", "PKM-C (Teknologi)"));
-        arrayList.add(new Lomba("KMIPN", "Hackathon"));
-        arrayList.add(new Lomba("PILMAPRES", "Pilmapres"));
+        arrayList.add(new Lomba("PKM", "PKM-C (Teknologi)", "21 Februari 2023", R.string.desc_lomba));
+        arrayList.add(new Lomba("KMIPN", "Hackathon","21 Maret 2023", R.string.desc_lomba));
+        arrayList.add(new Lomba("PILMAPRES", "Pilmapres","21 Juli 2023", R.string.desc_lomba));
     }
 }
