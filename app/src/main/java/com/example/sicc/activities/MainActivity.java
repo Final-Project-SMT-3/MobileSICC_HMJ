@@ -1,4 +1,4 @@
-package com.example.sicc;
+package com.example.sicc.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,7 +11,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.sicc.R;
 import com.example.sicc.fragments.HomeFragment;
+import com.example.sicc.fragments.ProgressFragment;
+import com.example.sicc.fragments.SettingFragment;
 
 public class MainActivity extends AppCompatActivity {
     private LinearLayout homeLayout, timelineLayout, saveLayout, settingLayout;
@@ -87,6 +90,10 @@ public class MainActivity extends AppCompatActivity {
                 txtTimeline.setVisibility(View.VISIBLE);
                 timelineLayout.setBackgroundResource(R.drawable.round_hover);
 
+                getSupportFragmentManager().beginTransaction().setReorderingAllowed(true)
+                        .replace(R.id.fragment_container, ProgressFragment.class, null)
+                        .commit();
+
                 ScaleAnimation scaleAnimation = new ScaleAnimation(0.8f, 1.0f, 1f, 1f, Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF, 0.0f);
                 scaleAnimation.setDuration(200);
                 scaleAnimation.setFillAfter(true);
@@ -130,6 +137,10 @@ public class MainActivity extends AppCompatActivity {
 
                 txtSetting.setVisibility(View.VISIBLE);
                 settingLayout.setBackgroundResource(R.drawable.round_hover);
+
+                getSupportFragmentManager().beginTransaction().setReorderingAllowed(true)
+                        .replace(R.id.fragment_container, SettingFragment.class, null)
+                        .commit();
 
                 ScaleAnimation scaleAnimation = new ScaleAnimation(0.8f, 1.0f, 1f, 1f, Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF, 0.0f);
                 scaleAnimation.setDuration(200);

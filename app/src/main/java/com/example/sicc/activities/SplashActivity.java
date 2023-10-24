@@ -1,4 +1,4 @@
-package com.example.sicc;
+package com.example.sicc.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.example.sicc.R;
 import com.example.sicc.authentication.LoginActivity;
 
 public class SplashActivity extends AppCompatActivity {

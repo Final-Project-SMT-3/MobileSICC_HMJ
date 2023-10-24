@@ -1,4 +1,4 @@
-package com.example.sicc;
+package com.example.sicc.activity_details;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.sicc.R;
+import com.example.sicc.activities.MainActivity;
 
 public class DetailInformationActivity extends AppCompatActivity {
     private ImageView btn_back;
@@ -40,7 +43,7 @@ public class DetailInformationActivity extends AppCompatActivity {
             startActivity(new Intent(DetailInformationActivity.this, MainActivity.class));
             finish();
         });
-        
+
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             judul.setText(bundle.getString("judul"));

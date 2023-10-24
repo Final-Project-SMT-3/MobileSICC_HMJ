@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorOnPrimary"
-    tools:context=".DetailInformationActivity">
+    tools:context=".activity_details.DetailInformationActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
