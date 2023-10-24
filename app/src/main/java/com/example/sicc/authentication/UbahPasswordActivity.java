@@ -7,7 +7,7 @@ import android.widget.Toast;
 
 import com.example.sicc.R;
 
-public class ResetPasswordActivity extends AppCompatActivity {
+public class UbahPasswordActivity extends AppCompatActivity {
     private long backPressedTime = 0;
 
     @Override

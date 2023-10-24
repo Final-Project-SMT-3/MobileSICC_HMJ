@@ -11,9 +11,10 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import com.chaos.view.PinView;
+
 import com.example.sicc.R;
+
 
 public class KodeOTPActivity extends AppCompatActivity {
     private Button btn_konfirmasi;
@@ -45,7 +46,7 @@ public class KodeOTPActivity extends AppCompatActivity {
         });
 
         btn_konfirmasi.setOnClickListener(v-> {
-            startActivity(new Intent(KodeOTPActivity.this, ResetPasswordActivity.class));
+            startActivity(new Intent(KodeOTPActivity.this, UbahPasswordActivity.class));
             finish();
         });
 
