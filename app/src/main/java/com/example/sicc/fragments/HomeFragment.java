@@ -22,7 +22,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
-    private TextView txt_name;
+    private TextView txt_name, txt_ketua;
     private RecyclerView recyclerView;
     private LombaAdapter adapter;
     private ArrayList<Lomba> arrayList;
@@ -40,42 +40,38 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
-    private String formatName(String name) {
-        String[] words = name.split(" ");
-        StringBuilder formattedName = new StringBuilder();
-
-        for (String word : words) {
-            if (formattedName.length() > 0) {
-                formattedName.append(" ");
-            }
-            if (word.length() > 0) {
-                formattedName.append(Character.toUpperCase(word.charAt(0)));
-                if (word.length() > 1) {
-                    formattedName.append(word.substring(1).toLowerCase());
-                }
-            }
-        }
-
-        return formattedName.toString();
-    }
-
     private void init() {
         addData();
 
         txt_name = view.findViewById(R.id.txt_name);
+        txt_ketua = view.findViewById(R.id.nama_ketua_kelompok);
         recyclerView = view.findViewById(R.id.recyclerView_Lomba);
         sharedPreferences = getContext().getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
 
-        String name = sharedPreferences.getString("name", "Guest");
-        // "Guest" is the default value to be returned if the key "name" is not found in shared preferences
-
-        name = formatName(name);
-        txt_name.setText(name + " 👋");
+        getData();
 
         adapter = new LombaAdapter(getContext(), arrayList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+    }
+
+    private String formatName(String name) {
+        String[] words = name.split(" ");
+        if (words.length >= 2) {
+            return words[0] + " " + words[1];
+        } else {
+            return name;
+        }
+    }
+
+    private void getData() {
+        // "Guest" is the default value to be returned if the key "name" is not found in shared preferences
+        String namaUser = sharedPreferences.getString("name", "Guest");
+        String nama= formatName(namaUser);
+
+        txt_name.setText(nama + " 👋");
+        txt_ketua.setText(nama);
     }
 
     private void addData() {

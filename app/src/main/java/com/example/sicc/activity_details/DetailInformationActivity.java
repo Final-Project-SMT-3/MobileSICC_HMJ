@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.sicc.R;
 import com.example.sicc.activities.MainActivity;
 
@@ -36,11 +37,13 @@ public class DetailInformationActivity extends AppCompatActivity {
 
         btn_back.setOnClickListener(v-> {
             startActivity(new Intent(DetailInformationActivity.this, MainActivity.class));
+            Animatoo.INSTANCE.animateSlideRight(this);
             finish();
         });
 
         btn_close.setOnClickListener(v-> {
             startActivity(new Intent(DetailInformationActivity.this, MainActivity.class));
+            Animatoo.INSTANCE.animateSlideRight(this);
             finish();
         });
 

@@ -33,6 +33,7 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.9.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("com.github.AtifSayings:Animatoo:1.0.1")
     implementation("de.hdodenhof:circleimageview:3.1.0")
     implementation("io.github.chaosleung:pinview:1.4.4")
     implementation("com.android.volley:volley:1.2.1")

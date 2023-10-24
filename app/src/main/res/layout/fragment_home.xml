@@ -37,7 +37,7 @@
                     android:id="@+id/txt_name"
                     android:layout_width="210dp"
                     android:layout_height="wrap_content"
-                    android:text="Hafidz Fadhillah👋"
+                    android:text="Guest Name👋"
                     android:textSize="22sp"
                     android:fontFamily="@font/poppinssemibold"/>
 
@@ -58,7 +58,7 @@
             app:cardElevation="5dp"
             app:cardCornerRadius="10dp"
             app:cardBackgroundColor="@color/colorOnPrimary"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_below="@id/layout_profile">
@@ -86,7 +86,7 @@
             android:text="Profile Kelompok"
             android:textSize="17sp"
             android:fontFamily="@font/poppinssemibold"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="20dp"
             android:layout_marginStart="20dp"
             android:layout_below="@id/card_search"/>
 
@@ -140,7 +140,7 @@
                             android:id="@+id/nama_kelompok"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="MAJU MAPAN"
+                            android:text="NAMA KELOMPOK"
                             android:textSize="20sp"
                             android:textColor="@color/white"
                             android:layout_marginTop="5dp"
@@ -150,7 +150,7 @@
                             android:id="@+id/nama_ketua_kelompok"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Mamat Sucamat"
+                            android:text="Guest Name"
                             android:textSize="16sp"
                             android:textColor="@color/white_gray"
                             android:layout_marginTop="-5dp"
@@ -250,7 +250,7 @@
                         android:id="@+id/nama_dospem"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Jio Sujiono"
+                        android:text="Guest Name"
                         android:textSize="17sp"
                         android:textColor="@color/white_gray"
                         android:fontFamily="@font/poppinsmedium"
@@ -269,7 +269,7 @@
             android:text="Daftar Kegiatan Lomba"
             android:textSize="17sp"
             android:fontFamily="@font/poppinssemibold"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="20dp"
             android:layout_marginStart="20dp"
             android:layout_below="@id/card_information"/>
 
@@ -278,7 +278,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_below="@id/layout_titleListCard">

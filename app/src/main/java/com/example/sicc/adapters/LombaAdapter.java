@@ -1,5 +1,6 @@
 package com.example.sicc.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.sicc.activity_details.DetailInformationActivity;
 import com.example.sicc.R;
 import com.example.sicc.models.Lomba;
@@ -40,9 +42,7 @@ public class LombaAdapter extends RecyclerView.Adapter<LombaAdapter.LombaViewHol
         holder.txt_tgl_lomba.setText(dataList.get(position).getTgl_lomba());
         holder.txt_desk_lomba.setText(dataList.get(position).getDeskripsi_lomba());
 
-        holder.txt_desk_lomba.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        holder.txt_desk_lomba.setOnClickListener(v-> {
                 Intent intent = new Intent(context, DetailInformationActivity.class);
                 intent.putExtra("judul", dataList.get(holder.getAdapterPosition()).getNama_lomba());
                 intent.putExtra("sub_Judul", dataList.get(holder.getAdapterPosition()).getJenis_lomba());
@@ -50,7 +50,8 @@ public class LombaAdapter extends RecyclerView.Adapter<LombaAdapter.LombaViewHol
                 intent.putExtra("desc_Lomba", dataList.get(holder.getAdapterPosition()).getDeskripsi_lomba());
 
                 context.startActivity(intent);
-            }
+                Animatoo.INSTANCE.animateSlideLeft(context);
+                ((Activity) context).finish();
         });
     }
 

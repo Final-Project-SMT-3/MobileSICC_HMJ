@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
-import com.example.sicc.authentication.KodeOTPActivity;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.sicc.R;
 
 public class LupaPasswordActivity extends AppCompatActivity {
@@ -30,11 +30,13 @@ public class LupaPasswordActivity extends AppCompatActivity {
 
         btn_back.setOnClickListener(v-> {
             startActivity(new Intent(LupaPasswordActivity.this, LoginActivity.class));
+            Animatoo.INSTANCE.animateSlideRight(this);
             finish();
         });
 
         btn_sendCode.setOnClickListener(v-> {
             startActivity(new Intent(LupaPasswordActivity.this, KodeOTPActivity.class));
+            Animatoo.INSTANCE.animateSlideLeft(this);
             finish();
         });
     }
