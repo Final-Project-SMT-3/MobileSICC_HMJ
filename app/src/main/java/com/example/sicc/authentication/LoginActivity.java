@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,6 +23,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.sicc.activities.MainActivity;
 import com.example.sicc.R;
 import com.example.sicc.models.Constant;
@@ -34,8 +37,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
-    private TextInputLayout layoutEmail, layoutPassword;
-    private EditText txt_email, txt_password;
+    private TextInputLayout layoutUsername, layoutPassword;
+    private EditText txt_username, txt_password;
     private TextView btn_lupaPassword;
     private Button btn_login;
     private long backPressedTime = 0;
@@ -49,12 +52,53 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void init() {
-        layoutEmail = findViewById(R.id.email_input_layout);
+        layoutUsername = findViewById(R.id.username_input_layout);
         layoutPassword = findViewById(R.id.password_input_layout);
-        txt_email = findViewById(R.id.txt_email);
+        txt_username = findViewById(R.id.txt_username);
         txt_password = findViewById(R.id.txt_password);
         btn_login = findViewById(R.id.btn_login);
         btn_lupaPassword = findViewById(R.id.lupa_password);
+
+        txt_username.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (!txt_username.getText().toString().isEmpty()) {
+                    layoutUsername.setErrorEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        txt_password.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (!txt_password.getText().toString().isEmpty()) {
+                    layoutPassword.setErrorEnabled(false);
+                }
+
+                if (txt_password.getText().toString().length() >= 8) {
+                    layoutPassword.setErrorEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
         btn_login.setOnClickListener(v-> {
             if (validate()) {
@@ -64,14 +108,15 @@ public class LoginActivity extends AppCompatActivity {
 
         btn_lupaPassword.setOnClickListener(v-> {
             startActivity(new Intent(LoginActivity.this, LupaPasswordActivity.class));
+            Animatoo.INSTANCE.animateSlideLeft(this);
             finish();
         });
     }
 
     private boolean validate() {
-        if (txt_email.getText().toString().isEmpty()) {
-            layoutEmail.setErrorEnabled(true);
-            layoutEmail.setError("Email Tidak Boleh Kosong");
+        if (txt_username.getText().toString().isEmpty()) {
+            layoutUsername.setErrorEnabled(true);
+            layoutUsername.setError("Username Tidak Boleh Kosong");
             return false;
         }
 
@@ -100,7 +145,7 @@ public class LoginActivity extends AppCompatActivity {
                 int statusCode = res.getInt("status_code");
                 String message = res.getString("message");
 
-                if (statusCode == 200) {
+                if (statusCode == 200 && message.equals("Success")) {
                     JSONObject userData = res.getJSONObject("response");
 
                     SharedPreferences userPref = getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
@@ -114,8 +159,10 @@ public class LoginActivity extends AppCompatActivity {
 
                     // If login success
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                    Toast.makeText(getApplicationContext(), "Login Sukses !", Toast.LENGTH_SHORT).show();
+                    Animatoo.INSTANCE.animateSlideLeft(this);
+                    finish();
 
+                    Toast.makeText(getApplicationContext(), "Login Sukses !", Toast.LENGTH_SHORT).show();
                 } else {
                     // Handle the case when the response indicates an error
                     Toast.makeText(getApplicationContext(), "Login Gagal : " + message, Toast.LENGTH_SHORT).show();
@@ -141,7 +188,7 @@ public class LoginActivity extends AppCompatActivity {
             protected Map<String,String> getParams(){
                 Map<String,String> params = new HashMap<String, String>();
                 params.put("password", txt_password.getText().toString().trim());
-                params.put("username", txt_email.getText().toString().trim());
+                params.put("username", txt_username.getText().toString().trim());
                 return params;
             }
         };

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorOnPrimary"
+    tools:context=".activity_details.InformasiAplikasiActivity">
+
+    <ImageView
+        android:id="@+id/btn_back"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/ic_back_button"
+        android:layout_marginTop="25dp"
+        android:layout_marginStart="20dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:contentDescription="Icon Back Button" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Informasi Aplikasi"
+        android:textSize="22sp"
+        android:fontFamily="@font/poppinssemibold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <ImageView
+        android:id="@+id/logo_image"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:src="@mipmap/ic_sicc_foreground"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/title"
+        android:contentDescription="Logo SICC" />
+
+    <TextView
+        android:id="@+id/welcome_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Informasi Aplikasi"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:fontFamily="@font/poppinssemibold"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_below="@id/logo_image"/>
+
+    <TextView
+        android:id="@+id/desc_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SICC Adalah Kepanjangan Dari Sistem Informasi Competition Center Yang Bertujuan Untuk Memanajemen Progress Kegiatan Lomba Mahasiswa Sehingga Lebih Efisien Dan Terarah."
+        android:textSize="16sp"
+        android:textAlignment="center"
+        android:fontFamily="@font/poppinsregular"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_below="@id/welcome_text"/>
+
+    <TextView
+        android:id="@+id/title_dev_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Oleh :"
+        android:textSize="16sp"
+        android:textAlignment="center"
+        android:fontFamily="@font/poppinsregular"
+        android:layout_marginTop="75dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_below="@id/desc_text"/>
+
+    <TextView
+        android:id="@+id/dev_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Kelompok 1 - TIF D"
+        android:textSize="16sp"
+        android:textAlignment="center"
+        android:fontFamily="@font/poppinsregular"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_below="@id/title_dev_text"/>
+
+    <TextView
+        android:id="@+id/title_version_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Versi Aplikasi :"
+        android:textSize="16sp"
+        android:textAlignment="center"
+        android:fontFamily="@font/poppinsregular"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_above="@id/version_text"/>
+
+    <TextView
+        android:id="@+id/version_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1.0.0"
+        android:textSize="16sp"
+        android:textAlignment="center"
+        android:fontFamily="@font/poppinsregular"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="35dp"/>
+
+</RelativeLayout>

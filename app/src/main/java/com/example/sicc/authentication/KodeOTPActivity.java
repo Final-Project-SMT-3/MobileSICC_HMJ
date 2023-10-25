@@ -11,6 +11,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.chaos.view.PinView;
 
 import com.example.sicc.R;
@@ -42,11 +44,13 @@ public class KodeOTPActivity extends AppCompatActivity {
 
         btn_back.setOnClickListener(v-> {
             startActivity(new Intent(KodeOTPActivity.this, LupaPasswordActivity.class));
+            Animatoo.INSTANCE.animateSlideRight(this);
             finish();
         });
 
         btn_konfirmasi.setOnClickListener(v-> {
             startActivity(new Intent(KodeOTPActivity.this, UbahPasswordActivity.class));
+            Animatoo.INSTANCE.animateSlideLeft(this);
             finish();
         });
 

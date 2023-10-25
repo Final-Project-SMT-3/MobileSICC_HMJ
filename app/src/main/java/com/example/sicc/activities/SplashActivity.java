@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.sicc.R;
 import com.example.sicc.authentication.LoginActivity;
 
@@ -20,6 +21,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
                 startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+                Animatoo.INSTANCE.animateSlideLeft(SplashActivity.this);
                 finish();
             }
         }, 1000);
