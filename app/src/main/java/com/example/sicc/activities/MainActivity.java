@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportFragmentManager().beginTransaction().setReorderingAllowed(true)
                         .replace(R.id.fragment_container, HomeFragment.class, null)
+                        .addToBackStack(null)
                         .commit();
 
         homeLayout.setOnClickListener(v-> {
@@ -66,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
                 getSupportFragmentManager().beginTransaction().setReorderingAllowed(true)
                         .replace(R.id.fragment_container, HomeFragment.class, null)
+                        .addToBackStack(null)
                         .commit();
 
                 ScaleAnimation scaleAnimation = new ScaleAnimation(0.8f, 1.0f, 1f, 1f, Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF, 0.0f);
@@ -92,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
                 getSupportFragmentManager().beginTransaction().setReorderingAllowed(true)
                         .replace(R.id.fragment_container, ProgressFragment.class, null)
+                        .addToBackStack(null)
                         .commit();
 
                 ScaleAnimation scaleAnimation = new ScaleAnimation(0.8f, 1.0f, 1f, 1f, Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF, 0.0f);
@@ -140,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
 
                 getSupportFragmentManager().beginTransaction().setReorderingAllowed(true)
                         .replace(R.id.fragment_container, SettingFragment.class, null)
+                        .addToBackStack(null)
                         .commit();
 
                 ScaleAnimation scaleAnimation = new ScaleAnimation(0.8f, 1.0f, 1f, 1f, Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF, 0.0f);
