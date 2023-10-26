@@ -10,7 +10,7 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Profile"
+        android:text="Pengaturan"
         android:textSize="22sp"
         android:fontFamily="@font/poppinssemibold"
         android:layout_centerHorizontal="true"
@@ -51,7 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="75dp"
+        android:layout_marginTop="65dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_below="@id/txt_jabatan">
@@ -68,7 +68,7 @@
             android:layout_height="wrap_content"
             android:text="Profile Kelompok"
             android:textSize="17sp"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="5dp"
             android:fontFamily="@font/poppinsmedium"/>
 
     </LinearLayout>
@@ -95,7 +95,7 @@
             android:layout_height="wrap_content"
             android:text="Informasi Aplikasi"
             android:textSize="17sp"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="5dp"
             android:fontFamily="@font/poppinsmedium"/>
 
     </LinearLayout>
@@ -123,7 +123,7 @@
             android:text="Logout"
             android:textSize="17sp"
             android:textColor="@android:color/holo_red_light"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="5dp"
             android:fontFamily="@font/poppinsmedium"/>
 
     </LinearLayout>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="85dp"
+    app:cardCornerRadius="10dp"
+    android:elevation="5dp"
+    app:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/foto_profil"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/ic_account"
+            android:layout_marginTop="6dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="10dp"
+            android:contentDescription="Logo Lomba" />
+
+        <TextView
+            android:id="@+id/nama_anggota"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Guest Name"
+            android:textSize="17sp"
+            android:textAlignment="textStart"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="12dp"
+            android:fontFamily="@font/poppinssemibold"
+            android:layout_toEndOf="@id/foto_profil"/>
+
+        <LinearLayout
+            android:id="@+id/layout_info_anggota"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginEnd="12dp"
+            android:layout_toEndOf="@id/foto_profil"
+            android:layout_below="@id/nama_anggota">
+
+            <TextView
+                android:id="@+id/txt_prodi_smt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TIF - SMT 3"
+                android:textSize="16sp"
+                android:textAlignment="textStart"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppinsregular" />
+
+            <TextView
+                android:id="@+id/tgl_lahir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="21 Februari 2023"
+                android:textSize="16sp"
+                android:textAlignment="textEnd"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppinsregular"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

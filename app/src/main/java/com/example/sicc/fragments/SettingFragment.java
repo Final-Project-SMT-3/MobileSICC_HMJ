@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.sicc.R;
+import com.example.sicc.activity_details.DetailProfileActivity;
 import com.example.sicc.activity_details.InformasiAplikasiActivity;
 import com.example.sicc.authentication.LoginActivity;
 
@@ -36,6 +37,11 @@ public class SettingFragment extends Fragment {
         btn_profile = view.findViewById(R.id.btn_profile_kelompok);
         btn_info = view.findViewById(R.id.btn_info_aplikasi);
         btn_logout = view.findViewById(R.id.btn_logout);
+
+        btn_profile.setOnClickListener(v-> {
+            startActivity(new Intent(getContext(), DetailProfileActivity.class));
+            Animatoo.INSTANCE.animateSlideLeft(getContext());
+        });
 
         btn_info.setOnClickListener(v-> {
             startActivity(new Intent(getContext(), InformasiAplikasiActivity.class));

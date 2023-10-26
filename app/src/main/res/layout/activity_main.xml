@@ -152,7 +152,7 @@
                 android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
-                android:text="Profile"
+                android:text="Pengaturan"
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 android:fontFamily="@font/poppinsregular"
