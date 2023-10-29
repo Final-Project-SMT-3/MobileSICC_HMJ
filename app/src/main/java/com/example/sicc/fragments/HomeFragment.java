@@ -17,8 +17,6 @@ import com.example.sicc.R;
 import com.example.sicc.adapters.LombaAdapter;
 import com.example.sicc.models.Lomba;
 
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
