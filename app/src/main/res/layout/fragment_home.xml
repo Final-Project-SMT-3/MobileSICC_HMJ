@@ -164,7 +164,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:gravity="center"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="11dp"
                     android:layout_marginStart="15dp"
                     android:layout_marginEnd="15dp"
                     android:orientation="horizontal">
@@ -233,7 +233,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:layout_marginTop="7dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginStart="15dp"
                     android:layout_marginEnd="15dp"
                     android:orientation="horizontal">
@@ -242,16 +242,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Pembimbing :"
-                        android:textSize="17sp"
+                        android:textSize="13sp"
                         android:textColor="@color/white_gray"
                         android:fontFamily="@font/poppinsmedium" />
 
                     <TextView
                         android:id="@+id/nama_dospem"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Guest Name"
-                        android:textSize="17sp"
+                        android:textSize="13sp"
                         android:textColor="@color/white_gray"
                         android:fontFamily="@font/poppinsmedium"
                         android:layout_marginStart="5dp"/>

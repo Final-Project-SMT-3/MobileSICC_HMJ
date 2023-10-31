@@ -51,7 +51,7 @@ public class LombaAdapter extends RecyclerView.Adapter<LombaAdapter.LombaViewHol
 
                 context.startActivity(intent);
                 Animatoo.INSTANCE.animateSlideLeft(context);
-                ((Activity) context).finish();
+//                ((Activity) context).finish();
         });
     }
 
