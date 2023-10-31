@@ -156,6 +156,74 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void setButtonActive(int tab) {
+        switch (tab) {
+            case 1:
+                txtTimeline.setVisibility(View.GONE);
+                txtSave.setVisibility(View.GONE);
+                txtSetting.setVisibility(View.GONE);
+
+                timelineLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                saveLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                settingLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+
+                txtHome.setVisibility(View.VISIBLE);
+                homeLayout.setBackgroundResource(R.drawable.round_hover);
+
+                selectedTab = 1;
+                break;
+
+            case 2:
+                txtHome.setVisibility(View.GONE);
+                txtSave.setVisibility(View.GONE);
+                txtSetting.setVisibility(View.GONE);
+
+                homeLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                saveLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                settingLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+
+                txtTimeline.setVisibility(View.VISIBLE);
+                timelineLayout.setBackgroundResource(R.drawable.round_hover);
+
+                selectedTab = 2;
+                break;
+
+            case 3:
+                txtHome.setVisibility(View.GONE);
+                txtTimeline.setVisibility(View.GONE);
+                txtSetting.setVisibility(View.GONE);
+
+                homeLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                timelineLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                settingLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+
+                txtSave.setVisibility(View.VISIBLE);
+                saveLayout.setBackgroundResource(R.drawable.round_hover);
+
+                selectedTab = 3;
+                break;
+
+            case 4:
+                txtHome.setVisibility(View.GONE);
+                txtTimeline.setVisibility(View.GONE);
+                txtSave.setVisibility(View.GONE);
+
+                homeLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                timelineLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                saveLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+
+                txtSetting.setVisibility(View.VISIBLE);
+                settingLayout.setBackgroundResource(R.drawable.round_hover);
+
+                selectedTab = 4;
+                break;
+
+            default:
+                Toast.makeText(MainActivity.this, "Mohon Maaf Tab Tidak DI Temukan", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
     @Override
     public void onBackPressed() {
         long currentTime = System.currentTimeMillis();

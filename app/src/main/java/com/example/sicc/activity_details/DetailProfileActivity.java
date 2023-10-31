@@ -4,11 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.sicc.R;
+import com.example.sicc.activities.MainActivity;
 import com.example.sicc.adapters.AnggotaAdapter;
 import com.example.sicc.models.Anggota;
 import com.example.sicc.models.Lomba;
@@ -52,5 +54,12 @@ public class DetailProfileActivity extends AppCompatActivity {
         arrayList.add(new Anggota("Bima Bimo Binjar", "TIF - SMT 3","21 Maret 2023"));
         arrayList.add(new Anggota("Lutfi Hakim", "TIF - SMT 3","21 Juli 2023"));
         arrayList.add(new Anggota("Adi Hendra", "TIF - SMT 3","21 Juli 2023"));
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        Animatoo.INSTANCE.animateSlideRight(this);
     }
 }
