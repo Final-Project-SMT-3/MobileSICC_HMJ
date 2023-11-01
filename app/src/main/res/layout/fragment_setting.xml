@@ -10,7 +10,7 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pengaturan"
+        android:text="Profile"
         android:textSize="22sp"
         android:fontFamily="@font/poppinssemibold"
         android:layout_centerHorizontal="true"

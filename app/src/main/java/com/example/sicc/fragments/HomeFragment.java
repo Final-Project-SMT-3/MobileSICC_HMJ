@@ -129,12 +129,12 @@ public class HomeFragment extends Fragment {
     }
 
     private void getData() {
-        // "Guest" is the default value to be returned if the key "name" is not found in shared preferences
+        // "-" is the default value to be returned if the key "name" is not found in shared preferences
         String namaUser = sharedPreferences.getString("nama_ketua", "-");
         String namaKelompok = sharedPreferences.getString("nama_kelompok", "-");
         String namaLomba = sharedPreferences.getString("lomba", "-");
         String nimAnggota = sharedPreferences.getString("nim_kelompok", "-");
-        String namaDospem = sharedPreferences.getString("dospem", "Belum Memilih Dosen Pembimbing");
+        String namaDospem = sharedPreferences.getString("dospem", "Belum Memilih Dospem");
 
         String nama = formatNama(namaUser);
         int anggota = countStrings(nimAnggota);
