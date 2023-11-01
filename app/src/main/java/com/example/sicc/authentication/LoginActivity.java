@@ -156,6 +156,8 @@ public class LoginActivity extends AppCompatActivity {
                     SharedPreferences userPref = getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = userPref.edit();
                     editor.putInt("id", userData.getInt("id"));
+                    editor.putString("user", userData.getString("username"));
+                    editor.putString("pass", userData.getString("password"));
                     editor.putString("nim_ketua", userData.getString("no_identitas"));
                     editor.putString("nama_ketua", userData.getString("nama"));
                     editor.putString("nama_kelompok", userData.getString("nama_kelompok"));
