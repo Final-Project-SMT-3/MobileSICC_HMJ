@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -37,21 +38,18 @@ public class LombaAdapter extends RecyclerView.Adapter<LombaAdapter.LombaViewHol
 
     @Override
     public void onBindViewHolder(@NonNull LombaAdapter.LombaViewHolder holder, int position) {
-        holder.txt_nama_lomba.setText(dataList.get(position).getNama_lomba());
-        holder.txt_jenis_lomba.setText(dataList.get(position).getJenis_lomba());
-        holder.txt_tgl_lomba.setText(dataList.get(position).getTgl_lomba());
-        holder.txt_desk_lomba.setText(dataList.get(position).getDeskripsi_lomba());
+        Lomba lomba = dataList.get(position);
 
-        holder.txt_desk_lomba.setOnClickListener(v-> {
+        holder.txt_nama_lomba.setText(lomba.getNama_lomba());
+        holder.txt_jenis_lomba.setText(lomba.getJenis_lomba());
+
+        holder.btn_detail.setOnClickListener(v-> {
                 Intent intent = new Intent(context, DetailInformationActivity.class);
-                intent.putExtra("judul", dataList.get(holder.getAdapterPosition()).getNama_lomba());
-                intent.putExtra("sub_Judul", dataList.get(holder.getAdapterPosition()).getJenis_lomba());
-                intent.putExtra("tgl_Lomba", dataList.get(holder.getAdapterPosition()).getTgl_lomba());
-                intent.putExtra("desc_Lomba", dataList.get(holder.getAdapterPosition()).getDeskripsi_lomba());
+                intent.putExtra("id_lomba", lomba.getId_lomba());
+                intent.putExtra("lombaPosition", position);
 
                 context.startActivity(intent);
                 Animatoo.INSTANCE.animateSlideLeft(context);
-//                ((Activity) context).finish();
         });
     }
 
@@ -61,15 +59,16 @@ public class LombaAdapter extends RecyclerView.Adapter<LombaAdapter.LombaViewHol
     }
 
     public class LombaViewHolder extends RecyclerView.ViewHolder {
-        private TextView txt_nama_lomba, txt_jenis_lomba, txt_tgl_lomba, txt_desk_lomba;
+        private ImageView foto_lomba;
+        private TextView txt_nama_lomba, txt_jenis_lomba, btn_detail;
 
         public LombaViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            foto_lomba = itemView.findViewById(R.id.logo_kegiatan_lomba);
             txt_nama_lomba = itemView.findViewById(R.id.nama_kegiatan_lomba);
             txt_jenis_lomba = itemView.findViewById(R.id.jenis_kegiatan_lomba);
-            txt_tgl_lomba = itemView.findViewById(R.id.tgl_kegiatan_lomba);
-            txt_desk_lomba = itemView.findViewById(R.id.deskripsi_kegiatan_lomba);
+            btn_detail = itemView.findViewById(R.id.txt_detail_lomba);
         }
     }
 }

@@ -18,12 +18,10 @@ import java.util.ArrayList;
 public class AnggotaAdapter extends RecyclerView.Adapter<AnggotaAdapter.AnggotaViewHolder> {
     private Context context;
     private ArrayList<Anggota> dataList;
-    private SharedPreferences sharedPreferences;
 
     public AnggotaAdapter(Context context, ArrayList<Anggota> dataList) {
         this.context = context;
         this.dataList = dataList;
-        this.sharedPreferences = context.getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
     }
 
     @NonNull

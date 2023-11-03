@@ -56,26 +56,15 @@
         <TextView
             android:id="@+id/txt_detail_lomba"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:text="Lihat Detail"
             android:textSize="16sp"
             android:textColor="@color/colorPrimary"
             android:textAlignment="center"
+            android:gravity="center_vertical"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/poppinssemibold"
             android:layout_below="@id/jenis_kegiatan_lomba"/>
-
-        <TextView
-            android:id="@+id/deskripsi_kegiatan_lomba"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="Deskripsi Lomba"
-            android:textSize="16sp"
-            android:textAlignment="center"
-            android:maxLines="0"
-            android:fontFamily="@font/poppinsregular"
-            android:layout_below="@id/jenis_kegiatan_lomba"/>
-
 
     </RelativeLayout>
 

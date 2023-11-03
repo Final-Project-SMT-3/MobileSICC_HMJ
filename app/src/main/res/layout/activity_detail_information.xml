@@ -9,7 +9,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <RelativeLayout
             android:id="@+id/layout_header"
@@ -30,8 +30,8 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/logo_image"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
                 android:src="@drawable/ic_account"
                 android:layout_centerHorizontal="true"
                 android:layout_below="@id/btn_back"
@@ -67,7 +67,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_tgl_lomba"
-                android:layout_width="220dp"
+                android:layout_width="130dp"
                 android:layout_height="40dp"
                 app:cardElevation="5dp"
                 app:cardCornerRadius="20dp"
@@ -83,10 +83,10 @@
                     android:gravity="center">
 
                     <TextView
-                        android:id="@+id/tgl_lomba"
+                        android:id="@+id/status_lomba"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="21 Februari 2023"
+                        android:text="On Going"
                         android:textSize="17sp"
                         android:textColor="@color/white_gray"
                         android:textAlignment="center"
@@ -113,22 +113,81 @@
         <TextView
             android:id="@+id/desc_text"
             android:layout_width="match_parent"
-            android:layout_height="275dp"
-            android:text="Deskripsi Perlombaan"
+            android:layout_height="wrap_content"
+            android:text="Deskripsi Lomba"
             android:textSize="17sp"
+            android:gravity="fill"
+            android:textAlignment="textStart"
             android:fontFamily="@font/poppinsregular"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:layout_below="@id/welcome_text"/>
+            android:layout_below="@id/welcome_text"
+            tools:ignore="RtlCompat" />
+
+        <LinearLayout
+            android:id="@+id/layout_tglMulai"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_below="@id/desc_text">
+
+            <TextView
+                android:layout_width="117dp"
+                android:layout_height="wrap_content"
+                android:text="Tanggal Mulai    :"
+                android:textSize="17sp"
+                android:layout_marginEnd="5dp"
+                android:fontFamily="@font/poppinsregular"/>
+
+            <TextView
+                android:id="@+id/tgl_mulai"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="21 Februari 2024"
+                android:textSize="17sp"
+                android:fontFamily="@font/poppinsregular"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_tglSelesai"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_below="@id/layout_tglMulai">
+
+            <TextView
+                android:layout_width="117dp"
+                android:layout_height="wrap_content"
+                android:text="Tanggal Selesai :"
+                android:textSize="17sp"
+                android:layout_marginEnd="5dp"
+                android:fontFamily="@font/poppinsregular"/>
+
+            <TextView
+                android:id="@+id/tgl_selesai"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="25 Februari 2024"
+                android:textSize="17sp"
+                android:fontFamily="@font/poppinsregular"/>
+
+        </LinearLayout>
 
         <Button
             android:id="@+id/btn_close"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:layout_below="@id/desc_text"
+            android:layout_below="@id/layout_tglSelesai"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
             android:fontFamily="@font/poppinsregular"
