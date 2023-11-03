@@ -15,13 +15,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.sicc.R;
 import com.example.sicc.activities.MainActivity;
 import com.example.sicc.adapters.LombaAdapter;
+import com.example.sicc.models.Constant;
 import com.example.sicc.models.Lomba;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -40,8 +53,6 @@ public class HomeFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        addData();
-
         init();
 
         return view;
@@ -58,7 +69,8 @@ public class HomeFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerView_Lomba);
         sharedPreferences = getContext().getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
 
-        getData();
+        getDataUser();
+        getDataLomba();
 
         photoProfile.setOnClickListener(v-> {
             ((MainActivity) requireActivity()).setButtonActive(4);
@@ -68,11 +80,6 @@ public class HomeFragment extends Fragment {
                     .addToBackStack(null)
                     .commit();
         });
-
-        adapter = new LombaAdapter(getContext(), arrayList);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
     }
 
     private static String formatNama(String namaKetua) {
@@ -128,7 +135,7 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    private void getData() {
+    private void getDataUser() {
         // "-" is the default value to be returned if the key "name" is not found in shared preferences
         String namaUser = sharedPreferences.getString("nama_ketua", "-");
         String namaKelompok = sharedPreferences.getString("nama_kelompok", "-");
@@ -148,10 +155,63 @@ public class HomeFragment extends Fragment {
         txt_dospem.setText(dospem);
     }
 
-    private void addData() {
+    private void getDataLomba() {
         arrayList = new ArrayList<>();
-        arrayList.add(new Lomba("PKM", "PKM-C (Teknologi)", "21 Februari 2023", R.string.desc_lomba));
-        arrayList.add(new Lomba("KMIPN", "Hackathon","21 Maret 2023", R.string.desc_lomba));
-        arrayList.add(new Lomba("PILMAPRES", "Pilmapres","21 Juli 2023", R.string.desc_lomba));
+
+        StringRequest request = new StringRequest(Request.Method.GET, Constant.LOMBA, response -> {
+            try {
+                JSONObject res = new JSONObject(response);
+
+                int statusCode = res.getInt("status_code");
+                String message = res.getString("message");
+
+                if (statusCode == 200 && message.equals("Success")) {
+                    JSONArray dataLomba = res.getJSONArray("response");
+
+                    for (int i = 0; i < dataLomba.length(); i++) {
+                        JSONObject objectLomba = dataLomba.getJSONObject(i);
+
+                        Lomba lomba = new Lomba();
+
+                        lomba.setId_lomba(objectLomba.getInt("id"));
+                        lomba.setNama_lomba(objectLomba.getString("nama_lomba"));
+                        lomba.setFoto_lomba(objectLomba.getJSONArray("detailLomba").getJSONObject(0).optString("foto", "-"));
+                        lomba.setJenis_lomba(objectLomba.getJSONArray("detailPelaksanaan").
+                                getJSONObject(0).optString("info", "-"));
+
+                        arrayList.add(lomba);
+                    }
+
+                    adapter = new LombaAdapter(getContext(), arrayList);
+                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+                    recyclerView.setLayoutManager(layoutManager);
+                    recyclerView.setAdapter(adapter);
+                } else {
+                    // Handle the case when the response indicates an error
+                    Toast.makeText(getContext().getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+
+                // Handle the case when there's a JSON parsing error
+                Toast.makeText(getContext().getApplicationContext(), "JSON Parsing Error", Toast.LENGTH_SHORT).show();
+            }
+        }, error -> {
+            error.printStackTrace();
+
+            // Handle the case when there's a network error
+            Toast.makeText(getContext().getApplicationContext(), "Network Error", Toast.LENGTH_SHORT).show();
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("HTTP-TOKEN", "KgncmLUc7qvicKI1OjaLYLkPi");
+                return headers;
+            }
+        };
+
+        RequestQueue queue = Volley.newRequestQueue(getContext().getApplicationContext());
+        queue.add(request);
+
     }
 }

@@ -18,7 +18,7 @@
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:src="@drawable/ic_account"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="5dp"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="10dp"
             android:contentDescription="Logo Lomba" />
