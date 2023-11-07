@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
@@ -214,6 +215,7 @@ public class LoginActivity extends AppCompatActivity {
         };
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
+        request.setRetryPolicy(new DefaultRetryPolicy(30000, 5, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(request);
     }
 

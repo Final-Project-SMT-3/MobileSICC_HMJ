@@ -24,15 +24,18 @@ import com.example.sicc.models.Constant;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class DetailInformationActivity extends AppCompatActivity {
     private int id_lomba = 0;
     private static int lombaPosition = 0;
     private ImageView btn_back;
-    private Button btn_close;
     private TextView judul, jenis, status, tgl_mulai, tgl_selesai, deskripsi;
 
     @Override
@@ -45,7 +48,6 @@ public class DetailInformationActivity extends AppCompatActivity {
 
     private void init() {
         btn_back = findViewById(R.id.btn_back);
-        btn_close = findViewById(R.id.btn_close);
 
         id_lomba = getIntent().getIntExtra("id_lomba", 0);
         lombaPosition = getIntent().getIntExtra("lombaPosition", -1);
@@ -60,12 +62,6 @@ public class DetailInformationActivity extends AppCompatActivity {
         getDetailLomba();
 
         btn_back.setOnClickListener(v-> {
-            startActivity(new Intent(DetailInformationActivity.this, MainActivity.class));
-            Animatoo.INSTANCE.animateSlideRight(this);
-            finish();
-        });
-
-        btn_close.setOnClickListener(v-> {
             startActivity(new Intent(DetailInformationActivity.this, MainActivity.class));
             Animatoo.INSTANCE.animateSlideRight(this);
             finish();
@@ -89,8 +85,8 @@ public class DetailInformationActivity extends AppCompatActivity {
                     jenis.setText(detailLomba.getString("info"));
                     status.setText(detailLomba.getString("status"));
                     deskripsi.setText(detailLomba.getString("detail_lomba"));
-                    tgl_mulai.setText(detailLomba.getString("tanggal_mulai"));
-                    tgl_selesai.setText(detailLomba.getString("tanggal_akhir"));
+                    tgl_mulai.setText(formatDate(detailLomba.getString("tanggal_mulai")));
+                    tgl_selesai.setText(formatDate(detailLomba.getString("tanggal_akhir")));
 
                 } else {
                     // Handle the case when the response indicates an error
@@ -126,5 +122,21 @@ public class DetailInformationActivity extends AppCompatActivity {
 
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(request);
+    }
+
+    public String formatDate(String inputDate) {
+        // Define the input date format
+        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+
+        // Define the output date format
+        SimpleDateFormat outputFormat = new SimpleDateFormat("d MMMM yyyy", new Locale("id", "ID"));
+
+        try {
+            Date date = inputFormat.parse(inputDate);
+            return outputFormat.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return inputDate;
+        }
     }
 }
