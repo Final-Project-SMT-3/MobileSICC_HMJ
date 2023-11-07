@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -19,21 +20,26 @@ import com.android.volley.toolbox.Volley;
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.sicc.R;
 import com.example.sicc.activities.MainActivity;
+import com.example.sicc.adapters.LoadingMain;
 import com.example.sicc.models.Constant;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class DetailInformationActivity extends AppCompatActivity {
     private int id_lomba = 0;
     private static int lombaPosition = 0;
     private ImageView btn_back;
-    private Button btn_close;
     private TextView judul, jenis, status, tgl_mulai, tgl_selesai, deskripsi;
+    private LoadingMain loadingMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +51,6 @@ public class DetailInformationActivity extends AppCompatActivity {
 
     private void init() {
         btn_back = findViewById(R.id.btn_back);
-        btn_close = findViewById(R.id.btn_close);
 
         id_lomba = getIntent().getIntExtra("id_lomba", 0);
         lombaPosition = getIntent().getIntExtra("lombaPosition", -1);
@@ -56,16 +61,19 @@ public class DetailInformationActivity extends AppCompatActivity {
         deskripsi = findViewById(R.id.desc_text);
         tgl_mulai = findViewById(R.id.tgl_mulai);
         tgl_selesai = findViewById(R.id.tgl_selesai);
+        loadingMain = new LoadingMain(this);
 
-        getDetailLomba();
+        loadingMain.show();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                getDetailLomba();
+            }
+        }, 500);
 
         btn_back.setOnClickListener(v-> {
-            startActivity(new Intent(DetailInformationActivity.this, MainActivity.class));
-            Animatoo.INSTANCE.animateSlideRight(this);
-            finish();
-        });
-
-        btn_close.setOnClickListener(v-> {
             startActivity(new Intent(DetailInformationActivity.this, MainActivity.class));
             Animatoo.INSTANCE.animateSlideRight(this);
             finish();
@@ -89,21 +97,29 @@ public class DetailInformationActivity extends AppCompatActivity {
                     jenis.setText(detailLomba.getString("info"));
                     status.setText(detailLomba.getString("status"));
                     deskripsi.setText(detailLomba.getString("detail_lomba"));
-                    tgl_mulai.setText(detailLomba.getString("tanggal_mulai"));
-                    tgl_selesai.setText(detailLomba.getString("tanggal_akhir"));
+                    tgl_mulai.setText(formatDate(detailLomba.getString("tanggal_mulai")));
+                    tgl_selesai.setText(formatDate(detailLomba.getString("tanggal_akhir")));
 
+                    loadingMain.cancel();
                 } else {
                     // Handle the case when the response indicates an error
+
+                    loadingMain.cancel();
+
                     Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
+
+                loadingMain.cancel();
 
                 // Handle the case when there's a JSON parsing error
                 Toast.makeText(getApplicationContext(), "JSON Parsing Error", Toast.LENGTH_SHORT).show();
             }
         }, error -> {
             error.printStackTrace();
+
+            loadingMain.cancel();
 
             // Handle the case when there's a network error
             Toast.makeText(getApplicationContext(), "Network Error", Toast.LENGTH_SHORT).show();
@@ -126,5 +142,21 @@ public class DetailInformationActivity extends AppCompatActivity {
 
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(request);
+    }
+
+    public String formatDate(String inputDate) {
+        // Define the input date format
+        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+
+        // Define the output date format
+        SimpleDateFormat outputFormat = new SimpleDateFormat("d MMMM yyyy", new Locale("id", "ID"));
+
+        try {
+            Date date = inputFormat.parse(inputDate);
+            return outputFormat.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return inputDate;
+        }
     }
 }

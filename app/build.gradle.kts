@@ -37,6 +37,7 @@ dependencies {
     implementation("de.hdodenhof:circleimageview:3.1.0")
     implementation("io.github.chaosleung:pinview:1.4.4")
     implementation("com.android.volley:volley:1.2.1")
+    implementation("com.airbnb.android:lottie:6.1.0")
 
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

@@ -1,16 +1,14 @@
 package com.example.sicc.fragments;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +22,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.sicc.R;
 import com.example.sicc.activities.MainActivity;
+import com.example.sicc.adapters.LoadingMain;
 import com.example.sicc.adapters.LombaAdapter;
 import com.example.sicc.models.Constant;
 import com.example.sicc.models.Lomba;
@@ -45,6 +44,7 @@ public class HomeFragment extends Fragment {
     private LombaAdapter adapter;
     private ArrayList<Lomba> arrayList;
     private View view;
+    private LoadingMain loadingMain;
     private SharedPreferences sharedPreferences;
 
     @Override
@@ -68,9 +68,18 @@ public class HomeFragment extends Fragment {
         txt_dospem = view.findViewById(R.id.nama_dospem);
         recyclerView = view.findViewById(R.id.recyclerView_Lomba);
         sharedPreferences = getContext().getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
+        loadingMain = new LoadingMain(requireActivity());
 
-        getDataUser();
-        getDataLomba();
+        loadingMain.show();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                getDataUser();
+                getDataLomba();
+            }
+        }, 500);
 
         photoProfile.setOnClickListener(v-> {
             ((MainActivity) requireActivity()).setButtonActive(4);
@@ -182,24 +191,36 @@ public class HomeFragment extends Fragment {
                         arrayList.add(lomba);
                     }
 
+
                     adapter = new LombaAdapter(getContext(), arrayList);
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
                     recyclerView.setLayoutManager(layoutManager);
                     recyclerView.setAdapter(adapter);
+
+                    loadingMain.cancel();
                 } else {
                     // Handle the case when the response indicates an error
+
+                    loadingMain.cancel();
+
                     Toast.makeText(getContext().getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
 
                 // Handle the case when there's a JSON parsing error
+
+                loadingMain.cancel();
+
                 Toast.makeText(getContext().getApplicationContext(), "JSON Parsing Error", Toast.LENGTH_SHORT).show();
             }
         }, error -> {
             error.printStackTrace();
 
             // Handle the case when there's a network error
+
+            loadingMain.cancel();
+
             Toast.makeText(getContext().getApplicationContext(), "Network Error", Toast.LENGTH_SHORT).show();
         }) {
             @Override
@@ -212,6 +233,5 @@ public class HomeFragment extends Fragment {
 
         RequestQueue queue = Volley.newRequestQueue(getContext().getApplicationContext());
         queue.add(request);
-
     }
 }

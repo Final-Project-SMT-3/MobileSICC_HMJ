@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
@@ -155,7 +156,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     SharedPreferences userPref = getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = userPref.edit();
-                    editor.putInt("id", userData.getInt("id"));
+                    editor.putInt("id_user", userData.getInt("id"));
                     editor.putString("user", userData.getString("username"));
                     editor.putString("pass", userData.getString("password"));
                     editor.putString("nim_ketua", userData.getString("no_identitas"));
@@ -214,6 +215,7 @@ public class LoginActivity extends AppCompatActivity {
         };
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
+        request.setRetryPolicy(new DefaultRetryPolicy(30000, 5, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(request);
     }
 
