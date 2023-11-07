@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.sicc.R;
 import com.example.sicc.activities.MainActivity;
 import com.example.sicc.adapters.AnggotaAdapter;
+import com.example.sicc.adapters.LoadingMain;
 import com.example.sicc.authentication.LoginActivity;
 import com.example.sicc.models.Anggota;
 import com.example.sicc.models.Constant;
@@ -42,6 +44,7 @@ public class DetailProfileActivity extends AppCompatActivity {
     private AnggotaAdapter adapter;
     private ArrayList<Anggota> arrayList;
     private SharedPreferences sharedPreferences;
+    private LoadingMain loadingMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +61,17 @@ public class DetailProfileActivity extends AppCompatActivity {
         btn_back = findViewById(R.id.btn_back);
         recyclerView = findViewById(R.id.recyclerView_Anggota);
         sharedPreferences = getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
+        loadingMain = new LoadingMain(this);
 
-        getData();
+        loadingMain.show();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                getData();
+            }
+        }, 500);
 
         btn_back.setOnClickListener(v-> {
             finish();
@@ -166,22 +178,30 @@ public class DetailProfileActivity extends AppCompatActivity {
                         arrayList.add(anggota);
                     }
 
+                    loadingMain.cancel();
+
                     adapter = new AnggotaAdapter(getApplicationContext(), arrayList);
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
                     recyclerView.setLayoutManager(layoutManager);
                     recyclerView.setAdapter(adapter);
                 } else {
+                    loadingMain.cancel();
+
                     // Handle the case when the response indicates an error
                     Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
 
+                loadingMain.cancel();
+
                 // Handle the case when there's a JSON parsing error
                 Toast.makeText(getApplicationContext(), "JSON Parsing Error", Toast.LENGTH_SHORT).show();
             }
         }, error -> {
             error.printStackTrace();
+
+            loadingMain.cancel();
 
             // Handle the case when there's a network error
             Toast.makeText(getApplicationContext(), "Network Error", Toast.LENGTH_SHORT).show();

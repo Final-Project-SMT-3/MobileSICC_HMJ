@@ -41,7 +41,7 @@
                 android:id="@+id/title_lomba"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="PKM"
+                android:text=""
                 android:textSize="20sp"
                 android:textColor="@color/white"
                 android:textAlignment="center"
@@ -68,7 +68,7 @@
             android:id="@+id/desc_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Deskripsi Lomba"
+            android:text=""
             android:textSize="15sp"
             android:gravity="fill_horizontal"
             android:textAlignment="textStart"
@@ -109,7 +109,7 @@
                 android:id="@+id/subTitle_lomba"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Jenis Lomba"
+                android:text=""
                 android:textSize="15sp"
                 android:fontFamily="@font/poppinsregular"/>
 
@@ -145,7 +145,7 @@
                 android:id="@+id/status_lomba"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Status Lomba"
+                android:text=""
                 android:textSize="15sp"
                 android:fontFamily="@font/poppinsregular"/>
 
@@ -181,7 +181,7 @@
                 android:id="@+id/tgl_mulai"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="21 Februari 2024"
+                android:text=""
                 android:textSize="15sp"
                 android:fontFamily="@font/poppinsregular"/>
 
@@ -217,7 +217,7 @@
                 android:id="@+id/tgl_selesai"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="25 Februari 2024"
+                android:text=""
                 android:textSize="15sp"
                 android:fontFamily="@font/poppinsregular"/>
 
