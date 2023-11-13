@@ -61,7 +61,7 @@
             android:textSize="16sp"
             android:textColor="@color/colorPrimary"
             android:textAlignment="center"
-            android:gravity="center_vertical"
+            android:gravity="center"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/poppinssemibold"
             android:layout_below="@id/jenis_kegiatan_lomba"/>

@@ -50,6 +50,7 @@ public class ProgressFragment extends Fragment {
                         replaceFragment(new MsgSuccesFragment());
                         break;
                     case 1:
+                        replaceFragment(new DospemFragment());
                         break;
                     case 2:
                         break;
