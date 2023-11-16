@@ -1,5 +1,7 @@
 package com.example.sicc.fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.core.content.ContextCompat;
@@ -18,6 +20,7 @@ import java.util.ArrayList;
 
 public class ProgressFragment extends Fragment {
     private StepView stepView;
+    private SharedPreferences sharedPreferences;
     private View view;
 
     @Override
@@ -33,6 +36,9 @@ public class ProgressFragment extends Fragment {
 
     private void init() {
         stepView = view.findViewById(R.id.step_view);
+        sharedPreferences = getContext().getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
+
+        String status_pengajuan = sharedPreferences.getString("status_pengajuan", "-");
 
         settingStepView();
 
@@ -50,7 +56,15 @@ public class ProgressFragment extends Fragment {
                         replaceFragment(new MsgSuccesFragment());
                         break;
                     case 1:
-                        replaceFragment(new DospemFragment());
+                        if (status_pengajuan.equals("Accept")) {
+                            replaceFragment(new MsgSuccesFragment());
+                        } else if (status_pengajuan.equals("Waiting Approval")) {
+                            replaceFragment(new MsgWaitingFragment());
+                        } else if (status_pengajuan.equals("Decline")) {
+
+                        } else {
+                            replaceFragment(new DospemFragment());
+                        }
                         break;
                     case 2:
                         break;

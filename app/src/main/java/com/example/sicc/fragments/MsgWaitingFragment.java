@@ -10,13 +10,14 @@ import android.view.ViewGroup;
 
 import com.example.sicc.R;
 
-public class MsgSuccesFragment extends Fragment {
+public class MsgWaitingFragment extends Fragment {
     private View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_msg_succes, container, false);
+
+        view = inflater.inflate(R.layout.fragment_msg_waiting, container, false);
 
         return view;
     }
