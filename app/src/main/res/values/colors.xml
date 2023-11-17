@@ -7,4 +7,6 @@
     <color name="colorPrimary">#356899</color>
     <color name="colorSecondary">#1A334C</color>
     <color name="colorOnPrimary">#FAFAFD</color>
+    <color name="colorSuccess">#2AAA45</color>
+    <color name="colorDanger">#FF474C</color>
 </resources>

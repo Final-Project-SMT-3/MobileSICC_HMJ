@@ -1,14 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.ProgressFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Progress Kelompok"
+        android:textSize="20sp"
+        android:fontFamily="@font/poppinssemibold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <com.shuhart.stepview.StepView
+        android:id="@+id/step_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        app:sv_selectedCircleColor="@color/colorPrimary"
+        app:sv_selectedStepNumberColor="@color/white"
+        app:sv_selectedTextColor="@color/black"
+        app:sv_selectedCircleRadius="12dp"
+        app:sv_nextTextColor="@android:color/darker_gray"
+        app:sv_nextStepLineColor="@android:color/darker_gray"
+        app:sv_doneCircleColor="@color/colorPrimary"
+        app:sv_doneStepLineColor="@color/colorPrimary"
+        app:sv_doneStepMarkColor="@color/white"
+        app:sv_doneCircleRadius="12dp"
+        app:sv_stepLineWidth="1dp"
+        app:sv_stepPadding="4dp"
+        app:sv_stepViewStyle="@style/StepView"
+        app:sv_stepNumberTextSize="14sp"
+        app:sv_typeface="@font/poppinsregular"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/title" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_container_progress"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_below="@id/step_view"/>
 
-</FrameLayout>
+</RelativeLayout>

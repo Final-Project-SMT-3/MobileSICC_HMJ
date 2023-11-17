@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.MsgSuccesFragment">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animationView"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/success_animation" />
+
+    <TextView
+        android:id="@+id/title_msg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SELESAI"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/poppinsmedium"
+        android:textAlignment="center"/>
+
+    <TextView
+        android:id="@+id/subtitle_msg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Selamat !"
+        android:textSize="15sp"
+        android:fontFamily="@font/poppinsregular"
+        android:textAlignment="center"
+        android:layout_marginTop="7dp"/>
+
+    <TextView
+        android:id="@+id/detailtitle_msg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Anda Telah Melewati Tahap Ini."
+        android:textSize="15sp"
+        android:fontFamily="@font/poppinsregular"
+        android:textAlignment="center"/>
+
+</LinearLayout>

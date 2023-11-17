@@ -36,7 +36,6 @@ import java.util.Map;
 
 public class DetailInformationActivity extends AppCompatActivity {
     private int id_lomba = 0;
-    private static int lombaPosition = 0;
     private ImageView btn_back;
     private TextView judul, jenis, status, tgl_mulai, tgl_selesai, deskripsi;
     private LoadingMain loadingMain;
@@ -53,7 +52,6 @@ public class DetailInformationActivity extends AppCompatActivity {
         btn_back = findViewById(R.id.btn_back);
 
         id_lomba = getIntent().getIntExtra("id_lomba", 0);
-        lombaPosition = getIntent().getIntExtra("lombaPosition", -1);
 
         judul = findViewById(R.id.title_lomba);
         jenis = findViewById(R.id.subTitle_lomba);

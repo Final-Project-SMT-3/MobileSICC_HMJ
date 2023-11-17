@@ -161,7 +161,12 @@ public class DetailProfileActivity extends AppCompatActivity {
 
                     txt_nama.setText(nama);
                     txt_lomba.setText(lomba);
-                    txt_dospem.setText(dospem != null ? dospem : "Belum Memilih Dospem");
+
+                    if (userData.getString("nama_dospem").equals("null") || dospem == null) {
+                        txt_dospem.setText("Belum Memilih Dospem");
+                    } else {
+                        txt_dospem.setText(dospem);
+                    }
 
                     // Data Anggota Kelompok
                     String nimAnggota = userData.getString("nim_anggota");

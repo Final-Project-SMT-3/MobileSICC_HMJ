@@ -150,18 +150,26 @@ public class HomeFragment extends Fragment {
         String namaKelompok = sharedPreferences.getString("nama_kelompok", "-");
         String namaLomba = sharedPreferences.getString("lomba", "-");
         String nimAnggota = sharedPreferences.getString("nim_kelompok", "-");
-        String namaDospem = sharedPreferences.getString("dospem", "Belum Memilih Dospem");
+        String namaDospem = sharedPreferences.getString("dospem", "-");
+        String status_pengajuan = sharedPreferences.getString("status_pengajuan", "-");
+
+        if (status_pengajuan.equals("null")) {
+            txt_dospem.setText("Belum Memilih Dosen Pembimbing.");
+        } else if (status_pengajuan.equals("Waiting Approval") || status_pengajuan.equals("Decline")) {
+            txt_dospem.setText(status_pengajuan);
+        } else if (status_pengajuan.equals("Accept")) {
+            String dospem = formatDosen(namaDospem);
+            txt_dospem.setText(dospem);
+        }
 
         String nama = formatNama(namaUser);
         int anggota = countStrings(nimAnggota);
-        String dospem = formatDosen(namaDospem);
 
         txt_name.setText(nama + " 👋");
         txt_kelompok.setText(namaKelompok);
         txt_ketua.setText(nama);
         txt_lomba.setText(namaLomba);
-        txt_anggota.setText(String.valueOf(anggota) + " Anggota");
-        txt_dospem.setText(dospem);
+        txt_anggota.setText(anggota + " Anggota");
     }
 
     private void getDataLomba() {
