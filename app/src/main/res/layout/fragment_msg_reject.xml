@@ -3,24 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:gravity="center"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".notification.MsgSuccesFragment">
+    tools:context=".notification.MsgRejectFragment">
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animationView"
         android:layout_width="150dp"
         android:layout_height="150dp"
+        android:padding="30dp"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_rawRes="@raw/success_animation" />
+        app:lottie_rawRes="@raw/rejected_animation" />
 
     <TextView
         android:id="@+id/title_msg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="SELESAI"
+        android:text="DI TOLAK"
         android:textSize="20sp"
         android:textColor="@color/black"
         android:fontFamily="@font/poppinsmedium"
@@ -30,7 +31,7 @@
         android:id="@+id/subtitle_msg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Selamat !"
+        android:text="Tetap Semangat !"
         android:textSize="15sp"
         android:fontFamily="@font/poppinsregular"
         android:textAlignment="center"
@@ -40,9 +41,18 @@
         android:id="@+id/detailtitle_msg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Anda Telah Melewati Tahap Ini."
+        android:text="Mungkin Belum Rejeki, Yuk Coba Lagi."
         android:textSize="15sp"
         android:fontFamily="@font/poppinsregular"
         android:textAlignment="center"/>
+
+    <Button
+        android:id="@+id/btn_dospem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cari Dospem Baru"
+        android:textSize="15sp"
+        android:fontFamily="@font/poppinsregular"
+        android:layout_marginTop="25dp"/>
 
 </LinearLayout>
