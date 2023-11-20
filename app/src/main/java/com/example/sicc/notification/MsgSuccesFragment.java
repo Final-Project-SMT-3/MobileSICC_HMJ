@@ -1,4 +1,4 @@
-package com.example.sicc.fragments;
+package com.example.sicc.notification;
 
 import android.os.Bundle;
 
@@ -16,6 +16,7 @@ public class MsgSuccesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         view = inflater.inflate(R.layout.fragment_msg_succes, container, false);
 
         return view;

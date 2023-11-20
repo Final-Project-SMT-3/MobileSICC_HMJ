@@ -3,34 +3,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:gravity="center"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".notification.MsgSuccesFragment">
+    tools:context=".notification.MsgNotRecognitionFragment">
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animationView"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:padding="30dp"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_rawRes="@raw/success_animation" />
+        app:lottie_rawRes="@raw/not_recoginition_animation" />
 
     <TextView
         android:id="@+id/title_msg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="SELESAI"
+        android:text="TIDAK DI IZINKAN"
         android:textSize="20sp"
         android:textColor="@color/black"
         android:fontFamily="@font/poppinsmedium"
-        android:textAlignment="center"/>
+        android:textAlignment="center"
+        android:layout_marginTop="-25dp"/>
 
     <TextView
         android:id="@+id/subtitle_msg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Selamat !"
+        android:text="Kamu Tidak Memiliki Akses !"
         android:textSize="15sp"
         android:fontFamily="@font/poppinsregular"
         android:textAlignment="center"
@@ -40,7 +42,7 @@
         android:id="@+id/detailtitle_msg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Anda Telah Melewati Tahap Ini."
+        android:text="Yuk Selesaikan Tahap Sebelumnya."
         android:textSize="15sp"
         android:fontFamily="@font/poppinsregular"
         android:textAlignment="center"/>

@@ -79,14 +79,6 @@ public class DetailProfileActivity extends AppCompatActivity {
         });
     }
 
-    private String[] getDataParams() {
-        String username = sharedPreferences.getString("user", "-");
-        String password = sharedPreferences.getString("pass", "-");
-
-        String[] result = {username, password};
-        return result;
-    }
-
     private static String formatNama(String namaKetua) {
         String[] words = namaKetua.split(" ");
         if (words.length >= 2) {
@@ -137,13 +129,9 @@ public class DetailProfileActivity extends AppCompatActivity {
 
     private void getData() {
         arrayList = new ArrayList<>();
+        int id_user = sharedPreferences.getInt("id_user", 0);
 
-        // Calling Method "getDataParams" Into Parameter API
-        String[] dataParams = getDataParams();
-        String username = dataParams[0];
-        String password = dataParams[1];
-
-        StringRequest request = new StringRequest(Request.Method.POST, Constant.LOGIN, response -> {
+        StringRequest request = new StringRequest(Request.Method.POST, Constant.DATA_USER, response -> {
             Log.d("Response", response);
             try {
                 JSONObject res = new JSONObject(response);
@@ -162,7 +150,7 @@ public class DetailProfileActivity extends AppCompatActivity {
                     txt_nama.setText(nama);
                     txt_lomba.setText(lomba);
 
-                    if (userData.getString("nama_dospem").equals("null") || dospem == null) {
+                    if (userData.getString("nama_dospem").equals("null")) {
                         txt_dospem.setText("Belum Memilih Dospem");
                     } else {
                         txt_dospem.setText(dospem);
@@ -221,8 +209,7 @@ public class DetailProfileActivity extends AppCompatActivity {
             @Override
             protected Map<String,String> getParams(){
                 Map<String,String> params = new HashMap<String, String>();
-                params.put("password", password);
-                params.put("username", username);
+                params.put("id_user", String.valueOf(id_user));
                 return params;
             }
         };
