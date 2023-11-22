@@ -47,10 +47,10 @@
         android:textAlignment="center"/>
 
     <Button
-        android:id="@+id/btn_dospem"
+        android:id="@+id/btn_redirect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cari Dospem Baru"
+        android:text=""
         android:textSize="15sp"
         android:fontFamily="@font/poppinsregular"
         android:layout_marginTop="25dp"/>

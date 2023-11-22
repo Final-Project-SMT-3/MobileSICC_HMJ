@@ -1,9 +1,12 @@
 package com.example.sicc.fragments;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -23,8 +27,10 @@ import com.example.sicc.authentication.LoginActivity;
 
 public class SettingFragment extends Fragment {
     private TextView txt_nama;
+    private Button ya, tidak;
     private LinearLayout btn_profile, btn_info, btn_logout;
     private SharedPreferences sharedPreferences;
+    private Dialog dialog;
     private View view;
 
     @Override
@@ -45,10 +51,18 @@ public class SettingFragment extends Fragment {
         btn_logout = view.findViewById(R.id.btn_logout);
         sharedPreferences = getContext().getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
 
+        dialog = new Dialog(requireContext());
+        dialog.setContentView(R.layout.custom_confirm_dialog);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(false);
+
+        ya = dialog.findViewById(R.id.btn_okay);
+        tidak = dialog.findViewById(R.id.btn_cancel);
+
         getData();
 
         buttonFunction();
-
     }
 
     private void getData() {
@@ -72,9 +86,29 @@ public class SettingFragment extends Fragment {
         });
 
         btn_logout.setOnClickListener(v-> {
-            startActivity(new Intent(getContext(), LoginActivity.class));
-            Animatoo.INSTANCE.animateSlideLeft(getContext());
-            ((Activity) getContext()).finish();
+            dialog.show();
+
+            ya.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.clear();
+                    editor.apply();
+
+                    startActivity(new Intent(getContext(), LoginActivity.class));
+                    Animatoo.INSTANCE.animateSlideLeft(getContext());
+                    ((Activity) getContext()).finish();
+
+                    dialog.dismiss();
+                }
+            });
+
+            tidak.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                }
+            });
         });
     }
 
