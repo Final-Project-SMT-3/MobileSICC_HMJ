@@ -196,6 +196,8 @@ public class HomeFragment extends Fragment {
 
                     if (namaDospem.equals("null")) {
                         txt_dospem.setText("Belum Memilih Dospem");
+                    } else if (!namaDospem.equals("null") && res.getString("status").equals("Decline Dospem")) {
+                        txt_dospem.setText("Belum Memilih Dospem");
                     } else if (!namaDospem.equals("null")) {
                         String dospem = formatDosen(namaDospem);
                         txt_dospem.setText(dospem);

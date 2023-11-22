@@ -91,6 +91,10 @@ public class SettingFragment extends Fragment {
             ya.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.clear();
+                    editor.apply();
+
                     startActivity(new Intent(getContext(), LoginActivity.class));
                     Animatoo.INSTANCE.animateSlideLeft(getContext());
                     ((Activity) getContext()).finish();

@@ -167,6 +167,7 @@ public class LoginActivity extends AppCompatActivity {
                     editor.putString("dospem", userData.getString("nama_dospem"));
                     editor.putString("lomba", userData.getString("nama_lomba"));
                     editor.putString("status_pengajuan", userData.getString("status_dospem"));
+                    editor.putBoolean("isLogin", true);
                     editor.apply();
 
                     loadingDialog.dismissLoadingDialog();
