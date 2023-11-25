@@ -42,6 +42,7 @@ public class ProgressFragment extends Fragment {
     private SharedPreferences sharedPreferences;
     private SwipeRefreshLayout swipeRefreshLayout;
     private LoadingMain loadingMain;
+    private  String status_pengajuan, status_p_dospem, status_p_judul, status_p_proposal;
     private View view;
 
     @Override
@@ -61,15 +62,15 @@ public class ProgressFragment extends Fragment {
         loadingMain = new LoadingMain(requireActivity());
         sharedPreferences = getContext().getApplicationContext().getSharedPreferences("user_login", Context.MODE_PRIVATE);
 
-        String status_pengajuan = sharedPreferences.getString("status_pengajuan", "-");
-        String status_p_dospem = sharedPreferences.getString("status_p_dospem", "-");
-        String status_p_judul = sharedPreferences.getString("status_p_judul", "-");
-        String status_p_proposal = sharedPreferences.getString("status_p_proposal", "-");
+        loadingMain.show();
 
-        settingStepView();
-
-        // Check Condition Initial Step View
-        check_StepView(status_pengajuan, status_p_dospem, status_p_judul, status_p_proposal);
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                getStatus_Pengajuan();
+            }
+        }, 500);
 
         // Handle step click events
         stepView.setOnStepClickListener(step -> {
@@ -87,12 +88,15 @@ public class ProgressFragment extends Fragment {
                                 break;
                             case "Waiting Approval":
                                 replaceFragment(new MsgWaitingFragment());
+                                stepView.done(false);
                                 break;
                             case "Decline":
                                 replaceFragment(new MsgRejectFragment());
+                                stepView.done(false);
                                 break;
                             default:
                                 replaceFragment(new DospemFragment());
+                                stepView.done(false);
                                 break;
                         }
                         break;
@@ -104,16 +108,24 @@ public class ProgressFragment extends Fragment {
                                 break;
                             case "Waiting Approval":
                                 replaceFragment(new MsgWaitingFragment());
+                                stepView.done(false);
                                 break;
                             case "Revision":
                                 replaceFragment(new MsgRevisionFragment());
+                                stepView.done(false);
                                 break;
                             case "Decline":
                                 replaceFragment(new MsgRejectFragment());
+                                stepView.done(false);
+                                break;
+                            case "null":
+                                replaceFragment(new MsgNotRecognitionFragment());
+                                stepView.done(false);
                                 break;
                             default:
-                                replaceFragment(new MsgNotRecognitionFragment());
-                                break;
+                            replaceFragment(new UploadJudulFragment());
+                            stepView.done(false);
+                            break;
                         }
                         break;
                     case 3:
@@ -124,15 +136,19 @@ public class ProgressFragment extends Fragment {
                                 break;
                             case "Waiting Approval":
                                 replaceFragment(new MsgWaitingFragment());
+                                stepView.done(false);
                                 break;
                             case "Revision":
                                 replaceFragment(new MsgRevisionFragment());
+                                stepView.done(false);
                                 break;
                             case "Decline":
                                 replaceFragment(new MsgRejectFragment());
+                                stepView.done(false);
                                 break;
                             default:
                                 replaceFragment(new MsgNotRecognitionFragment());
+                                stepView.done(false);
                                 break;
                         }
                         break;
@@ -143,7 +159,8 @@ public class ProgressFragment extends Fragment {
                                 stepView.done(true);
                                 break;
                             default:
-                              replaceFragment(new MsgNotRecognitionFragment());
+                                replaceFragment(new MsgNotRecognitionFragment());
+                                stepView.done(false);
                                 break;
                         }
                         break;
@@ -158,16 +175,34 @@ public class ProgressFragment extends Fragment {
             public void onRefresh() {
                 loadingMain.show();
 
-                Handler handler = new Handler();
-
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        settingStepView();
+
                         getStatus_Pengajuan();
                     }
                 }, 500);
             }
         });
+    }
+
+    private void settingStepView() {
+        stepView.getState()
+                .animationType(StepView.ANIMATION_ALL)
+                .steps(new ArrayList<String>() {{
+                    add("Team");
+                    add("Dospem");
+                    add("Judul");
+                    add("Proposal");
+                    add("Lolos");
+                }})
+                .stepsNumber(5)
+                .animationDuration(getResources().getInteger(android.R.integer.config_shortAnimTime))
+                .commit();
+
+        // Set an initial step as selected
+        stepView.go(0, true);
     }
 
     private void check_StepView(String status_pengajuan, String status_p_dospem,
@@ -177,56 +212,75 @@ public class ProgressFragment extends Fragment {
         if (status_pengajuan.equals("Belum Memilih Dosen Pembimbing.")) {
             replaceFragment(new DospemFragment());
             stepView.go(1, true);
+            stepView.done(false);
         } else if (status_p_dospem.equals("Waiting Approval")) {
             replaceFragment(new MsgWaitingFragment());
             stepView.go(1, true);
+            stepView.done(false);
         } else if (status_p_dospem.equals("Decline")) {
             replaceFragment(new MsgRejectFragment());
             stepView.go(1, true);
+            stepView.done(false);
         } else if (status_p_dospem.equals("Accept")) {
             replaceFragment(new MsgSuccesFragment());
             stepView.go(1, true);
+            stepView.done(true);
         } else if (status_p_dospem.equals("Accept") && status_pengajuan.equals("Belum Mengajukan Judul.")) {
+            replaceFragment(new UploadJudulFragment());
             stepView.go(2, true);
+            stepView.done(false);
         }
 
         // Check Condition Data Pengajuan Judul
         if (status_pengajuan.equals("Belum Mengajukan Judul.")) {
+            replaceFragment(new UploadJudulFragment());
             stepView.go(2, true);
+            stepView.done(false);
         } else if (status_p_judul.equals("Waiting Approval")) {
             replaceFragment(new MsgWaitingFragment());
             stepView.go(2, true);
+            stepView.done(false);
         } else if (status_p_judul.equals("Revision")) {
             replaceFragment(new MsgRevisionFragment());
             stepView.go(2, true);
+            stepView.done(false);
         } else if (status_p_judul.equals("Decline")) {
             replaceFragment(new MsgRejectFragment());
             stepView.go(2, true);
+            stepView.done(false);
         } else if (status_p_judul.equals("Accept")) {
             replaceFragment(new MsgSuccesFragment());
             stepView.go(2, true);
+            stepView.done(true);
         } else if (status_p_dospem.equals("Accept") && status_pengajuan.equals("Belum Mengajukan Proposal.")) {
             stepView.go(3, true);
+            stepView.done(false);
         }
 
         // Check Condition Data Pengajuan Proposal
         if (status_pengajuan.equals("Belum Mengajukan Proposal.")) {
             stepView.go(3, true);
+            stepView.done(false);
         } else if (status_p_proposal.equals("Waiting Approval")) {
             replaceFragment(new MsgWaitingFragment());
             stepView.go(3, true);
+            stepView.done(false);
         } else if (status_p_proposal.equals("Revision")) {
             replaceFragment(new MsgRevisionFragment());
             stepView.go(3, true);
+            stepView.done(false);
         } else if (status_p_proposal.equals("Decline")) {
             replaceFragment(new MsgRejectFragment());
             stepView.go(3, true);
+            stepView.done(false);
         } else if (status_p_proposal.equals("Accept") && status_pengajuan.equals("Accept Proposal")) {
             replaceFragment(new MsgFinalSuccesFragment());
             stepView.go(4, true);
+            stepView.done(true);
         } else if (status_p_proposal.equals("Accept")) {
             replaceFragment(new MsgSuccesFragment());
             stepView.go(3, true);
+            stepView.done(true);
         }
     }
 
@@ -245,10 +299,10 @@ public class ProgressFragment extends Fragment {
                 if (statusCode == 200 && message.equals("Success")) {
                     JSONObject userData = res.getJSONObject("response");
 
-                    String status_pengajuan = res.getString("status");
-                    String status_p_dospem = userData.getString("status_dospem");
-                    String status_p_judul = userData.getString("status_judul");
-                    String status_p_proposal = userData.getString("status_proposal");
+                    status_pengajuan = res.getString("status");
+                    status_p_dospem = userData.getString("status_dospem");
+                    status_p_judul = userData.getString("status_judul");
+                    status_p_proposal = userData.getString("status_proposal");
 
                     settingStepView();
 
@@ -261,7 +315,7 @@ public class ProgressFragment extends Fragment {
 
                     swipeRefreshLayout.setRefreshing(false);
 
-                    Toast.makeText(requireContext(), "Login Gagal : " + message, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
                 }
             } catch (JSONException e) {
                 // Handle the case when there's a JSON parsing error
@@ -303,24 +357,6 @@ public class ProgressFragment extends Fragment {
         RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
         request.setRetryPolicy(new DefaultRetryPolicy(30000, 5, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(request);
-    }
-
-    private void settingStepView() {
-        stepView.getState()
-                .animationType(StepView.ANIMATION_ALL)
-                .steps(new ArrayList<String>() {{
-                    add("Team");
-                    add("Dospem");
-                    add("Judul");
-                    add("Proposal");
-                    add("Lolos");
-                }})
-                .stepsNumber(5)
-                .animationDuration(getResources().getInteger(android.R.integer.config_shortAnimTime))
-                .commit();
-
-        // Set an initial step as selected
-        stepView.go(0, true);
     }
 
     private void replaceFragment(Fragment fragment) {

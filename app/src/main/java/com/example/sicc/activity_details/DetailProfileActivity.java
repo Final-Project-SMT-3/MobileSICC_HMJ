@@ -143,16 +143,22 @@ public class DetailProfileActivity extends AppCompatActivity {
                     JSONObject userData = res.getJSONObject("response");
 
                     // Data Detail Kelompok
+                    String nama_dospem = userData.getString("nama_dospem");
+                    String status_pengajuan_dospem = userData.getString("status_dospem");
                     String nama = formatNama(userData.getString("nama"));
                     String lomba = userData.getString("nama_lomba");
-                    String dospem = formatDosen(userData.getString("nama_dospem"));
 
                     txt_nama.setText(nama);
                     txt_lomba.setText(lomba);
 
-                    if (userData.getString("nama_dospem").equals("null")) {
+                    if (nama_dospem.equals("null")) {
                         txt_dospem.setText("Belum Memilih Dospem");
-                    } else {
+                    } else if (status_pengajuan_dospem.equals("Decline")) {
+                        txt_dospem.setText("Pengajuan Di Tolak");
+                    } else if (status_pengajuan_dospem.equals("Waiting Approval")) {
+                        txt_dospem.setText("Menunggu Konfirmasi");
+                    } else if (status_pengajuan_dospem.equals("Accept")) {
+                        String dospem = formatDosen(nama_dospem);
                         txt_dospem.setText(dospem);
                     }
 

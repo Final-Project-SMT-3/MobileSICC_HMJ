@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -177,6 +178,7 @@ public class HomeFragment extends Fragment {
 
                 if (statusCode == 200 && message.equals("Success")) {
                     JSONObject userData = res.getJSONObject("response");
+                    Log.d("Response", userData.toString());
 
                     // Share Preferences User After Login
                     SharedPreferences userPref = requireContext().getSharedPreferences("user_login", Context.MODE_PRIVATE);
@@ -193,12 +195,15 @@ public class HomeFragment extends Fragment {
                     String namaLomba = userData.getString("nama_lomba");
                     String nimAnggota = userData.getString("nim_anggota");
                     String namaDospem = userData.getString("nama_dospem");
+                    String status_pengajuan_dospem = userData.getString("status_dospem");
 
                     if (namaDospem.equals("null")) {
                         txt_dospem.setText("Belum Memilih Dospem");
-                    } else if (!namaDospem.equals("null") && res.getString("status").equals("Decline Dospem")) {
-                        txt_dospem.setText("Belum Memilih Dospem");
-                    } else if (!namaDospem.equals("null")) {
+                    } else if (status_pengajuan_dospem.equals("Decline")) {
+                        txt_dospem.setText("Pengajuan Di Tolak");
+                    } else if (status_pengajuan_dospem.equals("Waiting Approval")) {
+                        txt_dospem.setText("Menunggu Konfirmasi");
+                    } else if (status_pengajuan_dospem.equals("Accept")) {
                         String dospem = formatDosen(namaDospem);
                         txt_dospem.setText(dospem);
                     }
@@ -219,7 +224,7 @@ public class HomeFragment extends Fragment {
 
                     swipeRefreshLayout.setRefreshing(false);
 
-                    Toast.makeText(requireContext(), "Login Gagal : " + message, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
                 }
             } catch (JSONException e) {
                 // Handle the case when there's a JSON parsing error

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.UploadJudulFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/title_judul"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pengajuan Judul Proposal :"
+                android:textSize="17sp"
+                android:fontFamily="@font/poppinssemibold"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"/>
+
+            <TextView
+                android:id="@+id/subtitle_judul"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ketikan Judul Proposal Pada Kolom Yang Telah Di Sediakan dan Lakukan Proses Pengajuan"
+                android:textSize="15sp"
+                android:fontFamily="@font/poppinsregular"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_below="@id/title_judul"
+                tools:ignore="RtlCompat" />
+
+            <LinearLayout
+                android:id="@+id/layout_upload"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/subtitle_judul"
+                android:layout_margin="25dp"
+                android:background="@drawable/background_upload"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginEnd="25dp"
+                    android:fontFamily="@font/poppinssemibold"
+                    android:text="Upload Judul Proposal"
+                    android:textAlignment="center"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tgl_pengajuan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginEnd="25dp"
+                    android:layout_marginBottom="40dp"
+                    android:fontFamily="@font/poppinsregular"
+                    android:text="Upload Judul Proposal"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/darker_gray"
+                    android:textAlignment="center" />
+
+                <EditText
+                    android:id="@+id/editText_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginEnd="25dp"
+                    android:layout_marginBottom="50dp"
+                    android:background="@drawable/background_textarea"
+                    android:fontFamily="@font/poppinsregular"
+                    android:gravity="start|top"
+                    android:hint="Judul Proposal"
+                    android:inputType="textMultiLine"
+                    android:padding="15dp"
+                    android:textSize="15sp"
+                    android:autofillHints=""/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/title_review"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Review Pembimbing"
+                android:textSize="17sp"
+                android:fontFamily="@font/poppinssemibold"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_below="@id/layout_upload"
+                android:visibility="gone"/>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/layout_review"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="10dp"
+                android:elevation="5dp"
+                android:layout_margin="15dp"
+                android:layout_below="@id/title_review"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/txt_nama_dospem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Dosen Pembimbing"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/poppinssemibold"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:padding="10dp"/>
+
+                <TextView
+                    android:id="@+id/txt_review_dospem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Review Dari Dosen Pembimbing"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/poppinsregular"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:padding="10dp"/>
+
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/btn_ajukan_judul"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppinsregular"
+            android:text="Ajukan Judul"
+            android:textSize="15sp"
+            android:layout_margin="15dp"/>
+
+    </LinearLayout>
+
+</ScrollView>

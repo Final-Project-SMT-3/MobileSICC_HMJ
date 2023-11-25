@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Handler;
 import android.util.Log;
@@ -26,6 +28,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.sicc.R;
 import com.example.sicc.adapters.LoadingMain;
 import com.example.sicc.models.Constant;
+import com.example.sicc.notification.MsgWaitingFragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,8 +44,9 @@ public class PengajuanDospemFragment extends Fragment {
     private CheckBox btn_check;
     private Bundle bundle;
     private LoadingMain loadingMain;
-    private View view;
     private SharedPreferences sharedPreferences;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,8 +71,9 @@ public class PengajuanDospemFragment extends Fragment {
         total_diterima = view.findViewById(R.id.total_diterima);
         btn_pengajuan = view.findViewById(R.id.btn_pengajuan);
         btn_check = view.findViewById(R.id.check_permission);
-        sharedPreferences = getContext().getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
         loadingMain = new LoadingMain(requireContext());
+        sharedPreferences = getContext().getApplicationContext().getSharedPreferences("user_login", Context.MODE_PRIVATE);
+        swipeRefreshLayout = view.findViewById(R.id.swipe_refresh);
 
         loadingMain.show();
 
@@ -162,6 +167,7 @@ public class PengajuanDospemFragment extends Fragment {
     }
 
     private void pengajuanDospem() {
+        swipeRefreshLayout.setRefreshing(true);
         StringRequest request = new StringRequest(Request.Method.POST, Constant.PENGAJUAN_DOSPEM, response -> {
             Log.d("Response", response);
 
@@ -176,6 +182,13 @@ public class PengajuanDospemFragment extends Fragment {
 
                     Toast.makeText(getContext(), detail_message, Toast.LENGTH_SHORT).show();
 
+                    // Redirect Into Waiting
+                    FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
+                    transaction.setReorderingAllowed(true);
+                    transaction.replace(R.id.fragment_container_progress, MsgWaitingFragment.class, null);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
+
                     loadingMain.cancel();
                 } else {
                     loadingMain.cancel();
@@ -188,13 +201,19 @@ public class PengajuanDospemFragment extends Fragment {
 
                 loadingMain.cancel();
 
+                swipeRefreshLayout.setRefreshing(false);
+
                 // Handle the case when there's a JSON parsing error
                 Toast.makeText(getContext(), "JSON Parsing Error", Toast.LENGTH_SHORT).show();
             }
+
+            swipeRefreshLayout.setRefreshing(false);
         }, error -> {
             error.printStackTrace();
 
             loadingMain.cancel();
+
+            swipeRefreshLayout.setRefreshing(false);
 
             // Handle the case when there's a network error
             Toast.makeText(getContext(), "Network Error", Toast.LENGTH_SHORT).show();
