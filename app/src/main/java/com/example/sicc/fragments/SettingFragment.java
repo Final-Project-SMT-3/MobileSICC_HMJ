@@ -11,19 +11,33 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.sicc.R;
 import com.example.sicc.activity_details.DetailProfileActivity;
 import com.example.sicc.activity_details.InformasiAplikasiActivity;
+import com.example.sicc.adapters.LoadingMain;
 import com.example.sicc.authentication.LoginActivity;
+import com.example.sicc.models.Constant;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SettingFragment extends Fragment {
     private TextView txt_nama;
@@ -31,6 +45,7 @@ public class SettingFragment extends Fragment {
     private LinearLayout btn_profile, btn_info, btn_logout;
     private SharedPreferences sharedPreferences;
     private Dialog dialog;
+    private LoadingMain loadingMain;
     private View view;
 
     @Override
@@ -49,7 +64,18 @@ public class SettingFragment extends Fragment {
         btn_profile = view.findViewById(R.id.btn_profile_kelompok);
         btn_info = view.findViewById(R.id.btn_info_aplikasi);
         btn_logout = view.findViewById(R.id.btn_logout);
-        sharedPreferences = getContext().getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
+        loadingMain = new LoadingMain(requireActivity());
+        sharedPreferences = getContext().getApplicationContext().getSharedPreferences("user_login", Context.MODE_PRIVATE);
+
+        loadingMain.show();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                getDataUser();
+            }
+        }, 500);
 
         dialog = new Dialog(requireContext());
         dialog.setContentView(R.layout.custom_confirm_dialog);
@@ -60,18 +86,70 @@ public class SettingFragment extends Fragment {
         ya = dialog.findViewById(R.id.btn_okay);
         tidak = dialog.findViewById(R.id.btn_cancel);
 
-        getData();
-
         buttonFunction();
     }
 
-    private void getData() {
+    private void getDataUser() {
         // "-" is the default value to be returned if the key "name" is not found in shared preferences
-        String namaUser = sharedPreferences.getString("nama_ketua", "-");
+        int id_user = sharedPreferences.getInt("id_user", 0);
 
-        String nama = formatNama(namaUser);
+        StringRequest request = new StringRequest(Request.Method.POST, Constant.DATA_USER, response -> {
+            try {
+                JSONObject res = new JSONObject(response);
 
-        txt_nama.setText(nama);
+                int statusCode = res.getInt("status_code");
+                String message = res.getString("message");
+
+                if (statusCode == 200 && message.equals("Success")) {
+                    JSONObject userData = res.getJSONObject("response");
+
+                    String namaUser = userData.getString("nama");
+
+                    String nama = formatNama(namaUser);
+
+                    txt_nama.setText(nama);
+
+                    loadingMain.cancel();
+                } else {
+                    // Handle the case when the response indicates an error
+                    loadingMain.cancel();
+
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
+                }
+            } catch (JSONException e) {
+                // Handle the case when there's a JSON parsing error
+                e.printStackTrace();
+
+                loadingMain.cancel();
+
+                Toast.makeText(requireContext(), "JSON Parsing Error", Toast.LENGTH_SHORT).show();
+            }
+        }, error -> {
+            // Handle the case when there's a network error
+            error.printStackTrace();
+
+            loadingMain.cancel();
+
+            Toast.makeText(requireContext(), "Network Error", Toast.LENGTH_SHORT).show();
+        }) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("HTTP-TOKEN", "KgncmLUc7qvicKI1OjaLYLkPi");
+                return headers;
+            }
+
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("id_user", String.valueOf(id_user));
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
+        request.setRetryPolicy(new DefaultRetryPolicy(30000, 5, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        requestQueue.add(request);
     }
 
     private void buttonFunction() {

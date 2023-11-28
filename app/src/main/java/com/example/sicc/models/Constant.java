@@ -2,7 +2,7 @@ package com.example.sicc.models;
 
 public class Constant {
     // Jangan Lupa Ubah IP ADDRESS
-    public static final String URL = "http://192.168.0.13/be-sicc/public/";
+    public static final String URL = "http://192.168.0.13/";
     public static final String HOME = URL + "API";
     public static final String LOGIN = HOME + "/users/login";
     public static final String LOMBA = HOME + "/lomba/getLomba";
@@ -14,4 +14,5 @@ public class Constant {
     public static final String PENGAJUAN_JUDUL = HOME + "/Judul/pengajuanJudul";
     public static final String PENGAJUAN_REVISI_JUDUL = HOME + "/Judul/pengajuanRevisiJudul";
     public static final String DETAIL_JUDUL = HOME + "/Judul/getDetailJudul";
+    public static final String PENGAJUAN_PROPOSAL = HOME + "/Proposal/pengajuanProposal";
 }

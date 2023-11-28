@@ -253,12 +253,14 @@ public class ProgressFragment extends Fragment {
             stepView.go(2, true);
             stepView.done(true);
         } else if (status_p_dospem.equals("Accept") && status_pengajuan.equals("Belum Mengajukan Proposal.")) {
+            replaceFragment(new UploadProposalFragment());
             stepView.go(3, true);
             stepView.done(false);
         }
 
         // Check Condition Data Pengajuan Proposal
         if (status_pengajuan.equals("Belum Mengajukan Proposal.")) {
+            replaceFragment(new UploadProposalFragment());
             stepView.go(3, true);
             stepView.done(false);
         } else if (status_p_proposal.equals("Waiting Approval")) {

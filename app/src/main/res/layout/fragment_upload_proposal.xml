@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.UploadJudulFragment">
+    tools:context=".fragments.UploadProposalFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,7 +20,7 @@
                 android:id="@+id/title_judul"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Pengajuan Judul Proposal :"
+                android:text="Pengajuan Proposal :"
                 android:textSize="17sp"
                 android:fontFamily="@font/poppinssemibold"
                 android:layout_marginTop="15dp"
@@ -30,7 +31,7 @@
                 android:id="@+id/subtitle_judul"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Ketikan Judul Proposal Pada Kolom Yang Telah Di Sediakan dan Lakukan Proses Pengajuan"
+                android:text="Upload File Proposal Pada Kolom Yang Telah Di Sediakan dan Lakukan Proses Pengajuan"
                 android:textSize="15sp"
                 android:fontFamily="@font/poppinsregular"
                 android:layout_marginStart="15dp"
@@ -55,7 +56,7 @@
                     android:layout_marginTop="40dp"
                     android:layout_marginEnd="25dp"
                     android:fontFamily="@font/poppinssemibold"
-                    android:text="Upload Judul Proposal"
+                    android:text="Upload File Proposal"
                     android:textAlignment="center"
                     android:textSize="16sp" />
 
@@ -72,21 +73,46 @@
                     android:textColor="@android:color/darker_gray"
                     android:textAlignment="center" />
 
-                <EditText
-                    android:id="@+id/editText_input"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginEnd="25dp"
-                    android:layout_marginBottom="50dp"
-                    android:background="@drawable/background_textarea"
-                    android:fontFamily="@font/poppinsregular"
-                    android:gravity="start|top"
-                    android:hint="Judul Proposal"
-                    android:inputType="textMultiLine"
-                    android:padding="15dp"
-                    android:textSize="15sp"
-                    android:autofillHints=""/>
+                    android:layout_height="55dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="50dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="50dp"
+                        android:layout_height="52dp"
+                        app:cardBackgroundColor="@color/colorPrimary"
+                        android:layout_marginRight="5dp"
+                        android:elevation="5dp"
+                        app:cardCornerRadius="10dp">
+
+                        <ImageView
+                            android:id="@+id/btn_choose_file"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_upload"
+                            android:scaleType="centerInside" />
+
+                    </androidx.cardview.widget.CardView>
+
+                    <EditText
+                        android:id="@+id/editText_input"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/background_textarea"
+                        android:fontFamily="@font/poppinsregular"
+                        android:gravity="start|top"
+                        android:inputType="none"
+                        android:hint="Judul Proposal"
+                        android:padding="15dp"
+                        android:textSize="15sp"
+                        android:autofillHints=""/>
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -99,8 +125,7 @@
                 android:fontFamily="@font/poppinssemibold"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="15dp"
-                android:layout_below="@id/layout_upload"
-                android:visibility="gone"/>
+                android:layout_below="@id/layout_upload"/>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/layout_review"
@@ -109,8 +134,7 @@
                 app:cardCornerRadius="10dp"
                 android:elevation="5dp"
                 android:layout_margin="15dp"
-                android:layout_below="@id/title_review"
-                android:visibility="gone">
+                android:layout_below="@id/title_review">
 
                 <TextView
                     android:id="@+id/txt_nama_dospem"
@@ -144,7 +168,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppinsregular"
-            android:text="Ajukan Judul"
+            android:text="Ajukan Proposal"
             android:textSize="15sp"
             android:layout_margin="15dp"/>
 

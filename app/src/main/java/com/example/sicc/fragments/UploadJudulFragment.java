@@ -169,8 +169,6 @@ public class UploadJudulFragment extends Fragment {
                     if (status_judul.equals("Revision")) {
                         title_review.setVisibility(View.VISIBLE);
                         cardReview.setVisibility(View.VISIBLE);
-                        txt_nama_dosen.setVisibility(View.VISIBLE);
-                        txt_review_dospem.setVisibility(View.VISIBLE);
                         btn_pengajuan.setText("Ajukan Revisi Judul");
 
                         txt_nama_dosen.setText(formatDosen(nama_dosen));
