@@ -41,7 +41,7 @@ import java.util.Locale;
 import java.util.Map;
 
 public class UploadJudulFragment extends Fragment {
-    private String id_dosen;
+    private String id_dosen, id_pj;
     private CardView cardReview;
     private TextView txt_nama_dosen, txt_review_dospem, title_review, tgl_pengajuan;
     private EditText txt_judul;
@@ -160,6 +160,7 @@ public class UploadJudulFragment extends Fragment {
                     JSONObject dataJudul = res.getJSONObject("response");
 
                     id_dosen = dataJudul.getString("id_dospem");
+                    id_pj = dataJudul.getString("id_pengajuan_judul");
                     String nama_dosen = dataJudul.getString("nama_dospem");
                     String judul = dataJudul.getString("judul");
                     String review = dataJudul.getString("review");
@@ -355,7 +356,7 @@ public class UploadJudulFragment extends Fragment {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params = new HashMap<>();
-                params.put("id_dospem", id_dosen);
+                params.put("id_pj", id_pj);
                 params.put("judul", judul);
                 return params;
             }

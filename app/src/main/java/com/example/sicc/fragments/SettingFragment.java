@@ -43,7 +43,7 @@ public class SettingFragment extends Fragment {
     private TextView txt_nama;
     private Button ya, tidak;
     private LinearLayout btn_profile, btn_info, btn_logout;
-    private SharedPreferences sharedPreferences;
+    private SharedPreferences sharedPreferences, sharedPreferencesDataLogin;
     private Dialog dialog;
     private LoadingMain loadingMain;
     private View view;
@@ -65,7 +65,8 @@ public class SettingFragment extends Fragment {
         btn_info = view.findViewById(R.id.btn_info_aplikasi);
         btn_logout = view.findViewById(R.id.btn_logout);
         loadingMain = new LoadingMain(requireActivity());
-        sharedPreferences = getContext().getApplicationContext().getSharedPreferences("user_login", Context.MODE_PRIVATE);
+        sharedPreferences = getContext().getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
+        sharedPreferencesDataLogin = getContext().getApplicationContext().getSharedPreferences("user_login", Context.MODE_PRIVATE);
 
         loadingMain.show();
 
@@ -91,7 +92,7 @@ public class SettingFragment extends Fragment {
 
     private void getDataUser() {
         // "-" is the default value to be returned if the key "name" is not found in shared preferences
-        int id_user = sharedPreferences.getInt("id_user", 0);
+        int id_user = sharedPreferencesDataLogin.getInt("id_user", 0);
 
         StringRequest request = new StringRequest(Request.Method.POST, Constant.DATA_USER, response -> {
             try {

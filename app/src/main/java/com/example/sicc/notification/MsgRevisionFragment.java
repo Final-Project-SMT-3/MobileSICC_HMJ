@@ -20,6 +20,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.sicc.R;
 import com.example.sicc.fragments.DospemFragment;
 import com.example.sicc.fragments.UploadJudulFragment;
+import com.example.sicc.fragments.UploadProposalFragment;
 import com.example.sicc.models.Constant;
 
 import org.json.JSONException;
@@ -71,7 +72,7 @@ public class MsgRevisionFragment extends Fragment {
                     String status_p_proposal = userData.getString("status_proposal");
 
                     // Setting Message And Redirect By Status Pengajuan
-                    setStatus_Message(status_pengajuan, status_p_dospem, status_p_judul, status_p_proposal);
+                    setStatus_Message(status_pengajuan, status_p_judul, status_p_proposal);
 
                 } else {
                     // Handle the case when the response indicates an error
@@ -109,7 +110,7 @@ public class MsgRevisionFragment extends Fragment {
         requestQueue.add(request);
     }
 
-    private void setStatus_Message(String status_p, String p_dospem, String p_judul, String p_proposal) {
+    private void setStatus_Message(String status_p, String p_judul, String p_proposal) {
         if (status_p.equals("Revision Judul") && p_judul.equals("Revision")) {
             btn_redirect.setVisibility(View.VISIBLE);
             btn_redirect.setText("Lihat Review Dospem");
@@ -123,6 +124,13 @@ public class MsgRevisionFragment extends Fragment {
         } else if (status_p.equals("Revision Proposal") && p_proposal.equals("Revision")) {
             btn_redirect.setVisibility(View.VISIBLE);
             btn_redirect.setText("Lihat Review Dospem");
+
+            btn_redirect.setOnClickListener(v-> {
+                requireActivity().getSupportFragmentManager().beginTransaction().setReorderingAllowed(true)
+                        .replace(R.id.fragment_container_progress, UploadProposalFragment.class, null)
+                        .addToBackStack(null)
+                        .commit();
+            });
         }
     }
 }

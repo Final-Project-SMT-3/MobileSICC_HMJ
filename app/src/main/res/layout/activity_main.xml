@@ -104,7 +104,8 @@
             android:paddingEnd="5dp"
             android:gravity="center"
             android:layout_weight="1"
-            android:background="@android:color/transparent">
+            android:background="@android:color/transparent"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/icon_save"
