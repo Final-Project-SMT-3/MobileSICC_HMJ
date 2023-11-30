@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,14 +19,18 @@ import com.example.sicc.R;
 import com.example.sicc.models.Lomba;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class LombaAdapter extends RecyclerView.Adapter<LombaAdapter.LombaViewHolder> {
     private Context context;
     private ArrayList<Lomba> dataList;
+    private ArrayList<Lomba> dataListAll;
+
 
     public LombaAdapter(Context context, ArrayList<Lomba> dataList) {
         this.context = context;
         this.dataList = dataList;
+        this.dataListAll = new ArrayList<>(dataList) ;
     }
 
     @NonNull
@@ -56,6 +61,40 @@ public class LombaAdapter extends RecyclerView.Adapter<LombaAdapter.LombaViewHol
     @Override
     public int getItemCount() {
         return dataList.size();
+    }
+
+    Filter filter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            ArrayList<Lomba> filteredList = new ArrayList<>();
+            if (charSequence.toString().isEmpty()) {
+                filteredList.addAll(dataListAll);
+            } else {
+                for (Lomba lomba : dataListAll) {
+                    if (lomba.getNama_lomba().toLowerCase().contains(charSequence.toString().toLowerCase())
+                            || lomba.getJenis_lomba().toLowerCase().contains(charSequence.toString().toLowerCase()))
+                    {
+                        filteredList.add(lomba);
+                    }
+                }
+            }
+
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            dataList.clear();
+            dataList.addAll((Collection<? extends Lomba>) filterResults.values);
+            notifyDataSetChanged();
+        }
+    };
+
+    public Filter getFilter() {
+        return filter;
     }
 
     public class LombaViewHolder extends RecyclerView.ViewHolder {

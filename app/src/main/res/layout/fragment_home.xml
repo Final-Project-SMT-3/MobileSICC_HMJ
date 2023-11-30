@@ -66,6 +66,7 @@
             android:layout_below="@id/layout_profile">
 
             <EditText
+                android:id="@+id/txt_cariLomba"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:hint="Cari Lomba"

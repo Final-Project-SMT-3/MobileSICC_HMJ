@@ -4,16 +4,20 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +47,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class HomeFragment extends Fragment {
     private CircleImageView photoProfile;
     private TextView txt_name, txt_ketua, txt_kelompok, txt_dospem, txt_lomba, txt_anggota;
+    private EditText txt_search;
     private RecyclerView recyclerView;
     private LombaAdapter adapter;
     private ArrayList<Lomba> arrayList;
@@ -70,6 +75,7 @@ public class HomeFragment extends Fragment {
         txt_lomba = view.findViewById(R.id.jenis_lomba);
         txt_anggota = view.findViewById(R.id.anggota_kelompok);
         txt_dospem = view.findViewById(R.id.nama_dospem);
+        txt_search = view.findViewById(R.id.txt_cariLomba);
         recyclerView = view.findViewById(R.id.recyclerView_Lomba);
         sharedPreferences = getContext().getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
         loadingMain = new LoadingMain(requireActivity());
@@ -108,6 +114,25 @@ public class HomeFragment extends Fragment {
                     .replace(R.id.fragment_container, SettingFragment.class, null)
                     .addToBackStack(null)
                     .commit();
+        });
+
+        txt_search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String searchText = txt_search.getText().toString().trim();
+                filterResults(searchText);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String searchText = txt_search.getText().toString().trim();
+                filterResults(searchText);
+            }
         });
     }
 
@@ -346,5 +371,9 @@ public class HomeFragment extends Fragment {
 
         RequestQueue queue = Volley.newRequestQueue(getContext().getApplicationContext());
         queue.add(request);
+    }
+
+    private void filterResults(String searchText) {
+        adapter.getFilter().filter(searchText);
     }
 }
