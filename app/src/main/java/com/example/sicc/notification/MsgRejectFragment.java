@@ -20,6 +20,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.sicc.R;
 import com.example.sicc.fragments.DospemFragment;
 import com.example.sicc.fragments.UploadJudulFragment;
+import com.example.sicc.fragments.UploadProposalFragment;
 import com.example.sicc.models.Constant;
 
 import org.json.JSONException;
@@ -133,6 +134,13 @@ public class MsgRejectFragment extends Fragment {
         } else if (status_p.equals("Decline Proposal") && p_proposal.equals("Decline")) {
             btn_redirect.setVisibility(View.VISIBLE);
             btn_redirect.setText("Upload Proposal Baru");
+
+            btn_redirect.setOnClickListener(v-> {
+                requireActivity().getSupportFragmentManager().beginTransaction().setReorderingAllowed(true)
+                        .replace(R.id.fragment_container_progress, UploadProposalFragment.class, null)
+                        .addToBackStack(null)
+                        .commit();
+            });
         }
     }
 }
