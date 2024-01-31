@@ -37,7 +37,7 @@ import java.util.Map;
 public class LoginActivity extends AppCompatActivity {
     private TextInputLayout layoutUsername, layoutPassword;
     private EditText txt_username, txt_password;
-    private TextView btn_lupaPassword;
+    private TextView btn_lupaPassword, txt_register, btn_register;
     private Button btn_login;
     private long backPressedTime = 0;
     private final LoadingDialog loadingDialog = new LoadingDialog(LoginActivity.this);
@@ -57,6 +57,8 @@ public class LoginActivity extends AppCompatActivity {
         txt_password = findViewById(R.id.txt_password);
         btn_login = findViewById(R.id.btn_login);
         btn_lupaPassword = findViewById(R.id.lupa_password);
+        txt_register = findViewById(R.id.txt_register);
+        btn_register = findViewById(R.id.btn_register);
 
         txt_username.addTextChangedListener(new TextWatcher() {
             @Override
@@ -114,6 +116,18 @@ public class LoginActivity extends AppCompatActivity {
 
         btn_lupaPassword.setOnClickListener(v-> {
             startActivity(new Intent(LoginActivity.this, LupaPasswordActivity.class));
+            Animatoo.INSTANCE.animateSlideLeft(this);
+            finish();
+        });
+
+        txt_register.setOnClickListener(v -> {
+            startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+            Animatoo.INSTANCE.animateSlideLeft(this);
+            finish();
+        });
+
+        btn_register.setOnClickListener(v -> {
+            startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
             Animatoo.INSTANCE.animateSlideLeft(this);
             finish();
         });

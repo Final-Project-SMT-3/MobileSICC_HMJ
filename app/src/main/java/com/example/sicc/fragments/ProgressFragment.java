@@ -191,13 +191,11 @@ public class ProgressFragment extends Fragment {
         stepView.getState()
                 .animationType(StepView.ANIMATION_ALL)
                 .steps(new ArrayList<String>() {{
-                    add("Team");
-                    add("Dospem");
-                    add("Judul");
-                    add("Proposal");
+                    add("Akun");
+                    add("Data Kelompok");
                     add("Lolos");
                 }})
-                .stepsNumber(5)
+                .stepsNumber(3)
                 .animationDuration(getResources().getInteger(android.R.integer.config_shortAnimTime))
                 .commit();
 

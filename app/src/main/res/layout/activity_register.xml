@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorOnPrimary"
-    tools:context=".authentication.LoginActivity">
+    tools:context=".authentication.RegisterActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -25,7 +25,7 @@
             android:id="@+id/welcome_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Selamat Datang 👋"
+            android:text="Registrasi"
             android:textSize="25sp"
             android:fontFamily="@font/poppinssemibold"
             android:layout_marginStart="20dp"
@@ -33,10 +33,10 @@
             android:layout_below="@id/logo_image"/>
 
         <TextView
-            android:id="@+id/ayologin_text"
+            android:id="@+id/ayoregister_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ayo Log in !"
+            android:text="Ayo Registrasi Dan Daftarkan Kelompokmu !"
             android:textSize="16sp"
             android:fontFamily="@font/poppinsregular"
             android:layout_marginStart="20dp"
@@ -44,20 +44,20 @@
             android:layout_below="@id/welcome_text"/>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/username_input_layout"
+            android:id="@+id/email_input_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginTop="30dp"
-            android:layout_below="@id/ayologin_text">
+            android:layout_below="@id/ayoregister_text">
 
             <EditText
-                android:id="@+id/txt_username"
+                android:id="@+id/txt_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Username"
-                android:drawableStart="@drawable/ic_user"
+                android:hint="Email"
+                android:drawableStart="@drawable/ic_email"
                 android:drawablePadding="15dp"
                 android:inputType="text"
                 android:textSize="16sp"
@@ -67,23 +67,22 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/password_input_layout"
+            android:id="@+id/username_input_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            app:passwordToggleEnabled="true"
-            android:layout_below="@id/username_input_layout">
+            android:layout_below="@id/email_input_layout">
 
             <EditText
-                android:id="@+id/txt_password"
+                android:id="@+id/txt_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Password"
-                android:drawableStart="@drawable/ic_lock"
+                android:hint="Username"
+                android:drawableStart="@drawable/ic_user"
                 android:drawablePadding="15dp"
-                android:inputType="textPassword"
+                android:inputType="textPersonName"
                 android:textSize="16sp"
                 android:fontFamily="@font/poppinsregular"
                 android:autofillHints="" />
@@ -91,53 +90,40 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/btn_login"
+            android:id="@+id/btn_register"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:text="Log in"
+            android:text="Register"
             android:textSize="18sp"
             android:fontFamily="@font/poppinsregular"
             android:layout_marginTop="30dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:layout_below="@id/password_input_layout"/>
-
-        <TextView
-            android:id="@+id/lupa_password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Lupa Password?"
-            android:textSize="16sp"
-            android:textColor="@color/colorPrimary"
-            android:fontFamily="@font/poppinssemibold"
-            android:layout_marginTop="50dp"
-            android:layout_marginBottom="40dp"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/btn_login"/>
+            android:layout_below="@id/username_input_layout"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_below="@id/lupa_password"
+            android:layout_below="@id/btn_register"
             android:gravity="center"
-            android:layout_marginTop="25dp">
+            android:layout_marginTop="50dp">
 
             <TextView
-                android:id="@+id/txt_register"
+                android:id="@+id/txt_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Belum Punya Akun ?"
+                android:text="Sudah Punya Akun ?"
                 android:layout_marginEnd="5dp"
                 android:textSize="16sp"
                 android:textColor="#424242"
                 android:fontFamily="@font/poppinslight" />
 
             <TextView
-                android:id="@+id/btn_register"
+                android:id="@+id/btn_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Register"
+                android:text="Login"
                 android:textSize="16sp"
                 android:textColor="@color/colorPrimary"
                 android:fontFamily="@font/poppinssemibold" />

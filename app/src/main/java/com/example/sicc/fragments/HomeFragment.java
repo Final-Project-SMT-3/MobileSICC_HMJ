@@ -1,23 +1,20 @@
 package com.example.sicc.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Handler;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,8 +24,10 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.sicc.R;
 import com.example.sicc.activities.MainActivity;
+import com.example.sicc.activities.SearchLombaActivity;
 import com.example.sicc.adapters.LoadingMain;
 import com.example.sicc.adapters.LombaAdapter;
 import com.example.sicc.models.Constant;
@@ -46,8 +45,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HomeFragment extends Fragment {
     private CircleImageView photoProfile;
-    private TextView txt_name, txt_ketua, txt_kelompok, txt_dospem, txt_lomba, txt_anggota;
-    private EditText txt_search;
+    private TextView txt_name, txt_ketua, txt_kelompok, txt_dospem, txt_lomba, txt_anggota, txt_search;
     private RecyclerView recyclerView;
     private LombaAdapter adapter;
     private ArrayList<Lomba> arrayList;
@@ -116,23 +114,13 @@ public class HomeFragment extends Fragment {
                     .commit();
         });
 
-        txt_search.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        txt_search.setOnClickListener(v-> {
+            Context context = requireActivity();
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                String searchText = txt_search.getText().toString().trim();
-                filterResults(searchText);
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                String searchText = txt_search.getText().toString().trim();
-                filterResults(searchText);
-            }
+            // Start the new activity using an intent
+            Intent intent = new Intent(context, SearchLombaActivity.class);
+            Animatoo.INSTANCE.animateSlideLeft(getContext());
+            context.startActivity(intent);
         });
     }
 
@@ -224,10 +212,10 @@ public class HomeFragment extends Fragment {
 
                     if (namaDospem.equals("null")) {
                         txt_dospem.setText("Belum Memilih Dospem");
-                    } else if (status_pengajuan_dospem.equals("Decline")) {
-                        txt_dospem.setText("Pengajuan Di Tolak");
                     } else if (status_pengajuan_dospem.equals("Waiting Approval")) {
                         txt_dospem.setText("Menunggu Konfirmasi");
+                    } else if (status_pengajuan_dospem.equals("Decline")) {
+                        txt_dospem.setText("Pengajuan Di Tolak");
                     } else if (status_pengajuan_dospem.equals("Accept")) {
                         String dospem = formatDosen(namaDospem);
                         txt_dospem.setText(dospem);
@@ -371,9 +359,5 @@ public class HomeFragment extends Fragment {
 
         RequestQueue queue = Volley.newRequestQueue(getContext().getApplicationContext());
         queue.add(request);
-    }
-
-    private void filterResults(String searchText) {
-        adapter.getFilter().filter(searchText);
     }
 }

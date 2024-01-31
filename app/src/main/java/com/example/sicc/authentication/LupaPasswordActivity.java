@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -51,19 +52,17 @@ public class LupaPasswordActivity extends AppCompatActivity {
         loadingMain = new LoadingMain(this);
 
         btn_sendCode.setOnClickListener(v-> {
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    if (!txt_email.getText().toString().isEmpty()) {
+            if (validate()) {
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
                         loadingMain.show();
 
                         sendCodeOTP();
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Mohon Masukan Email Anda", Toast.LENGTH_SHORT).show();
                     }
-                }
-            }, 500);
+                }, 500);
+            }
         });
 
         btn_back.setOnClickListener(v-> {
@@ -132,6 +131,20 @@ public class LupaPasswordActivity extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         request.setRetryPolicy(new DefaultRetryPolicy(30000, 5, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(request);
+    }
+
+    private boolean validate() {
+        if (txt_email.getText().toString().isEmpty()) {
+            Toast.makeText(getApplicationContext(), "Mohon Masukan Email Anda", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (!Patterns.EMAIL_ADDRESS.matcher(txt_email.getText().toString()).matches()) {
+            Toast.makeText(getApplicationContext(), "Email Tidak Valid", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        return true;
     }
 
     @Override
