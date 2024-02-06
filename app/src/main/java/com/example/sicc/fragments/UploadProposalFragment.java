@@ -95,7 +95,7 @@ public class UploadProposalFragment extends Fragment implements PickiTCallbacks 
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                getDetailJudul();
+//                getDetailJudul();
             }
         }, 500);
 
@@ -109,7 +109,7 @@ public class UploadProposalFragment extends Fragment implements PickiTCallbacks 
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    uploadProposal();
+//                    uploadProposal();
                 }
             }, 500);
         });
@@ -170,250 +170,250 @@ public class UploadProposalFragment extends Fragment implements PickiTCallbacks 
         }
     }
 
-    private void getDetailJudul() {
-        StringRequest request = new StringRequest(Request.Method.POST, Constant.DETAIL_PROPOSAL, response -> {
-            try {
-                JSONObject res = new JSONObject(response);
+//    private void getDetailJudul() {
+//        StringRequest request = new StringRequest(Request.Method.POST, Constant.DETAIL_PROPOSAL, response -> {
+//            try {
+//                JSONObject res = new JSONObject(response);
+//
+//                int status_code = res.getInt("status_code");
+//                String message = res.getString("message");
+//
+//                if (status_code == 200 && message.equals("Success")) {
+//                    JSONObject dataProposal = res.getJSONObject("response");
+//
+//                    id_dospem = dataProposal.getString("id_dospem");
+//                    id_judul = dataProposal.getString("id_judul");
+//                    id_pp = dataProposal.getString("id_pengajuan_proposal");
+//                    String nama_dosen = dataProposal.getString("nama_dospem");
+//                    String file_proposal = dataProposal.getString("path");
+//                    String review = dataProposal.getString("review");
+//                    String tanggal_pengajuan = dataProposal.getString("submit_date");
+//                    String status_judul = dataProposal.getString("status_proposal");
+//
+//                    if (status_judul.equals("Revision")) {
+//                        txt_title.setVisibility(View.VISIBLE);
+//                        card_review.setVisibility(View.VISIBLE);
+//                        btn_pengajuan.setText("Ajukan Revisi Proposal");
+//
+//                        txt_nama_dosen.setText(formatDosen(nama_dosen));
+//                        txt_review_dospem.setText(review);
+//                        name_file.setText(file_proposal);
+//                        tgl_pengajuan.setText("Pengajuan : " + formatDate(tanggal_pengajuan));
+//
+//                        btn_pengajuan.setOnClickListener(v-> {
+//                            Handler handler = new Handler();
+//                            handler.postDelayed(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    uploadRevisiProposal();
+//                                }
+//                            }, 500);
+//                        });
+//                    }
+//
+//                    loadingMain.cancel();
+//                } else {
+//                    loadingMain.cancel();
+//
+//                    // Handle the case when the response indicates an error
+//                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+//                }
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//
+//                loadingMain.cancel();
+//
+//                // Handle the case when there's a JSON parsing error
+//                Toast.makeText(getContext(), "JSON Parsing Error", Toast.LENGTH_SHORT).show();
+//            }
+//        }, error -> {
+//            error.printStackTrace();
+//
+//            loadingMain.cancel();
+//
+//            // Handle the case when there's a network error
+//            Toast.makeText(getContext(), "Network Error", Toast.LENGTH_SHORT).show();
+//        }) {
+//            String id_mahasiswa = String.valueOf(sharedPreferences.getInt("id_user", 0));
+//
+//            @Nullable
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                Map<String, String> headers = new HashMap<>();
+//                headers.put("HTTP-TOKEN", "KgncmLUc7qvicKI1OjaLYLkPi");
+//                return headers;
+//            }
+//
+//            @Nullable
+//            @Override
+//            protected Map<String, String> getParams() throws AuthFailureError {
+//                Map<String,String> params = new HashMap<>();
+//                params.put("id_mhs", id_mahasiswa);
+//                return params;
+//            }
+//        };
+//
+//        RequestQueue queue = Volley.newRequestQueue(requireContext());
+//        queue.add(request);
+//    }
 
-                int status_code = res.getInt("status_code");
-                String message = res.getString("message");
+//    private void uploadProposal() {
+//        StringRequest request = new StringRequest(Request.Method.POST, Constant.PENGAJUAN_PROPOSAL, response -> {
+//            Log.d("Response", response);
+//            try {
+//                JSONObject res = new JSONObject(response);
+//
+//                int status_code = res.getInt("status_code");
+//                String message = res.getString("message");
+//
+//                if (status_code == 200 && message.equals("Success")) {
+//                    String detail_message = res.getString("response");
+//
+//                    Toast.makeText(getContext(), detail_message, Toast.LENGTH_SHORT).show();
+//
+//                    // Redirect Into Waiting
+//                    FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
+//                    transaction.setReorderingAllowed(true);
+//                    transaction.replace(R.id.fragment_container_progress, MsgWaitingFragment.class, null);
+//                    transaction.addToBackStack(null);
+//                    transaction.commit();
+//
+//                    loadingMain.cancel();
+//                } else {
+//                    loadingMain.cancel();
+//
+//                    // Handle the case when the response indicates an error
+//                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+//                }
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//
+//                loadingMain.cancel();
+//
+//                // Handle the case when there's a JSON parsing error
+//                Toast.makeText(getContext(), "JSON Parsing Error", Toast.LENGTH_SHORT).show();
+//            }
+//        }, error -> {
+//            error.printStackTrace();
+//
+//            loadingMain.cancel();
+//
+//            // Handle the case when there's a network error
+//            Toast.makeText(getContext(), "Network Error", Toast.LENGTH_SHORT).show();
+//        }) {
+//            String file = name_file.getText().toString();
+//
+//            @Nullable
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                Map<String, String> headers = new HashMap<>();
+//                headers.put("HTTP-TOKEN", "KgncmLUc7qvicKI1OjaLYLkPi");
+//                return headers;
+//            }
+//
+//            @Nullable
+//            @Override
+//            protected Map<String, String> getParams() throws AuthFailureError {
+//                Map<String,String> params = new HashMap<>();
+//                params.put("id_dospem", id_dospem);
+//                params.put("id_judul", id_judul);
+//
+//                if (pdfUri != null) {
+//                    try {
+//                        String pdfBase64 = pdfToBase64(pdfUri);
+//                        Log.d("String", pdfBase64);
+//                        params.put("file_path", pdfBase64);
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//
+//                return params;
+//            }
+//        };
+//
+//        RequestQueue queue = Volley.newRequestQueue(requireContext());
+//        queue.add(request);
+//    }
 
-                if (status_code == 200 && message.equals("Success")) {
-                    JSONObject dataProposal = res.getJSONObject("response");
-
-                    id_dospem = dataProposal.getString("id_dospem");
-                    id_judul = dataProposal.getString("id_judul");
-                    id_pp = dataProposal.getString("id_pengajuan_proposal");
-                    String nama_dosen = dataProposal.getString("nama_dospem");
-                    String file_proposal = dataProposal.getString("path");
-                    String review = dataProposal.getString("review");
-                    String tanggal_pengajuan = dataProposal.getString("submit_date");
-                    String status_judul = dataProposal.getString("status_proposal");
-
-                    if (status_judul.equals("Revision")) {
-                        txt_title.setVisibility(View.VISIBLE);
-                        card_review.setVisibility(View.VISIBLE);
-                        btn_pengajuan.setText("Ajukan Revisi Proposal");
-
-                        txt_nama_dosen.setText(formatDosen(nama_dosen));
-                        txt_review_dospem.setText(review);
-                        name_file.setText(file_proposal);
-                        tgl_pengajuan.setText("Pengajuan : " + formatDate(tanggal_pengajuan));
-
-                        btn_pengajuan.setOnClickListener(v-> {
-                            Handler handler = new Handler();
-                            handler.postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    uploadRevisiProposal();
-                                }
-                            }, 500);
-                        });
-                    }
-
-                    loadingMain.cancel();
-                } else {
-                    loadingMain.cancel();
-
-                    // Handle the case when the response indicates an error
-                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-
-                loadingMain.cancel();
-
-                // Handle the case when there's a JSON parsing error
-                Toast.makeText(getContext(), "JSON Parsing Error", Toast.LENGTH_SHORT).show();
-            }
-        }, error -> {
-            error.printStackTrace();
-
-            loadingMain.cancel();
-
-            // Handle the case when there's a network error
-            Toast.makeText(getContext(), "Network Error", Toast.LENGTH_SHORT).show();
-        }) {
-            String id_mahasiswa = String.valueOf(sharedPreferences.getInt("id_user", 0));
-
-            @Nullable
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> headers = new HashMap<>();
-                headers.put("HTTP-TOKEN", "KgncmLUc7qvicKI1OjaLYLkPi");
-                return headers;
-            }
-
-            @Nullable
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> params = new HashMap<>();
-                params.put("id_mhs", id_mahasiswa);
-                return params;
-            }
-        };
-
-        RequestQueue queue = Volley.newRequestQueue(requireContext());
-        queue.add(request);
-    }
-
-    private void uploadProposal() {
-        StringRequest request = new StringRequest(Request.Method.POST, Constant.PENGAJUAN_PROPOSAL, response -> {
-            Log.d("Response", response);
-            try {
-                JSONObject res = new JSONObject(response);
-
-                int status_code = res.getInt("status_code");
-                String message = res.getString("message");
-
-                if (status_code == 200 && message.equals("Success")) {
-                    String detail_message = res.getString("response");
-
-                    Toast.makeText(getContext(), detail_message, Toast.LENGTH_SHORT).show();
-
-                    // Redirect Into Waiting
-                    FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
-                    transaction.setReorderingAllowed(true);
-                    transaction.replace(R.id.fragment_container_progress, MsgWaitingFragment.class, null);
-                    transaction.addToBackStack(null);
-                    transaction.commit();
-
-                    loadingMain.cancel();
-                } else {
-                    loadingMain.cancel();
-
-                    // Handle the case when the response indicates an error
-                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-
-                loadingMain.cancel();
-
-                // Handle the case when there's a JSON parsing error
-                Toast.makeText(getContext(), "JSON Parsing Error", Toast.LENGTH_SHORT).show();
-            }
-        }, error -> {
-            error.printStackTrace();
-
-            loadingMain.cancel();
-
-            // Handle the case when there's a network error
-            Toast.makeText(getContext(), "Network Error", Toast.LENGTH_SHORT).show();
-        }) {
-            String file = name_file.getText().toString();
-
-            @Nullable
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> headers = new HashMap<>();
-                headers.put("HTTP-TOKEN", "KgncmLUc7qvicKI1OjaLYLkPi");
-                return headers;
-            }
-
-            @Nullable
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> params = new HashMap<>();
-                params.put("id_dospem", id_dospem);
-                params.put("id_judul", id_judul);
-
-                if (pdfUri != null) {
-                    try {
-                        String pdfBase64 = pdfToBase64(pdfUri);
-                        Log.d("String", pdfBase64);
-                        params.put("file_path", pdfBase64);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                return params;
-            }
-        };
-
-        RequestQueue queue = Volley.newRequestQueue(requireContext());
-        queue.add(request);
-    }
-
-    private void uploadRevisiProposal() {
-        StringRequest request = new StringRequest(Request.Method.POST, Constant.PENGAJUAN_REVISI_PROPOSAL, response -> {
-            Log.d("Response", response);
-            try {
-                JSONObject res = new JSONObject(response);
-
-                int status_code = res.getInt("status_code");
-                String message = res.getString("message");
-
-                if (status_code == 200 && message.equals("Success")) {
-                    String detail_message = res.getString("response");
-
-                    Toast.makeText(getContext(), detail_message, Toast.LENGTH_SHORT).show();
-
-                    // Redirect Into Waiting
-                    FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
-                    transaction.setReorderingAllowed(true);
-                    transaction.replace(R.id.fragment_container_progress, MsgWaitingFragment.class, null);
-                    transaction.addToBackStack(null);
-                    transaction.commit();
-
-                    loadingMain.cancel();
-                } else {
-                    loadingMain.cancel();
-
-                    // Handle the case when the response indicates an error
-                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-
-                loadingMain.cancel();
-
-                // Handle the case when there's a JSON parsing error
-                Toast.makeText(getContext(), "JSON Parsing Error", Toast.LENGTH_SHORT).show();
-            }
-        }, error -> {
-            error.printStackTrace();
-
-            loadingMain.cancel();
-
-            // Handle the case when there's a network error
-            Toast.makeText(getContext(), "Network Error", Toast.LENGTH_SHORT).show();
-        }) {
-            String file = name_file.getText().toString();
-
-            @Nullable
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> headers = new HashMap<>();
-                headers.put("HTTP-TOKEN", "KgncmLUc7qvicKI1OjaLYLkPi");
-                return headers;
-            }
-
-            @Nullable
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> params = new HashMap<>();
-                params.put("id_pp", id_pp);
-                params.put("id_judul", id_judul);
-
-                if (pdfUri != null) {
-                    try {
-                        String pdfBase64 = pdfToBase64(pdfUri);
-                        Log.d("String", pdfBase64);
-                        params.put("file_path", pdfBase64);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                return params;
-            }
-        };
-
-        RequestQueue queue = Volley.newRequestQueue(requireContext());
-        queue.add(request);
-    }
+//  private void uploadRevisiProposal() {
+//        StringRequest request = new StringRequest(Request.Method.POST, Constant.PENGAJUAN_REVISI_PROPOSAL, response -> {
+//            Log.d("Response", response);
+//            try {
+//                JSONObject res = new JSONObject(response);
+//
+//                int status_code = res.getInt("status_code");
+//                String message = res.getString("message");
+//
+//                if (status_code == 200 && message.equals("Success")) {
+//                    String detail_message = res.getString("response");
+//
+//                    Toast.makeText(getContext(), detail_message, Toast.LENGTH_SHORT).show();
+//
+//                    // Redirect Into Waiting
+//                    FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
+//                    transaction.setReorderingAllowed(true);
+//                    transaction.replace(R.id.fragment_container_progress, MsgWaitingFragment.class, null);
+//                    transaction.addToBackStack(null);
+//                    transaction.commit();
+//
+//                    loadingMain.cancel();
+//                } else {
+//                    loadingMain.cancel();
+//
+//                    // Handle the case when the response indicates an error
+//                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+//                }
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//
+//                loadingMain.cancel();
+//
+//                // Handle the case when there's a JSON parsing error
+//                Toast.makeText(getContext(), "JSON Parsing Error", Toast.LENGTH_SHORT).show();
+//            }
+//        }, error -> {
+//            error.printStackTrace();
+//
+//            loadingMain.cancel();
+//
+//            // Handle the case when there's a network error
+//            Toast.makeText(getContext(), "Network Error", Toast.LENGTH_SHORT).show();
+//        }) {
+//            String file = name_file.getText().toString();
+//
+//            @Nullable
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                Map<String, String> headers = new HashMap<>();
+//                headers.put("HTTP-TOKEN", "KgncmLUc7qvicKI1OjaLYLkPi");
+//                return headers;
+//            }
+//
+//            @Nullable
+//            @Override
+//            protected Map<String, String> getParams() throws AuthFailureError {
+//                Map<String,String> params = new HashMap<>();
+//                params.put("id_pp", id_pp);
+//                params.put("id_judul", id_judul);
+//
+//                if (pdfUri != null) {
+//                    try {
+//                        String pdfBase64 = pdfToBase64(pdfUri);
+//                        Log.d("String", pdfBase64);
+//                        params.put("file_path", pdfBase64);
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//
+//                return params;
+//            }
+//        };
+//
+//        RequestQueue queue = Volley.newRequestQueue(requireContext());
+//        queue.add(request);
+//    }
 
     private void showFileChooser() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);

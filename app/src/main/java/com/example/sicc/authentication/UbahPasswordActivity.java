@@ -110,7 +110,7 @@ public class UbahPasswordActivity extends AppCompatActivity {
                     public void run() {
                         loadingMain.show();
 
-                        resetPassword();
+//                        resetPassword();
                     }
                 }, 500);
             }
@@ -151,66 +151,66 @@ public class UbahPasswordActivity extends AppCompatActivity {
         return true;
     }
 
-    private void resetPassword() {
-        StringRequest request = new StringRequest(Request.Method.POST, Constant.RESET_PASSWORD, response -> {
-            try {
-                JSONObject res = new JSONObject(response);
-
-                int statusCode = res.getInt("status_code");
-                String message = res.getString("message");
-
-                if (statusCode == 200 && message.equals("Success")) {
-
-                    startActivity(new Intent(UbahPasswordActivity.this, LoginActivity.class));
-                    Animatoo.INSTANCE.animateSlideLeft(this);
-                    finish();
-
-                    Toast.makeText(this, "Password Berhasil Di Ubah", Toast.LENGTH_SHORT).show();
-
-                    loadingMain.cancel();
-                } else {
-                    // Handle the case when the response indicates an error
-
-                    loadingMain.cancel();
-
-                    Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-
-                loadingMain.cancel();
-
-                Toast.makeText(this, "JSON Parsing Error", Toast.LENGTH_SHORT).show();
-            }
-        }, error -> {
-            error.printStackTrace();
-
-            loadingMain.cancel();
-
-            Toast.makeText(this, "Network Error", Toast.LENGTH_SHORT).show();
-        }) {
-            String email = sharedPreferences.getString("email", "-");
-
-            @Override
-            public Map<String, String> getHeaders() {
-                Map<String, String> headers = new HashMap<>();
-                headers.put("HTTP-TOKEN", "KgncmLUc7qvicKI1OjaLYLkPi");
-                return headers;
-            }
-
-            @Override
-            protected Map<String,String> getParams(){
-                Map<String,String> params = new HashMap<String, String>();
-                params.put("email", email);
-                params.put("password", txt_conf_password.getText().toString().trim());
-                return params;
-            }
-        };
-
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        request.setRetryPolicy(new DefaultRetryPolicy(30000, 5, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        requestQueue.add(request);
-    }
+//    private void resetPassword() {
+//        StringRequest request = new StringRequest(Request.Method.POST, Constant.RESET_PASSWORD, response -> {
+//            try {
+//                JSONObject res = new JSONObject(response);
+//
+//                int statusCode = res.getInt("status_code");
+//                String message = res.getString("message");
+//
+//                if (statusCode == 200 && message.equals("Success")) {
+//
+//                    startActivity(new Intent(UbahPasswordActivity.this, LoginActivity.class));
+//                    Animatoo.INSTANCE.animateSlideLeft(this);
+//                    finish();
+//
+//                    Toast.makeText(this, "Password Berhasil Di Ubah", Toast.LENGTH_SHORT).show();
+//
+//                    loadingMain.cancel();
+//                } else {
+//                    // Handle the case when the response indicates an error
+//
+//                    loadingMain.cancel();
+//
+//                    Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+//                }
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//
+//                loadingMain.cancel();
+//
+//                Toast.makeText(this, "JSON Parsing Error", Toast.LENGTH_SHORT).show();
+//            }
+//        }, error -> {
+//            error.printStackTrace();
+//
+//            loadingMain.cancel();
+//
+//            Toast.makeText(this, "Network Error", Toast.LENGTH_SHORT).show();
+//        }) {
+//            String email = sharedPreferences.getString("email", "-");
+//
+//            @Override
+//            public Map<String, String> getHeaders() {
+//                Map<String, String> headers = new HashMap<>();
+//                headers.put("HTTP-TOKEN", "KgncmLUc7qvicKI1OjaLYLkPi");
+//                return headers;
+//            }
+//
+//            @Override
+//            protected Map<String,String> getParams(){
+//                Map<String,String> params = new HashMap<String, String>();
+//                params.put("email", email);
+//                params.put("password", txt_conf_password.getText().toString().trim());
+//                return params;
+//            }
+//        };
+//
+//        RequestQueue requestQueue = Volley.newRequestQueue(this);
+//        request.setRetryPolicy(new DefaultRetryPolicy(30000, 5, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+//        requestQueue.add(request);
+//    }
 
     public void onBackPressed() {
         long currentTime = System.currentTimeMillis();

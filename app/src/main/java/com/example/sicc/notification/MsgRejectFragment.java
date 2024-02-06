@@ -49,66 +49,66 @@ public class MsgRejectFragment extends Fragment {
         btn_redirect = view.findViewById(R.id.btn_redirect);
         sharedPreferences = getContext().getApplicationContext().getSharedPreferences("user_login", Context.MODE_PRIVATE);
 
-        getStatus_Pengajuan();
+//        getStatus_Pengajuan();
     }
 
-    private void getStatus_Pengajuan() {
-        // "-" is the default value to be returned if the key "name" is not found in shared preferences
-        int id_user = sharedPreferences.getInt("id_user", 0);
-
-        StringRequest request = new StringRequest(Request.Method.POST, Constant.DATA_USER, response -> {
-            try {
-                JSONObject res = new JSONObject(response);
-
-                int statusCode = res.getInt("status_code");
-                String message = res.getString("message");
-
-                if (statusCode == 200 && message.equals("Success")) {
-                    JSONObject userData = res.getJSONObject("response");
-
-                    String status_pengajuan = res.getString("status");
-                    String status_p_dospem = userData.getString("status_dospem");
-                    String status_p_judul = userData.getString("status_judul");
-                    String status_p_proposal = userData.getString("status_proposal");
-
-                    // Setting Message And Redirect By Status Pengajuan
-                    setStatus_Message(status_pengajuan, status_p_dospem, status_p_judul, status_p_proposal);
-
-                } else {
-                    // Handle the case when the response indicates an error
-                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
-                }
-            } catch (JSONException e) {
-                // Handle the case when there's a JSON parsing error
-                e.printStackTrace();
-
-                Toast.makeText(requireContext(), "JSON Parsing Error", Toast.LENGTH_SHORT).show();
-            }
-        }, error -> {
-            // Handle the case when there's a network error
-            error.printStackTrace();
-
-            Toast.makeText(requireContext(), "Network Error", Toast.LENGTH_SHORT).show();
-        }) {
-            @Override
-            public Map<String, String> getHeaders() {
-                Map<String, String> headers = new HashMap<>();
-                headers.put("HTTP-TOKEN", "KgncmLUc7qvicKI1OjaLYLkPi");
-                return headers;
-            }
-
-            @Override
-            protected Map<String,String> getParams(){
-                Map<String,String> params = new HashMap<String, String>();
-                params.put("id_user", String.valueOf(id_user));
-                return params;
-            }
-        };
-
-        RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
-        request.setRetryPolicy(new DefaultRetryPolicy(30000, 5, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        requestQueue.add(request);
-    }
+//    private void getStatus_Pengajuan() {
+//        // "-" is the default value to be returned if the key "name" is not found in shared preferences
+//        int id_user = sharedPreferences.getInt("id_user", 0);
+//
+//        StringRequest request = new StringRequest(Request.Method.POST, Constant.DATA_USER, response -> {
+//            try {
+//                JSONObject res = new JSONObject(response);
+//
+//                int statusCode = res.getInt("status_code");
+//                String message = res.getString("message");
+//
+//                if (statusCode == 200 && message.equals("Success")) {
+//                    JSONObject userData = res.getJSONObject("response");
+//
+//                    String status_pengajuan = res.getString("status");
+//                    String status_p_dospem = userData.getString("status_dospem");
+//                    String status_p_judul = userData.getString("status_judul");
+//                    String status_p_proposal = userData.getString("status_proposal");
+//
+//                    // Setting Message And Redirect By Status Pengajuan
+//                    setStatus_Message(status_pengajuan, status_p_dospem, status_p_judul, status_p_proposal);
+//
+//                } else {
+//                    // Handle the case when the response indicates an error
+//                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
+//                }
+//            } catch (JSONException e) {
+//                // Handle the case when there's a JSON parsing error
+//                e.printStackTrace();
+//
+//                Toast.makeText(requireContext(), "JSON Parsing Error", Toast.LENGTH_SHORT).show();
+//            }
+//        }, error -> {
+//            // Handle the case when there's a network error
+//            error.printStackTrace();
+//
+//            Toast.makeText(requireContext(), "Network Error", Toast.LENGTH_SHORT).show();
+//        }) {
+//            @Override
+//            public Map<String, String> getHeaders() {
+//                Map<String, String> headers = new HashMap<>();
+//                headers.put("HTTP-TOKEN", "KgncmLUc7qvicKI1OjaLYLkPi");
+//                return headers;
+//            }
+//
+//            @Override
+//            protected Map<String,String> getParams(){
+//                Map<String,String> params = new HashMap<String, String>();
+//                params.put("id_user", String.valueOf(id_user));
+//                return params;
+//            }
+//        };
+//
+//        RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
+//        request.setRetryPolicy(new DefaultRetryPolicy(30000, 5, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+//        requestQueue.add(request);
+//    }
 
     private void setStatus_Message(String status_p, String p_dospem, String p_judul, String p_proposal) {
         if (status_p.equals("Decline Dospem") && p_dospem.equals("Decline")) {

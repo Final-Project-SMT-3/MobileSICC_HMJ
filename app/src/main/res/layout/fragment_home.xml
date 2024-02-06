@@ -8,300 +8,319 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.HomeFragment">
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:scrollbars="none">
 
-        <LinearLayout
-            android:id="@+id/layout_profile"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp">
+            android:layout_height="match_parent">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:id="@+id/layout_profile"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="1">
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Selamat Datang !"
-                    android:textSize="16sp"
-                    android:fontFamily="@font/poppinsregular"/>
+                    android:orientation="vertical"
+                    android:layout_weight="1">
 
-                <TextView
-                    android:id="@+id/txt_name"
-                    android:layout_width="210dp"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:textSize="22sp"
-                    android:fontFamily="@font/poppinssemibold"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Selamat Datang !"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/poppinsregular"/>
+
+                    <TextView
+                        android:id="@+id/txt_name"
+                        android:layout_width="210dp"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textSize="22sp"
+                        android:fontFamily="@font/poppinssemibold"/>
+
+                </LinearLayout>
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/image_profile"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/ic_account"/>
 
             </LinearLayout>
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/image_profile"
-                android:layout_width="50dp"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_search"
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:src="@drawable/ic_account"/>
+                app:cardElevation="5dp"
+                app:cardCornerRadius="10dp"
+                app:cardBackgroundColor="@color/colorOnPrimary"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_below="@id/layout_profile">
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/txt_cariLomba"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="Cari Lomba"
+                    android:textSize="16sp"
+                    android:textColor="@color/white_gray"
+                    android:fontFamily="@font/poppinsregular"
+                    android:drawableStart="@drawable/ic_search"
+                    android:drawablePadding="10dp"
+                    android:gravity="center|start"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card_search"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            app:cardElevation="5dp"
-            app:cardCornerRadius="10dp"
-            app:cardBackgroundColor="@color/colorOnPrimary"
-            android:layout_marginTop="15dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_below="@id/layout_profile">
+            </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/txt_cariLomba"
+                android:id="@+id/layout_titleProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Profile Kelompok"
+                android:textSize="17sp"
+                android:fontFamily="@font/poppinssemibold"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_below="@id/card_search"/>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_information"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="Cari Lomba"
-                android:textSize="16sp"
-                android:textColor="@color/white_gray"
-                android:fontFamily="@font/poppinsregular"
-                android:drawableStart="@drawable/ic_search"
-                android:drawablePadding="10dp"
-                android:gravity="center|start"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp" />
-
-        </androidx.cardview.widget.CardView>
-
-        <TextView
-            android:id="@+id/layout_titleProfile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Profile Kelompok"
-            android:textSize="17sp"
-            android:fontFamily="@font/poppinssemibold"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_below="@id/card_search"/>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card_information"
-            android:layout_width="match_parent"
-            android:layout_height="190dp"
-            app:cardElevation="5dp"
-            app:cardCornerRadius="10dp"
-            app:cardBackgroundColor="@color/colorPrimary"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_below="@id/layout_titleProfile">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:background="@drawable/gradient_card">
+                android:layout_height="190dp"
+                app:cardElevation="5dp"
+                app:cardCornerRadius="10dp"
+                app:cardBackgroundColor="@color/colorPrimary"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_below="@id/layout_titleProfile">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:orientation="horizontal">
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        app:cardCornerRadius="10dp">
-
-                        <ImageView
-                            android:id="@+id/logo_kelompok"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:src="@mipmap/ic_sicc"
-                            android:contentDescription="Logo Kelompok" />
-
-                    </androidx.cardview.widget.CardView>
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:background="@drawable/gradient_card">
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginStart="20dp">
+                        android:layout_marginTop="15dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/nama_kelompok"
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            app:cardCornerRadius="10dp">
+
+                            <ImageView
+                                android:id="@+id/logo_kelompok"
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
+                                android:src="@mipmap/ic_sicc"
+                                android:contentDescription="Logo Kelompok" />
+
+                        </androidx.cardview.widget.CardView>
+
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text=""
-                            android:textSize="20sp"
-                            android:textColor="@color/white"
-                            android:layout_marginTop="5dp"
-                            android:fontFamily="@font/poppinssemibold" />
+                            android:orientation="vertical"
+                            android:layout_marginStart="20dp">
+
+                            <TextView
+                                android:id="@+id/nama_kelompok"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textSize="20sp"
+                                android:textColor="@color/white"
+                                android:layout_marginTop="5dp"
+                                android:fontFamily="@font/poppinssemibold" />
+
+                            <TextView
+                                android:id="@+id/nama_ketua_kelompok"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textSize="16sp"
+                                android:textColor="@color/white_gray"
+                                android:layout_marginTop="-5dp"
+                                android:fontFamily="@font/poppinsregular"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:gravity="center"
+                        android:layout_marginTop="11dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:orientation="horizontal">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="125dp"
+                            android:layout_height="40dp"
+                            app:cardElevation="5dp"
+                            app:cardCornerRadius="20dp"
+                            android:layout_marginEnd="10dp"
+                            app:cardBackgroundColor="#804876A3">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:gravity="center">
+
+                                <TextView
+                                    android:id="@+id/jenis_lomba"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text=""
+                                    android:textSize="17sp"
+                                    android:textColor="@color/white_gray"
+                                    android:textAlignment="center"
+                                    android:fontFamily="@font/poppinsregular"
+                                    android:layout_marginTop="5dp"/>
+
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="125dp"
+                            android:layout_height="40dp"
+                            app:cardElevation="5dp"
+                            app:cardCornerRadius="20dp"
+                            android:layout_marginStart="10dp"
+                            app:cardBackgroundColor="#804876A3">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:gravity="center">
+
+                                <TextView
+                                    android:id="@+id/anggota_kelompok"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text=""
+                                    android:textSize="17sp"
+                                    android:textColor="@color/white_gray"
+                                    android:textAlignment="center"
+                                    android:fontFamily="@font/poppinsregular"
+                                    android:layout_marginTop="5dp"/>
+
+                            </LinearLayout>
+
+
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/nama_ketua_kelompok"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text=""
-                            android:textSize="16sp"
+                            android:text="Dosen Pembimbing :"
+                            android:textSize="13sp"
                             android:textColor="@color/white_gray"
-                            android:layout_marginTop="-5dp"
-                            android:fontFamily="@font/poppinsregular"/>
+                            android:fontFamily="@font/poppinsmedium" />
+
+                        <TextView
+                            android:id="@+id/nama_dospem"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textSize="13sp"
+                            android:textColor="@color/white_gray"
+                            android:fontFamily="@font/poppinsmedium"
+                            android:layout_marginStart="5dp"/>
 
                     </LinearLayout>
 
                 </LinearLayout>
 
-                <LinearLayout
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/layout_titleListCardLomba"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Daftar Kegiatan Lomba"
+                android:textSize="17sp"
+                android:fontFamily="@font/poppinssemibold"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_below="@id/card_information"/>
+
+            <LinearLayout
+                android:id="@+id/layout_listCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_below="@id/layout_titleListCardLomba">
+
+                <ScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:gravity="center"
-                    android:layout_marginTop="11dp"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:orientation="horizontal">
+                    android:layout_height="match_parent"
+                    android:scrollbars="none">
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="125dp"
-                        android:layout_height="40dp"
-                        app:cardElevation="5dp"
-                        app:cardCornerRadius="20dp"
-                        android:layout_marginEnd="10dp"
-                        app:cardBackgroundColor="#804876A3">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:gravity="center">
-
-                            <TextView
-                                android:id="@+id/jenis_lomba"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text=""
-                                android:textSize="17sp"
-                                android:textColor="@color/white_gray"
-                                android:textAlignment="center"
-                                android:fontFamily="@font/poppinsregular"
-                                android:layout_marginTop="5dp"/>
-
-                        </LinearLayout>
-
-                    </androidx.cardview.widget.CardView>
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="125dp"
-                        android:layout_height="40dp"
-                        app:cardElevation="5dp"
-                        app:cardCornerRadius="20dp"
-                        android:layout_marginStart="10dp"
-                        app:cardBackgroundColor="#804876A3">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:gravity="center">
-
-                            <TextView
-                                android:id="@+id/anggota_kelompok"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text=""
-                                android:textSize="17sp"
-                                android:textColor="@color/white_gray"
-                                android:textAlignment="center"
-                                android:fontFamily="@font/poppinsregular"
-                                android:layout_marginTop="5dp"/>
-
-                        </LinearLayout>
-
-
-                    </androidx.cardview.widget.CardView>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Dosen Pembimbing :"
-                        android:textSize="13sp"
-                        android:textColor="@color/white_gray"
-                        android:fontFamily="@font/poppinsmedium" />
-
-                    <TextView
-                        android:id="@+id/nama_dospem"
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerView_Lomba"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text=""
-                        android:textSize="13sp"
-                        android:textColor="@color/white_gray"
-                        android:fontFamily="@font/poppinsmedium"
-                        android:layout_marginStart="5dp"/>
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
 
-                </LinearLayout>
+                    </androidx.recyclerview.widget.RecyclerView>
+
+                </ScrollView>
 
             </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/layout_titleListCardDospem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rekomendasi Dosen Pembimbing"
+                android:textSize="17sp"
+                android:fontFamily="@font/poppinssemibold"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_below="@id/layout_listCard"/>
 
-        <TextView
-            android:id="@+id/layout_titleListCard"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Daftar Kegiatan Lomba"
-            android:textSize="17sp"
-            android:fontFamily="@font/poppinssemibold"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_below="@id/card_information"/>
+        </RelativeLayout>
 
-        <LinearLayout
-            android:id="@+id/layout_listCard"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_marginTop="5dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_below="@id/layout_titleListCard">
-
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView_Lomba"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
-
-                </androidx.recyclerview.widget.RecyclerView>
-
-            </ScrollView>
-
-        </LinearLayout>
-
-    </RelativeLayout>
+    </ScrollView>
 
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

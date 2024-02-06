@@ -67,7 +67,7 @@ public class KodeOTPActivity extends AppCompatActivity {
                     if (!pinView.getText().toString().isEmpty()) {
                         loadingMain.show();
 
-                        cekCodeOTP();
+//                        cekCodeOTP();
                     } else {
                         Toast.makeText(getApplicationContext(), "Masukan Kode OTP Yang Kami Kirim Di Email Anda", Toast.LENGTH_SHORT).show();
                     }
@@ -95,7 +95,7 @@ public class KodeOTPActivity extends AppCompatActivity {
                         public void run() {
                             loadingMain.show();
 
-                            cekCodeOTP();
+//                            cekCodeOTP();
                         }
                     }, 500);
                 }
@@ -108,61 +108,61 @@ public class KodeOTPActivity extends AppCompatActivity {
         });
     }
 
-    private void cekCodeOTP() {
-        StringRequest request = new StringRequest(Request.Method.POST, Constant.CEK_OTP, response -> {
-            try {
-                JSONObject res = new JSONObject(response);
-
-                int statusCode = res.getInt("status_code");
-                String message = res.getString("message");
-
-                if (statusCode == 200 && message.equals("Success")) {
-
-                    startActivity(new Intent(KodeOTPActivity.this, UbahPasswordActivity.class));
-                    Animatoo.INSTANCE.animateSlideLeft(this);
-                    finish();
-
-                    loadingMain.cancel();
-                } else {
-                    // Handle the case when the response indicates an error
-
-                    loadingMain.cancel();
-
-                    Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-
-                loadingMain.cancel();
-
-                Toast.makeText(this, "JSON Parsing Error", Toast.LENGTH_SHORT).show();
-            }
-        }, error -> {
-            error.printStackTrace();
-
-            loadingMain.cancel();
-
-            Toast.makeText(this, "Network Error", Toast.LENGTH_SHORT).show();
-        }) {
-            @Override
-            public Map<String, String> getHeaders() {
-                Map<String, String> headers = new HashMap<>();
-                headers.put("HTTP-TOKEN", "KgncmLUc7qvicKI1OjaLYLkPi");
-                return headers;
-            }
-
-            @Override
-            protected Map<String,String> getParams(){
-                Map<String,String> params = new HashMap<String, String>();
-                params.put("otp", pinView.getText().toString());
-                return params;
-            }
-        };
-
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        request.setRetryPolicy(new DefaultRetryPolicy(30000, 5, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        requestQueue.add(request);
-    }
+//    private void cekCodeOTP() {
+//        StringRequest request = new StringRequest(Request.Method.POST, Constant.CEK_OTP, response -> {
+//            try {
+//                JSONObject res = new JSONObject(response);
+//
+//                int statusCode = res.getInt("status_code");
+//                String message = res.getString("message");
+//
+//                if (statusCode == 200 && message.equals("Success")) {
+//
+//                    startActivity(new Intent(KodeOTPActivity.this, UbahPasswordActivity.class));
+//                    Animatoo.INSTANCE.animateSlideLeft(this);
+//                    finish();
+//
+//                    loadingMain.cancel();
+//                } else {
+//                    // Handle the case when the response indicates an error
+//
+//                    loadingMain.cancel();
+//
+//                    Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+//                }
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//
+//                loadingMain.cancel();
+//
+//                Toast.makeText(this, "JSON Parsing Error", Toast.LENGTH_SHORT).show();
+//            }
+//        }, error -> {
+//            error.printStackTrace();
+//
+//            loadingMain.cancel();
+//
+//            Toast.makeText(this, "Network Error", Toast.LENGTH_SHORT).show();
+//        }) {
+//            @Override
+//            public Map<String, String> getHeaders() {
+//                Map<String, String> headers = new HashMap<>();
+//                headers.put("HTTP-TOKEN", "KgncmLUc7qvicKI1OjaLYLkPi");
+//                return headers;
+//            }
+//
+//            @Override
+//            protected Map<String,String> getParams(){
+//                Map<String,String> params = new HashMap<String, String>();
+//                params.put("otp", pinView.getText().toString());
+//                return params;
+//            }
+//        };
+//
+//        RequestQueue requestQueue = Volley.newRequestQueue(this);
+//        request.setRetryPolicy(new DefaultRetryPolicy(30000, 5, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+//        requestQueue.add(request);
+//    }
 
     @Override
     public void onBackPressed() {

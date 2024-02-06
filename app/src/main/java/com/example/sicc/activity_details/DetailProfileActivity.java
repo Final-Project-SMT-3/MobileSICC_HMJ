@@ -69,7 +69,7 @@ public class DetailProfileActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                getData();
+//                getData();
             }
         }, 500);
 
@@ -127,102 +127,102 @@ public class DetailProfileActivity extends AppCompatActivity {
         }
     }
 
-    private void getData() {
-        arrayList = new ArrayList<>();
-        int id_user = sharedPreferences.getInt("id_user", 0);
-
-        StringRequest request = new StringRequest(Request.Method.POST, Constant.DATA_USER, response -> {
-            Log.d("Response", response);
-            try {
-                JSONObject res = new JSONObject(response);
-
-                int statusCode = res.getInt("status_code");
-                String message = res.getString("message");
-
-                if (statusCode == 200 && message.equals("Success")) {
-                    JSONObject userData = res.getJSONObject("response");
-
-                    // Data Detail Kelompok
-                    String nama_dospem = userData.getString("nama_dospem");
-                    String status_pengajuan_dospem = userData.getString("status_dospem");
-                    String nama = formatNama(userData.getString("nama"));
-                    String lomba = userData.getString("nama_lomba");
-
-                    txt_nama.setText(nama);
-                    txt_lomba.setText(lomba);
-
-                    if (nama_dospem.equals("null")) {
-                        txt_dospem.setText("Belum Memilih Dospem");
-                    } else if (status_pengajuan_dospem.equals("Decline")) {
-                        txt_dospem.setText("Pengajuan Di Tolak");
-                    } else if (status_pengajuan_dospem.equals("Waiting Approval")) {
-                        txt_dospem.setText("Menunggu Konfirmasi");
-                    } else if (status_pengajuan_dospem.equals("Accept")) {
-                        String dospem = formatDosen(nama_dospem);
-                        txt_dospem.setText(dospem);
-                    }
-
-                    // Data Anggota Kelompok
-                    String nimAnggota = userData.getString("nim_anggota");
-                    String namaAnggota = userData.getString("nama_anggota");
-
-                    // Split Data Into Array Element's
-                    String[] nimArray = nimAnggota.split(", ");
-                    String[] namaArray = namaAnggota.split(", ");
-
-                    for (int i = 0; i < nimArray.length; i++) {
-                        Anggota anggota = new Anggota();
-                        anggota.setNim_anggota(nimArray[i]);
-                        anggota.setNama_anggota(namaArray[i]);
-                        arrayList.add(anggota);
-                    }
-
-                    loadingMain.cancel();
-
-                    adapter = new AnggotaAdapter(getApplicationContext(), arrayList);
-                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
-                    recyclerView.setLayoutManager(layoutManager);
-                    recyclerView.setAdapter(adapter);
-                } else {
-                    loadingMain.cancel();
-
-                    // Handle the case when the response indicates an error
-                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-
-                loadingMain.cancel();
-
-                // Handle the case when there's a JSON parsing error
-                Toast.makeText(getApplicationContext(), "JSON Parsing Error", Toast.LENGTH_SHORT).show();
-            }
-        }, error -> {
-            error.printStackTrace();
-
-            loadingMain.cancel();
-
-            // Handle the case when there's a network error
-            Toast.makeText(getApplicationContext(), "Network Error", Toast.LENGTH_SHORT).show();
-        }) {
-            @Override
-            public Map<String, String> getHeaders() {
-                Map<String, String> headers = new HashMap<>();
-                headers.put("HTTP-TOKEN", "KgncmLUc7qvicKI1OjaLYLkPi");
-                return headers;
-            }
-
-            @Override
-            protected Map<String,String> getParams(){
-                Map<String,String> params = new HashMap<String, String>();
-                params.put("id_user", String.valueOf(id_user));
-                return params;
-            }
-        };
-
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(request);
-    }
+//    private void getData() {
+//        arrayList = new ArrayList<>();
+//        int id_user = sharedPreferences.getInt("id_user", 0);
+//
+//        StringRequest request = new StringRequest(Request.Method.POST, Constant.DATA_USER, response -> {
+//            Log.d("Response", response);
+//            try {
+//                JSONObject res = new JSONObject(response);
+//
+//                int statusCode = res.getInt("status_code");
+//                String message = res.getString("message");
+//
+//                if (statusCode == 200 && message.equals("Success")) {
+//                    JSONObject userData = res.getJSONObject("response");
+//
+//                    // Data Detail Kelompok
+//                    String nama_dospem = userData.getString("nama_dospem");
+//                    String status_pengajuan_dospem = userData.getString("status_dospem");
+//                    String nama = formatNama(userData.getString("nama"));
+//                    String lomba = userData.getString("nama_lomba");
+//
+//                    txt_nama.setText(nama);
+//                    txt_lomba.setText(lomba);
+//
+//                    if (nama_dospem.equals("null")) {
+//                        txt_dospem.setText("Belum Memilih Dospem");
+//                    } else if (status_pengajuan_dospem.equals("Decline")) {
+//                        txt_dospem.setText("Pengajuan Di Tolak");
+//                    } else if (status_pengajuan_dospem.equals("Waiting Approval")) {
+//                        txt_dospem.setText("Menunggu Konfirmasi");
+//                    } else if (status_pengajuan_dospem.equals("Accept")) {
+//                        String dospem = formatDosen(nama_dospem);
+//                        txt_dospem.setText(dospem);
+//                    }
+//
+//                    // Data Anggota Kelompok
+//                    String nimAnggota = userData.getString("nim_anggota");
+//                    String namaAnggota = userData.getString("nama_anggota");
+//
+//                    // Split Data Into Array Element's
+//                    String[] nimArray = nimAnggota.split(", ");
+//                    String[] namaArray = namaAnggota.split(", ");
+//
+//                    for (int i = 0; i < nimArray.length; i++) {
+//                        Anggota anggota = new Anggota();
+//                        anggota.setNim_anggota(nimArray[i]);
+//                        anggota.setNama_anggota(namaArray[i]);
+//                        arrayList.add(anggota);
+//                    }
+//
+//                    loadingMain.cancel();
+//
+//                    adapter = new AnggotaAdapter(getApplicationContext(), arrayList);
+//                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+//                    recyclerView.setLayoutManager(layoutManager);
+//                    recyclerView.setAdapter(adapter);
+//                } else {
+//                    loadingMain.cancel();
+//
+//                    // Handle the case when the response indicates an error
+//                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+//                }
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//
+//                loadingMain.cancel();
+//
+//                // Handle the case when there's a JSON parsing error
+//                Toast.makeText(getApplicationContext(), "JSON Parsing Error", Toast.LENGTH_SHORT).show();
+//            }
+//        }, error -> {
+//            error.printStackTrace();
+//
+//            loadingMain.cancel();
+//
+//            // Handle the case when there's a network error
+//            Toast.makeText(getApplicationContext(), "Network Error", Toast.LENGTH_SHORT).show();
+//        }) {
+//            @Override
+//            public Map<String, String> getHeaders() {
+//                Map<String, String> headers = new HashMap<>();
+//                headers.put("HTTP-TOKEN", "KgncmLUc7qvicKI1OjaLYLkPi");
+//                return headers;
+//            }
+//
+//            @Override
+//            protected Map<String,String> getParams(){
+//                Map<String,String> params = new HashMap<String, String>();
+//                params.put("id_user", String.valueOf(id_user));
+//                return params;
+//            }
+//        };
+//
+//        RequestQueue requestQueue = Volley.newRequestQueue(this);
+//        requestQueue.add(request);
+//    }
 
     @Override
     public void onBackPressed() {

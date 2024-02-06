@@ -81,7 +81,7 @@ public class PengajuanDospemFragment extends Fragment {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                getDataDospem();
+//                getDataDospem();
             }
         }, 500);
 
@@ -99,147 +99,147 @@ public class PengajuanDospemFragment extends Fragment {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        pengajuanDospem();
+//                        pengajuanDospem();
                     }
                 }, 500);
             }
         });
     }
 
-    private void getDataDospem() {
-        StringRequest request = new StringRequest(Request.Method.POST, Constant.DETAIL_DOSEN_PEMBIMBING, response -> {
-            Log.d("Response", response);
+//    private void getDataDospem() {
+//        StringRequest request = new StringRequest(Request.Method.POST, Constant.DETAIL_DOSEN_PEMBIMBING, response -> {
+//            Log.d("Response", response);
+//
+//            try {
+//                JSONObject res = new JSONObject(response);
+//
+//                int status_code = res.getInt("status_code");
+//                String message = res.getString("message");
+//
+//                if (status_code == 200 && message.equals("Success")) {
+//                    JSONObject detailDospem = res.getJSONObject("response");
+//
+//                    nama_dosen.setText(detailDospem.getString("nama"));
+//                    email_dosen.setText(detailDospem.getString("email"));
+//
+//                    loadingMain.cancel();
+//                } else {
+//                    loadingMain.cancel();
+//
+//                    // Handle the case when the response indicates an error
+//                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+//                }
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//
+//                loadingMain.cancel();
+//
+//                // Handle the case when there's a JSON parsing error
+//                Toast.makeText(getContext(), "JSON Parsing Error", Toast.LENGTH_SHORT).show();
+//            }
+//        }, error -> {
+//            error.printStackTrace();
+//
+//            loadingMain.cancel();
+//
+//            // Handle the case when there's a network error
+//            Toast.makeText(getContext(), "Network Error", Toast.LENGTH_SHORT).show();
+//        }) {
+//            @Nullable
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                Map<String, String> headers = new HashMap<>();
+//                headers.put("HTTP-TOKEN", "KgncmLUc7qvicKI1OjaLYLkPi");
+//                return headers;
+//            }
+//
+//            @Nullable
+//            @Override
+//            protected Map<String, String> getParams() throws AuthFailureError {
+//                Map<String, String> params = new HashMap<>();
+//                params.put("id_dosen", id_dospem + "");
+//                return params;
+//            }
+//        };
+//
+//        RequestQueue queue = Volley.newRequestQueue(requireContext());
+//        queue.add(request);
+//    }
 
-            try {
-                JSONObject res = new JSONObject(response);
-
-                int status_code = res.getInt("status_code");
-                String message = res.getString("message");
-
-                if (status_code == 200 && message.equals("Success")) {
-                    JSONObject detailDospem = res.getJSONObject("response");
-
-                    nama_dosen.setText(detailDospem.getString("nama"));
-                    email_dosen.setText(detailDospem.getString("email"));
-
-                    loadingMain.cancel();
-                } else {
-                    loadingMain.cancel();
-
-                    // Handle the case when the response indicates an error
-                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-
-                loadingMain.cancel();
-
-                // Handle the case when there's a JSON parsing error
-                Toast.makeText(getContext(), "JSON Parsing Error", Toast.LENGTH_SHORT).show();
-            }
-        }, error -> {
-            error.printStackTrace();
-
-            loadingMain.cancel();
-
-            // Handle the case when there's a network error
-            Toast.makeText(getContext(), "Network Error", Toast.LENGTH_SHORT).show();
-        }) {
-            @Nullable
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> headers = new HashMap<>();
-                headers.put("HTTP-TOKEN", "KgncmLUc7qvicKI1OjaLYLkPi");
-                return headers;
-            }
-
-            @Nullable
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("id_dosen", id_dospem + "");
-                return params;
-            }
-        };
-
-        RequestQueue queue = Volley.newRequestQueue(requireContext());
-        queue.add(request);
-    }
-
-    private void pengajuanDospem() {
-        swipeRefreshLayout.setRefreshing(true);
-        StringRequest request = new StringRequest(Request.Method.POST, Constant.PENGAJUAN_DOSPEM, response -> {
-            Log.d("Response", response);
-
-            try {
-                JSONObject res = new JSONObject(response);
-
-                int status_code = res.getInt("status_code");
-                String message = res.getString("message");
-
-                if (status_code == 200 && message.equals("Success")) {
-                    String detail_message = res.getString("response");
-
-                    Toast.makeText(getContext(), detail_message, Toast.LENGTH_SHORT).show();
-
-                    // Redirect Into Waiting
-                    FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
-                    transaction.setReorderingAllowed(true);
-                    transaction.replace(R.id.fragment_container_progress, MsgWaitingFragment.class, null);
-                    transaction.addToBackStack(null);
-                    transaction.commit();
-
-                    loadingMain.cancel();
-                } else {
-                    loadingMain.cancel();
-
-                    // Handle the case when the response indicates an error
-                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-
-                loadingMain.cancel();
-
-                swipeRefreshLayout.setRefreshing(false);
-
-                // Handle the case when there's a JSON parsing error
-                Toast.makeText(getContext(), "JSON Parsing Error", Toast.LENGTH_SHORT).show();
-            }
-
-            swipeRefreshLayout.setRefreshing(false);
-        }, error -> {
-            error.printStackTrace();
-
-            loadingMain.cancel();
-
-            swipeRefreshLayout.setRefreshing(false);
-
-            // Handle the case when there's a network error
-            Toast.makeText(getContext(), "Network Error", Toast.LENGTH_SHORT).show();
-        }) {
-            // Get User Login Id
-            String id_mahasiswa = String.valueOf(sharedPreferences.getInt("id_user", 0));
-
-            @Nullable
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> headers = new HashMap<>();
-                headers.put("HTTP-TOKEN", "KgncmLUc7qvicKI1OjaLYLkPi");
-                return headers;
-            }
-
-            @Nullable
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> params = new HashMap<>();
-                params.put("id_mhs", id_mahasiswa);
-                params.put("id_dosen", String.valueOf(id_dospem));
-                return params;
-            }
-        };
-
-        RequestQueue queue = Volley.newRequestQueue(requireContext());
-        queue.add(request);
-    }
+//    private void pengajuanDospem() {
+//        swipeRefreshLayout.setRefreshing(true);
+//        StringRequest request = new StringRequest(Request.Method.POST, Constant.PENGAJUAN_DOSPEM, response -> {
+//            Log.d("Response", response);
+//
+//            try {
+//                JSONObject res = new JSONObject(response);
+//
+//                int status_code = res.getInt("status_code");
+//                String message = res.getString("message");
+//
+//                if (status_code == 200 && message.equals("Success")) {
+//                    String detail_message = res.getString("response");
+//
+//                    Toast.makeText(getContext(), detail_message, Toast.LENGTH_SHORT).show();
+//
+//                    // Redirect Into Waiting
+//                    FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
+//                    transaction.setReorderingAllowed(true);
+//                    transaction.replace(R.id.fragment_container_progress, MsgWaitingFragment.class, null);
+//                    transaction.addToBackStack(null);
+//                    transaction.commit();
+//
+//                    loadingMain.cancel();
+//                } else {
+//                    loadingMain.cancel();
+//
+//                    // Handle the case when the response indicates an error
+//                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+//                }
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//
+//                loadingMain.cancel();
+//
+//                swipeRefreshLayout.setRefreshing(false);
+//
+//                // Handle the case when there's a JSON parsing error
+//                Toast.makeText(getContext(), "JSON Parsing Error", Toast.LENGTH_SHORT).show();
+//            }
+//
+//            swipeRefreshLayout.setRefreshing(false);
+//        }, error -> {
+//            error.printStackTrace();
+//
+//            loadingMain.cancel();
+//
+//            swipeRefreshLayout.setRefreshing(false);
+//
+//            // Handle the case when there's a network error
+//            Toast.makeText(getContext(), "Network Error", Toast.LENGTH_SHORT).show();
+//        }) {
+//            // Get User Login Id
+//            String id_mahasiswa = String.valueOf(sharedPreferences.getInt("id_user", 0));
+//
+//            @Nullable
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                Map<String, String> headers = new HashMap<>();
+//                headers.put("HTTP-TOKEN", "KgncmLUc7qvicKI1OjaLYLkPi");
+//                return headers;
+//            }
+//
+//            @Nullable
+//            @Override
+//            protected Map<String, String> getParams() throws AuthFailureError {
+//                Map<String,String> params = new HashMap<>();
+//                params.put("id_mhs", id_mahasiswa);
+//                params.put("id_dosen", String.valueOf(id_dospem));
+//                return params;
+//            }
+//        };
+//
+//        RequestQueue queue = Volley.newRequestQueue(requireContext());
+//        queue.add(request);
+//    }
 }

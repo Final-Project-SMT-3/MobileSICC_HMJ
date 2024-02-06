@@ -1,6 +1,5 @@
 package com.example.sicc.authentication;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -11,6 +10,7 @@ import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -35,8 +35,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
-    private TextInputLayout layoutUsername, layoutPassword;
-    private EditText txt_username, txt_password;
+    private TextInputLayout layoutEmail, layoutPassword;
+    private EditText txt_email, txt_password;
     private TextView btn_lupaPassword, txt_register, btn_register;
     private Button btn_login;
     private long backPressedTime = 0;
@@ -51,16 +51,16 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void init() {
-        layoutUsername = findViewById(R.id.username_input_layout);
+        layoutEmail = findViewById(R.id.email_input_layout);
         layoutPassword = findViewById(R.id.password_input_layout);
-        txt_username = findViewById(R.id.txt_username);
+        txt_email = findViewById(R.id.txt_email);
         txt_password = findViewById(R.id.txt_password);
         btn_login = findViewById(R.id.btn_login);
         btn_lupaPassword = findViewById(R.id.lupa_password);
         txt_register = findViewById(R.id.txt_register);
         btn_register = findViewById(R.id.btn_register);
 
-        txt_username.addTextChangedListener(new TextWatcher() {
+        txt_email.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -68,8 +68,8 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (!txt_username.getText().toString().isEmpty()) {
-                    layoutUsername.setErrorEnabled(false);
+                if (!txt_email.getText().toString().isEmpty()) {
+                    layoutEmail.setErrorEnabled(false);
                 }
             }
 
@@ -134,15 +134,21 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean validate() {
-        if (txt_username.getText().toString().isEmpty()) {
-            layoutUsername.setErrorEnabled(true);
-            layoutUsername.setError("Username Tidak Boleh Kosong");
+        if (txt_email.getText().toString().isEmpty()) {
+            layoutEmail.setErrorEnabled(true);
+            layoutEmail.setError("Username Tidak Boleh Kosong");
             return false;
         }
 
         if (txt_password.getText().toString().isEmpty()) {
             layoutPassword.setErrorEnabled(true);
             layoutPassword.setError("Password Tidak Boleh Kosong");
+            return false;
+        }
+
+        if (!Patterns.EMAIL_ADDRESS.matcher(txt_email.getText().toString()).matches()) {
+            layoutEmail.setErrorEnabled(true);
+            layoutEmail.setError("Email Tidak Valid");
             return false;
         }
 
@@ -166,32 +172,34 @@ public class LoginActivity extends AppCompatActivity {
                 String message = res.getString("message");
 
                 if (statusCode == 200 && message.equals("Success")) {
-                    JSONObject userData = res.getJSONObject("response");
+                    JSONObject responseData = res.getJSONObject("response");
 
-                    SharedPreferences userPref = getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = userPref.edit();
-                    editor.putInt("id_user", userData.getInt("id"));
-                    editor.putString("user", userData.getString("username"));
-                    editor.putString("pass", userData.getString("password"));
-                    editor.putString("nim_ketua", userData.getString("no_identitas"));
-                    editor.putString("nama_ketua", userData.getString("nama"));
-                    editor.putString("nama_kelompok", userData.getString("nama_kelompok"));
-                    editor.putString("nim_kelompok", userData.getString("nim_anggota"));
-                    editor.putString("nama_anggota", userData.getString("nama_anggota"));
-                    editor.putString("dospem", userData.getString("nama_dospem"));
-                    editor.putString("lomba", userData.getString("nama_lomba"));
-                    editor.putString("status_pengajuan", userData.getString("status_dospem"));
-                    editor.putBoolean("isLogin", true);
-                    editor.apply();
+                    JSONObject userData = responseData.getJSONObject("user");
 
-                    loadingDialog.dismissLoadingDialog();
+                    // Check Role Data User
+                    if (userData.getString("role").equals("Admin")) {
+                        loadingDialog.dismissLoadingDialog();
 
-                    // If login success
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                    Animatoo.INSTANCE.animateSlideLeft(this);
-                    finish();
+                        Toast.makeText(getApplicationContext(), "Anda Tidak Memiliki Akses !", Toast.LENGTH_SHORT).show();
+                    } else {
+                        SharedPreferences userPref = getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = userPref.edit();
+                        editor.putInt("id_user", userData.getInt("id"));
+                        editor.putString("nama", userData.getString("name"));
+                        editor.putString("email", userData.getString("email"));
+                        editor.putString("role", userData.getString("role"));
+                        editor.putBoolean("isLogin", true);
+                        editor.apply();
 
-                    Toast.makeText(getApplicationContext(), "Login Sukses !", Toast.LENGTH_SHORT).show();
+                        loadingDialog.dismissLoadingDialog();
+
+                        // If login success
+                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        Animatoo.INSTANCE.animateSlideLeft(this);
+                        finish();
+
+                        Toast.makeText(getApplicationContext(), "Login Sukses !", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
                     loadingDialog.dismissLoadingDialog();
 
@@ -215,17 +223,10 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Network Error", Toast.LENGTH_SHORT).show();
         }) {
             @Override
-            public Map<String, String> getHeaders() {
-                Map<String, String> headers = new HashMap<>();
-                headers.put("HTTP-TOKEN", "KgncmLUc7qvicKI1OjaLYLkPi");
-                return headers;
-            }
-
-            @Override
             protected Map<String,String> getParams(){
                 Map<String,String> params = new HashMap<String, String>();
+                params.put("email", txt_email.getText().toString().trim());
                 params.put("password", txt_password.getText().toString().trim());
-                params.put("username", txt_username.getText().toString().trim());
                 return params;
             }
         };

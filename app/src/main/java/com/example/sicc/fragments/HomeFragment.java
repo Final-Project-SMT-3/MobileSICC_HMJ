@@ -79,14 +79,14 @@ public class HomeFragment extends Fragment {
         loadingMain = new LoadingMain(requireActivity());
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh);
 
-        loadingMain.show();
+//        loadingMain.show();
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                getDataUser();
-                getDataLomba();
+//                getDataUser();
+//                getDataLomba();
             }
         }, 500);
 
@@ -98,8 +98,8 @@ public class HomeFragment extends Fragment {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        getDataUser();
-                        getDataLomba();
+//                        getDataUser();
+//                        getDataLomba();
                     }
                 }, 500);
             }
@@ -177,187 +177,187 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    private void getDataUser() {
-        swipeRefreshLayout.setRefreshing(true);
-        // "-" is the default value to be returned if the key "name" is not found in shared preferences
-        int id_user = sharedPreferences.getInt("id_user", 0);
+//    private void getDataUser() {
+//        swipeRefreshLayout.setRefreshing(true);
+//        // "-" is the default value to be returned if the key "name" is not found in shared preferences
+//        int id_user = sharedPreferences.getInt("id_user", 0);
+//
+//        StringRequest request = new StringRequest(Request.Method.POST, Constant.DATA_USER, response -> {
+//            try {
+//                JSONObject res = new JSONObject(response);
+//
+//                int statusCode = res.getInt("status_code");
+//                String message = res.getString("message");
+//
+//                if (statusCode == 200 && message.equals("Success")) {
+//                    JSONObject userData = res.getJSONObject("response");
+//                    Log.d("Response", userData.toString());
+//
+//                    // Share Preferences User After Login
+//                    SharedPreferences userPref = requireContext().getSharedPreferences("user_login", Context.MODE_PRIVATE);
+//                    SharedPreferences.Editor editor = userPref.edit();
+//                    editor.putInt("id_user", userData.getInt("id"));
+//                    editor.putString("status_pengajuan", res.getString("status"));
+//                    editor.putString("status_p_dospem", userData.getString("status_dospem"));
+//                    editor.putString("status_p_judul", userData.getString("status_judul"));
+//                    editor.putString("status_p_proposal", userData.getString("status_proposal"));
+//                    editor.apply();
+//
+//                    String namaUser = userData.getString("nama");
+//                    String namaKelompok = userData.getString("nama_kelompok");
+//                    String namaLomba = userData.getString("nama_lomba");
+//                    String nimAnggota = userData.getString("nim_anggota");
+//                    String namaDospem = userData.getString("nama_dospem");
+//                    String status_pengajuan_dospem = userData.getString("status_dospem");
+//
+//                    if (namaDospem.equals("null")) {
+//                        txt_dospem.setText("Belum Memilih Dospem");
+//                    } else if (status_pengajuan_dospem.equals("Waiting Approval")) {
+//                        txt_dospem.setText("Menunggu Konfirmasi");
+//                    } else if (status_pengajuan_dospem.equals("Decline")) {
+//                        txt_dospem.setText("Pengajuan Di Tolak");
+//                    } else if (status_pengajuan_dospem.equals("Accept")) {
+//                        String dospem = formatDosen(namaDospem);
+//                        txt_dospem.setText(dospem);
+//                    }
+//
+//                    String nama = formatNama(namaUser);
+//                    int anggota = countStrings(nimAnggota);
+//
+//                    txt_name.setText(nama + " 👋");
+//                    txt_kelompok.setText(namaKelompok);
+//                    txt_ketua.setText(nama);
+//                    txt_lomba.setText(namaLomba);
+//                    txt_anggota.setText(anggota + " Anggota");
+//
+//                    loadingMain.cancel();
+//                } else {
+//                    // Handle the case when the response indicates an error
+//                    loadingMain.cancel();
+//
+//                    swipeRefreshLayout.setRefreshing(false);
+//
+//                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
+//                }
+//            } catch (JSONException e) {
+//                // Handle the case when there's a JSON parsing error
+//                e.printStackTrace();
+//
+//                loadingMain.cancel();
+//
+//                swipeRefreshLayout.setRefreshing(false);
+//
+//                Toast.makeText(requireContext(), "JSON Parsing Error", Toast.LENGTH_SHORT).show();
+//            }
+//
+//            swipeRefreshLayout.setRefreshing(false);
+//        }, error -> {
+//            // Handle the case when there's a network error
+//            error.printStackTrace();
+//
+//            loadingMain.cancel();
+//
+//            swipeRefreshLayout.setRefreshing(false);
+//
+//            Toast.makeText(requireContext(), "Network Error", Toast.LENGTH_SHORT).show();
+//        }) {
+//            @Override
+//            public Map<String, String> getHeaders() {
+//                Map<String, String> headers = new HashMap<>();
+//                headers.put("HTTP-TOKEN", "KgncmLUc7qvicKI1OjaLYLkPi");
+//                return headers;
+//            }
+//
+//            @Override
+//            protected Map<String,String> getParams(){
+//                Map<String,String> params = new HashMap<String, String>();
+//                params.put("id_user", String.valueOf(id_user));
+//                return params;
+//            }
+//        };
+//
+//        RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
+//        request.setRetryPolicy(new DefaultRetryPolicy(30000, 5, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+//        requestQueue.add(request);
+//    }
 
-        StringRequest request = new StringRequest(Request.Method.POST, Constant.DATA_USER, response -> {
-            try {
-                JSONObject res = new JSONObject(response);
-
-                int statusCode = res.getInt("status_code");
-                String message = res.getString("message");
-
-                if (statusCode == 200 && message.equals("Success")) {
-                    JSONObject userData = res.getJSONObject("response");
-                    Log.d("Response", userData.toString());
-
-                    // Share Preferences User After Login
-                    SharedPreferences userPref = requireContext().getSharedPreferences("user_login", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = userPref.edit();
-                    editor.putInt("id_user", userData.getInt("id"));
-                    editor.putString("status_pengajuan", res.getString("status"));
-                    editor.putString("status_p_dospem", userData.getString("status_dospem"));
-                    editor.putString("status_p_judul", userData.getString("status_judul"));
-                    editor.putString("status_p_proposal", userData.getString("status_proposal"));
-                    editor.apply();
-
-                    String namaUser = userData.getString("nama");
-                    String namaKelompok = userData.getString("nama_kelompok");
-                    String namaLomba = userData.getString("nama_lomba");
-                    String nimAnggota = userData.getString("nim_anggota");
-                    String namaDospem = userData.getString("nama_dospem");
-                    String status_pengajuan_dospem = userData.getString("status_dospem");
-
-                    if (namaDospem.equals("null")) {
-                        txt_dospem.setText("Belum Memilih Dospem");
-                    } else if (status_pengajuan_dospem.equals("Waiting Approval")) {
-                        txt_dospem.setText("Menunggu Konfirmasi");
-                    } else if (status_pengajuan_dospem.equals("Decline")) {
-                        txt_dospem.setText("Pengajuan Di Tolak");
-                    } else if (status_pengajuan_dospem.equals("Accept")) {
-                        String dospem = formatDosen(namaDospem);
-                        txt_dospem.setText(dospem);
-                    }
-
-                    String nama = formatNama(namaUser);
-                    int anggota = countStrings(nimAnggota);
-
-                    txt_name.setText(nama + " 👋");
-                    txt_kelompok.setText(namaKelompok);
-                    txt_ketua.setText(nama);
-                    txt_lomba.setText(namaLomba);
-                    txt_anggota.setText(anggota + " Anggota");
-
-                    loadingMain.cancel();
-                } else {
-                    // Handle the case when the response indicates an error
-                    loadingMain.cancel();
-
-                    swipeRefreshLayout.setRefreshing(false);
-
-                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
-                }
-            } catch (JSONException e) {
-                // Handle the case when there's a JSON parsing error
-                e.printStackTrace();
-
-                loadingMain.cancel();
-
-                swipeRefreshLayout.setRefreshing(false);
-
-                Toast.makeText(requireContext(), "JSON Parsing Error", Toast.LENGTH_SHORT).show();
-            }
-
-            swipeRefreshLayout.setRefreshing(false);
-        }, error -> {
-            // Handle the case when there's a network error
-            error.printStackTrace();
-
-            loadingMain.cancel();
-
-            swipeRefreshLayout.setRefreshing(false);
-
-            Toast.makeText(requireContext(), "Network Error", Toast.LENGTH_SHORT).show();
-        }) {
-            @Override
-            public Map<String, String> getHeaders() {
-                Map<String, String> headers = new HashMap<>();
-                headers.put("HTTP-TOKEN", "KgncmLUc7qvicKI1OjaLYLkPi");
-                return headers;
-            }
-
-            @Override
-            protected Map<String,String> getParams(){
-                Map<String,String> params = new HashMap<String, String>();
-                params.put("id_user", String.valueOf(id_user));
-                return params;
-            }
-        };
-
-        RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
-        request.setRetryPolicy(new DefaultRetryPolicy(30000, 5, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        requestQueue.add(request);
-    }
-
-    private void getDataLomba() {
-        arrayList = new ArrayList<>();
-        swipeRefreshLayout.setRefreshing(true);
-
-        StringRequest request = new StringRequest(Request.Method.GET, Constant.LOMBA, response -> {
-            try {
-                JSONObject res = new JSONObject(response);
-
-                int statusCode = res.getInt("status_code");
-                String message = res.getString("message");
-
-                if (statusCode == 200 && message.equals("Success")) {
-                    JSONArray dataLomba = res.getJSONArray("response");
-
-                    for (int i = 0; i < dataLomba.length(); i++) {
-                        JSONObject objectLomba = dataLomba.getJSONObject(i);
-
-                        Lomba lomba = new Lomba();
-
-                        lomba.setId_lomba(objectLomba.getInt("id"));
-                        lomba.setNama_lomba(objectLomba.getString("nama_lomba"));
-                        lomba.setFoto_lomba(objectLomba.getJSONArray("detailLomba").getJSONObject(0).optString("foto", "-"));
-                        lomba.setJenis_lomba(objectLomba.getJSONArray("detailPelaksanaan").
-                                getJSONObject(0).optString("info", "-"));
-
-                        arrayList.add(lomba);
-                    }
-
-
-                    adapter = new LombaAdapter(getContext(), arrayList);
-                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-                    recyclerView.setLayoutManager(layoutManager);
-                    recyclerView.setAdapter(adapter);
-
-                    loadingMain.cancel();
-                } else {
-                    // Handle the case when the response indicates an error
-
-                    loadingMain.cancel();
-
-                    swipeRefreshLayout.setRefreshing(false);
-
-                    Toast.makeText(getContext().getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-
-                // Handle the case when there's a JSON parsing error
-
-                loadingMain.cancel();
-
-                swipeRefreshLayout.setRefreshing(false);
-
-                Toast.makeText(getContext().getApplicationContext(), "JSON Parsing Error", Toast.LENGTH_SHORT).show();
-            }
-
-            swipeRefreshLayout.setRefreshing(false);
-        }, error -> {
-            error.printStackTrace();
-
-            // Handle the case when there's a network error
-
-            loadingMain.cancel();
-
-            swipeRefreshLayout.setRefreshing(false);
-
-            Toast.makeText(getContext().getApplicationContext(), "Network Error", Toast.LENGTH_SHORT).show();
-        }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> headers = new HashMap<>();
-                headers.put("HTTP-TOKEN", "KgncmLUc7qvicKI1OjaLYLkPi");
-                return headers;
-            }
-        };
-
-        RequestQueue queue = Volley.newRequestQueue(getContext().getApplicationContext());
-        queue.add(request);
-    }
+//    private void getDataLomba() {
+//        arrayList = new ArrayList<>();
+//        swipeRefreshLayout.setRefreshing(true);
+//
+//        StringRequest request = new StringRequest(Request.Method.GET, Constant.LOMBA, response -> {
+//            try {
+//                JSONObject res = new JSONObject(response);
+//
+//                int statusCode = res.getInt("status_code");
+//                String message = res.getString("message");
+//
+//                if (statusCode == 200 && message.equals("Success")) {
+//                    JSONArray dataLomba = res.getJSONArray("response");
+//
+//                    for (int i = 0; i < dataLomba.length(); i++) {
+//                        JSONObject objectLomba = dataLomba.getJSONObject(i);
+//
+//                        Lomba lomba = new Lomba();
+//
+//                        lomba.setId_lomba(objectLomba.getInt("id"));
+//                        lomba.setNama_lomba(objectLomba.getString("nama_lomba"));
+//                        lomba.setFoto_lomba(objectLomba.getJSONArray("detailLomba").getJSONObject(0).optString("foto", "-"));
+//                        lomba.setJenis_lomba(objectLomba.getJSONArray("detailPelaksanaan").
+//                                getJSONObject(0).optString("info", "-"));
+//
+//                        arrayList.add(lomba);
+//                    }
+//
+//
+//                    adapter = new LombaAdapter(getContext(), arrayList);
+//                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+//                    recyclerView.setLayoutManager(layoutManager);
+//                    recyclerView.setAdapter(adapter);
+//
+//                    loadingMain.cancel();
+//                } else {
+//                    // Handle the case when the response indicates an error
+//
+//                    loadingMain.cancel();
+//
+//                    swipeRefreshLayout.setRefreshing(false);
+//
+//                    Toast.makeText(getContext().getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+//                }
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//
+//                // Handle the case when there's a JSON parsing error
+//
+//                loadingMain.cancel();
+//
+//                swipeRefreshLayout.setRefreshing(false);
+//
+//                Toast.makeText(getContext().getApplicationContext(), "JSON Parsing Error", Toast.LENGTH_SHORT).show();
+//            }
+//
+//            swipeRefreshLayout.setRefreshing(false);
+//        }, error -> {
+//            error.printStackTrace();
+//
+//            // Handle the case when there's a network error
+//
+//            loadingMain.cancel();
+//
+//            swipeRefreshLayout.setRefreshing(false);
+//
+//            Toast.makeText(getContext().getApplicationContext(), "Network Error", Toast.LENGTH_SHORT).show();
+//        }) {
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                Map<String, String> headers = new HashMap<>();
+//                headers.put("HTTP-TOKEN", "KgncmLUc7qvicKI1OjaLYLkPi");
+//                return headers;
+//            }
+//        };
+//
+//        RequestQueue queue = Volley.newRequestQueue(getContext().getApplicationContext());
+//        queue.add(request);
+//    }
 }

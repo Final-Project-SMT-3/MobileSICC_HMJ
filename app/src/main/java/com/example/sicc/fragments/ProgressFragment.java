@@ -68,7 +68,7 @@ public class ProgressFragment extends Fragment {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                getStatus_Pengajuan();
+//                getStatus_Pengajuan();
             }
         }, 500);
 
@@ -180,7 +180,7 @@ public class ProgressFragment extends Fragment {
                     public void run() {
                         settingStepView();
 
-                        getStatus_Pengajuan();
+//                        getStatus_Pengajuan();
                     }
                 }, 500);
             }
@@ -284,80 +284,80 @@ public class ProgressFragment extends Fragment {
         }
     }
 
-    private void getStatus_Pengajuan() {
-        swipeRefreshLayout.setRefreshing(true);
-        // "-" is the default value to be returned if the key "name" is not found in shared preferences
-        int id_user = sharedPreferences.getInt("id_user", 0);
-
-        StringRequest request = new StringRequest(Request.Method.POST, Constant.DATA_USER, response -> {
-            try {
-                JSONObject res = new JSONObject(response);
-
-                int statusCode = res.getInt("status_code");
-                String message = res.getString("message");
-
-                if (statusCode == 200 && message.equals("Success")) {
-                    JSONObject userData = res.getJSONObject("response");
-
-                    status_pengajuan = res.getString("status");
-                    status_p_dospem = userData.getString("status_dospem");
-                    status_p_judul = userData.getString("status_judul");
-                    status_p_proposal = userData.getString("status_proposal");
-
-                    settingStepView();
-
-                    check_StepView(status_pengajuan, status_p_dospem, status_p_judul, status_p_proposal);
-
-                    loadingMain.cancel();
-                } else {
-                    // Handle the case when the response indicates an error
-                    loadingMain.cancel();
-
-                    swipeRefreshLayout.setRefreshing(false);
-
-                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
-                }
-            } catch (JSONException e) {
-                // Handle the case when there's a JSON parsing error
-                e.printStackTrace();
-
-                loadingMain.cancel();
-
-                swipeRefreshLayout.setRefreshing(false);
-
-                Toast.makeText(requireContext(), "JSON Parsing Error", Toast.LENGTH_SHORT).show();
-            }
-
-            swipeRefreshLayout.setRefreshing(false);
-        }, error -> {
-            // Handle the case when there's a network error
-            error.printStackTrace();
-
-            loadingMain.cancel();
-
-            swipeRefreshLayout.setRefreshing(false);
-
-            Toast.makeText(requireContext(), "Network Error", Toast.LENGTH_SHORT).show();
-        }) {
-            @Override
-            public Map<String, String> getHeaders() {
-                Map<String, String> headers = new HashMap<>();
-                headers.put("HTTP-TOKEN", "KgncmLUc7qvicKI1OjaLYLkPi");
-                return headers;
-            }
-
-            @Override
-            protected Map<String,String> getParams(){
-                Map<String,String> params = new HashMap<String, String>();
-                params.put("id_user", String.valueOf(id_user));
-                return params;
-            }
-        };
-
-        RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
-        request.setRetryPolicy(new DefaultRetryPolicy(30000, 5, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        requestQueue.add(request);
-    }
+//    private void getStatus_Pengajuan() {
+//        swipeRefreshLayout.setRefreshing(true);
+//        // "-" is the default value to be returned if the key "name" is not found in shared preferences
+//        int id_user = sharedPreferences.getInt("id_user", 0);
+//
+//        StringRequest request = new StringRequest(Request.Method.POST, Constant.DATA_USER, response -> {
+//            try {
+//                JSONObject res = new JSONObject(response);
+//
+//                int statusCode = res.getInt("status_code");
+//                String message = res.getString("message");
+//
+//                if (statusCode == 200 && message.equals("Success")) {
+//                    JSONObject userData = res.getJSONObject("response");
+//
+//                    status_pengajuan = res.getString("status");
+//                    status_p_dospem = userData.getString("status_dospem");
+//                    status_p_judul = userData.getString("status_judul");
+//                    status_p_proposal = userData.getString("status_proposal");
+//
+//                    settingStepView();
+//
+//                    check_StepView(status_pengajuan, status_p_dospem, status_p_judul, status_p_proposal);
+//
+//                    loadingMain.cancel();
+//                } else {
+//                    // Handle the case when the response indicates an error
+//                    loadingMain.cancel();
+//
+//                    swipeRefreshLayout.setRefreshing(false);
+//
+//                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
+//                }
+//            } catch (JSONException e) {
+//                // Handle the case when there's a JSON parsing error
+//                e.printStackTrace();
+//
+//                loadingMain.cancel();
+//
+//                swipeRefreshLayout.setRefreshing(false);
+//
+//                Toast.makeText(requireContext(), "JSON Parsing Error", Toast.LENGTH_SHORT).show();
+//            }
+//
+//            swipeRefreshLayout.setRefreshing(false);
+//        }, error -> {
+//            // Handle the case when there's a network error
+//            error.printStackTrace();
+//
+//            loadingMain.cancel();
+//
+//            swipeRefreshLayout.setRefreshing(false);
+//
+//            Toast.makeText(requireContext(), "Network Error", Toast.LENGTH_SHORT).show();
+//        }) {
+//            @Override
+//            public Map<String, String> getHeaders() {
+//                Map<String, String> headers = new HashMap<>();
+//                headers.put("HTTP-TOKEN", "KgncmLUc7qvicKI1OjaLYLkPi");
+//                return headers;
+//            }
+//
+//            @Override
+//            protected Map<String,String> getParams(){
+//                Map<String,String> params = new HashMap<String, String>();
+//                params.put("id_user", String.valueOf(id_user));
+//                return params;
+//            }
+//        };
+//
+//        RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
+//        request.setRetryPolicy(new DefaultRetryPolicy(30000, 5, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+//        requestQueue.add(request);
+//    }
 
     private void replaceFragment(Fragment fragment) {
         FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();

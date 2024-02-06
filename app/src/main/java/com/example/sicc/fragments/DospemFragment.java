@@ -58,74 +58,74 @@ public class DospemFragment extends Fragment {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                getDataDospem();
+//                getDataDospem();
             }
         }, 500);
     }
 
-    private void getDataDospem() {
-        arrayList = new ArrayList<>();
-
-        StringRequest request = new StringRequest(Request.Method.GET, Constant.DOSEN_PEMBIMBING, response -> {
-            try {
-                JSONObject res = new JSONObject(response);
-
-                int status_code = res.getInt("status_code");
-                String message = res.getString("message");
-
-                if (status_code == 200 && message.equals("Success")) {
-                    JSONArray dataDospem = res.getJSONArray("response");
-
-                    for (int i = 0; i < dataDospem.length(); i++) {
-                        JSONObject objectDospem = dataDospem.getJSONObject(i);
-
-                        Dospem dospem = new Dospem();
-
-                        dospem.setId_dospem(objectDospem.getInt("id"));
-                        dospem.setNama_dosen(objectDospem.getString("nama"));
-                        dospem.setNidn_dosen(objectDospem.getString("no_identitas"));
-                        dospem.setStatus_dosen(objectDospem.getString("status_dosen"));
-
-                        arrayList.add(dospem);
-                    }
-
-                    adapter = new DospemAdapter(requireContext(), arrayList);
-                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false);
-                    recyclerView.setLayoutManager(layoutManager);
-                    recyclerView.setAdapter(adapter);
-
-                    loadingMain.cancel();
-                } else {
-                    loadingMain.cancel();
-
-                    // Handle the case when the response indicates an error
-                    Toast.makeText(getContext().getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-
-                loadingMain.cancel();
-
-                // Handle the case when there's a JSON parsing error
-                Toast.makeText(getContext().getApplicationContext(), "JSON Parsing Error", Toast.LENGTH_SHORT).show();
-            }
-        }, error -> {
-            error.printStackTrace();
-
-            loadingMain.cancel();
-
-            // Handle the case when there's a network error
-            Toast.makeText(getContext().getApplicationContext(), "Network Error", Toast.LENGTH_SHORT).show();
-        }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> headers = new HashMap<>();
-                headers.put("HTTP-TOKEN", "KgncmLUc7qvicKI1OjaLYLkPi");
-                return headers;
-            }
-        };
-
-        RequestQueue queue = Volley.newRequestQueue(getContext().getApplicationContext());
-        queue.add(request);
-    }
+//    private void getDataDospem() {
+//        arrayList = new ArrayList<>();
+//
+//        StringRequest request = new StringRequest(Request.Method.GET, Constant.DOSEN_PEMBIMBING, response -> {
+//            try {
+//                JSONObject res = new JSONObject(response);
+//
+//                int status_code = res.getInt("status_code");
+//                String message = res.getString("message");
+//
+//                if (status_code == 200 && message.equals("Success")) {
+//                    JSONArray dataDospem = res.getJSONArray("response");
+//
+//                    for (int i = 0; i < dataDospem.length(); i++) {
+//                        JSONObject objectDospem = dataDospem.getJSONObject(i);
+//
+//                        Dospem dospem = new Dospem();
+//
+//                        dospem.setId_dospem(objectDospem.getInt("id"));
+//                        dospem.setNama_dosen(objectDospem.getString("nama"));
+//                        dospem.setNidn_dosen(objectDospem.getString("no_identitas"));
+//                        dospem.setStatus_dosen(objectDospem.getString("status_dosen"));
+//
+//                        arrayList.add(dospem);
+//                    }
+//
+//                    adapter = new DospemAdapter(requireContext(), arrayList);
+//                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false);
+//                    recyclerView.setLayoutManager(layoutManager);
+//                    recyclerView.setAdapter(adapter);
+//
+//                    loadingMain.cancel();
+//                } else {
+//                    loadingMain.cancel();
+//
+//                    // Handle the case when the response indicates an error
+//                    Toast.makeText(getContext().getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+//                }
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//
+//                loadingMain.cancel();
+//
+//                // Handle the case when there's a JSON parsing error
+//                Toast.makeText(getContext().getApplicationContext(), "JSON Parsing Error", Toast.LENGTH_SHORT).show();
+//            }
+//        }, error -> {
+//            error.printStackTrace();
+//
+//            loadingMain.cancel();
+//
+//            // Handle the case when there's a network error
+//            Toast.makeText(getContext().getApplicationContext(), "Network Error", Toast.LENGTH_SHORT).show();
+//        }) {
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                Map<String, String> headers = new HashMap<>();
+//                headers.put("HTTP-TOKEN", "KgncmLUc7qvicKI1OjaLYLkPi");
+//                return headers;
+//            }
+//        };
+//
+//        RequestQueue queue = Volley.newRequestQueue(getContext().getApplicationContext());
+//        queue.add(request);
+//    }
 }

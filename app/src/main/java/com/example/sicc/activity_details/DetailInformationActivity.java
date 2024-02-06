@@ -67,7 +67,7 @@ public class DetailInformationActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                getDetailLomba();
+//                getDetailLomba();
             }
         }, 500);
 
@@ -78,69 +78,69 @@ public class DetailInformationActivity extends AppCompatActivity {
         });
     }
 
-    private void getDetailLomba() {
-        StringRequest request = new StringRequest(Request.Method.POST, Constant.DETAIL_LOMBA, response -> {
-            // Handle the response
-            Log.d("Response", response);
-            try {
-                JSONObject res = new JSONObject(response);
-
-                int status_code = res.getInt("status_code");
-                String message =  res.getString("message");
-
-                if (status_code == 200 && message.equals("Success")) {
-                    JSONObject detailLomba = res.getJSONObject("response");
-
-                    judul.setText(detailLomba.getString("nama_lomba"));
-                    jenis.setText(detailLomba.getString("info"));
-                    status.setText(detailLomba.getString("status"));
-                    deskripsi.setText(detailLomba.getString("detail_lomba"));
-                    tgl_mulai.setText(formatDate(detailLomba.getString("tanggal_mulai")));
-                    tgl_selesai.setText(formatDate(detailLomba.getString("tanggal_akhir")));
-
-                    loadingMain.cancel();
-                } else {
-                    // Handle the case when the response indicates an error
-
-                    loadingMain.cancel();
-
-                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-
-                loadingMain.cancel();
-
-                // Handle the case when there's a JSON parsing error
-                Toast.makeText(getApplicationContext(), "JSON Parsing Error", Toast.LENGTH_SHORT).show();
-            }
-        }, error -> {
-            error.printStackTrace();
-
-            loadingMain.cancel();
-
-            // Handle the case when there's a network error
-            Toast.makeText(getApplicationContext(), "Network Error", Toast.LENGTH_SHORT).show();
-        }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> headers = new HashMap<>();
-                headers.put("HTTP-TOKEN", "KgncmLUc7qvicKI1OjaLYLkPi");
-                return headers;
-            }
-
-            @Nullable
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("id_lomba", id_lomba + "");
-                return params;
-            }
-        };
-
-        RequestQueue queue = Volley.newRequestQueue(this);
-        queue.add(request);
-    }
+//    private void getDetailLomba() {
+//        StringRequest request = new StringRequest(Request.Method.POST, Constant.DETAIL_LOMBA, response -> {
+//            // Handle the response
+//            Log.d("Response", response);
+//            try {
+//                JSONObject res = new JSONObject(response);
+//
+//                int status_code = res.getInt("status_code");
+//                String message =  res.getString("message");
+//
+//                if (status_code == 200 && message.equals("Success")) {
+//                    JSONObject detailLomba = res.getJSONObject("response");
+//
+//                    judul.setText(detailLomba.getString("nama_lomba"));
+//                    jenis.setText(detailLomba.getString("info"));
+//                    status.setText(detailLomba.getString("status"));
+//                    deskripsi.setText(detailLomba.getString("detail_lomba"));
+//                    tgl_mulai.setText(formatDate(detailLomba.getString("tanggal_mulai")));
+//                    tgl_selesai.setText(formatDate(detailLomba.getString("tanggal_akhir")));
+//
+//                    loadingMain.cancel();
+//                } else {
+//                    // Handle the case when the response indicates an error
+//
+//                    loadingMain.cancel();
+//
+//                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+//                }
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//
+//                loadingMain.cancel();
+//
+//                // Handle the case when there's a JSON parsing error
+//                Toast.makeText(getApplicationContext(), "JSON Parsing Error", Toast.LENGTH_SHORT).show();
+//            }
+//        }, error -> {
+//            error.printStackTrace();
+//
+//            loadingMain.cancel();
+//
+//            // Handle the case when there's a network error
+//            Toast.makeText(getApplicationContext(), "Network Error", Toast.LENGTH_SHORT).show();
+//        }) {
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                Map<String, String> headers = new HashMap<>();
+//                headers.put("HTTP-TOKEN", "KgncmLUc7qvicKI1OjaLYLkPi");
+//                return headers;
+//            }
+//
+//            @Nullable
+//            @Override
+//            protected Map<String, String> getParams() throws AuthFailureError {
+//                Map<String, String> params = new HashMap<>();
+//                params.put("id_lomba", id_lomba + "");
+//                return params;
+//            }
+//        };
+//
+//        RequestQueue queue = Volley.newRequestQueue(this);
+//        queue.add(request);
+//    }
 
     public String formatDate(String inputDate) {
         // Define the input date format

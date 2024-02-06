@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipe_refresh"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorOnPrimary"
+    tools:context=".fragments.PemenangFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Daftar Pemenang"
+            android:textSize="22sp"
+            android:fontFamily="@font/poppinssemibold"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:scrollbars="none"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_below="@id/title">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView_Menu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+        </ScrollView>
+
+    </RelativeLayout>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

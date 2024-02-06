@@ -53,7 +53,7 @@
                 android:id="@+id/text_home"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
-                android:text="Home"
+                android:text="Beranda"
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 android:fontFamily="@font/poppinsregular"
@@ -86,7 +86,7 @@
                 android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
-                android:text="Progress"
+                android:text="Progres"
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 android:fontFamily="@font/poppinsregular"
@@ -96,7 +96,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/bookmark_layout"
+            android:id="@+id/achievement_layout"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:orientation="horizontal"
@@ -104,23 +104,22 @@
             android:paddingEnd="5dp"
             android:gravity="center"
             android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:visibility="gone">
+            android:background="@android:color/transparent">
 
             <ImageView
-                android:id="@+id/icon_save"
+                android:id="@+id/icon_trophy"
                 android:layout_width="20dp"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
-                android:src="@drawable/ic_save"
-                android:contentDescription="Icon Bookmark" />
+                android:src="@drawable/ic_trophy"
+                android:contentDescription="Icon Achievement" />
 
             <TextView
-                android:id="@+id/text_save"
+                android:id="@+id/text_pemenang"
                 android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
-                android:text="Bookmark"
+                android:text="Pemenang"
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 android:fontFamily="@font/poppinsregular"

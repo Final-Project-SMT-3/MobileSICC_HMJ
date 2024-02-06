@@ -79,7 +79,7 @@ public class UploadJudulFragment extends Fragment {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                getDetailJudul();
+//                getDetailJudul();
             }
         }, 500);
 
@@ -87,7 +87,7 @@ public class UploadJudulFragment extends Fragment {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    pengajuanJudul();
+//                    pengajuanJudul();
                 }
             }, 500);
         });
@@ -148,221 +148,221 @@ public class UploadJudulFragment extends Fragment {
         }
     }
 
-    private void getDetailJudul() {
-        StringRequest request = new StringRequest(Request.Method.POST, Constant.DETAIL_JUDUL, response -> {
-            try {
-                JSONObject res = new JSONObject(response);
+//    private void getDetailJudul() {
+//        StringRequest request = new StringRequest(Request.Method.POST, Constant.DETAIL_JUDUL, response -> {
+//            try {
+//                JSONObject res = new JSONObject(response);
+//
+//                int status_code = res.getInt("status_code");
+//                String message = res.getString("message");
+//
+//                if (status_code == 200 && message.equals("Success")) {
+//                    JSONObject dataJudul = res.getJSONObject("response");
+//
+//                    id_dosen = dataJudul.getString("id_dospem");
+//                    id_pj = dataJudul.getString("id_pengajuan_judul");
+//                    String nama_dosen = dataJudul.getString("nama_dospem");
+//                    String judul = dataJudul.getString("judul");
+//                    String review = dataJudul.getString("review");
+//                    String tanggal_pengajuan = dataJudul.getString("submit_date");
+//                    String status_judul = dataJudul.getString("status_judul");
+//
+//                    if (status_judul.equals("Revision")) {
+//                        title_review.setVisibility(View.VISIBLE);
+//                        cardReview.setVisibility(View.VISIBLE);
+//                        btn_pengajuan.setText("Ajukan Revisi Judul");
+//
+//                        txt_nama_dosen.setText(formatDosen(nama_dosen));
+//                        txt_review_dospem.setText(review);
+//                        txt_judul.setText(judul);
+//                        tgl_pengajuan.setText("Pengajuan : " + formatDate(tanggal_pengajuan));
+//
+//                        btn_pengajuan.setOnClickListener(v-> {
+//                            Handler handler = new Handler();
+//                            handler.postDelayed(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    pengajuanRevisiJudul();
+//                                }
+//                            }, 500);
+//                        });
+//                    }
+//
+//                    loadingMain.cancel();
+//                } else {
+//                    loadingMain.cancel();
+//
+//                    // Handle the case when the response indicates an error
+//                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+//                }
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//
+//                loadingMain.cancel();
+//
+//                // Handle the case when there's a JSON parsing error
+//                Toast.makeText(getContext(), "JSON Parsing Error", Toast.LENGTH_SHORT).show();
+//            }
+//        }, error -> {
+//            error.printStackTrace();
+//
+//            loadingMain.cancel();
+//
+//            // Handle the case when there's a network error
+//            Toast.makeText(getContext(), "Network Error", Toast.LENGTH_SHORT).show();
+//        }) {
+//            String id_mahasiswa = String.valueOf(sharedPreferences.getInt("id_user", 0));
+//
+//            @Nullable
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                Map<String, String> headers = new HashMap<>();
+//                headers.put("HTTP-TOKEN", "KgncmLUc7qvicKI1OjaLYLkPi");
+//                return headers;
+//            }
+//
+//            @Nullable
+//            @Override
+//            protected Map<String, String> getParams() throws AuthFailureError {
+//                Map<String,String> params = new HashMap<>();
+//                params.put("id_mhs", id_mahasiswa);
+//                return params;
+//            }
+//        };
+//
+//        RequestQueue queue = Volley.newRequestQueue(requireContext());
+//        queue.add(request);
+//    }
 
-                int status_code = res.getInt("status_code");
-                String message = res.getString("message");
+//    private void pengajuanJudul() {
+//        StringRequest request = new StringRequest(Request.Method.POST, Constant.PENGAJUAN_JUDUL, response -> {
+//            try {
+//                JSONObject res = new JSONObject(response);
+//
+//                int status_code = res.getInt("status_code");
+//                String message = res.getString("message");
+//
+//                if (status_code == 200 && message.equals("Success")) {
+//                    String detail_message = res.getString("response");
+//
+//                    Toast.makeText(getContext(), detail_message, Toast.LENGTH_SHORT).show();
+//
+//                    // Redirect Into Waiting
+//                    FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
+//                    transaction.setReorderingAllowed(true);
+//                    transaction.replace(R.id.fragment_container_progress, MsgWaitingFragment.class, null);
+//                    transaction.addToBackStack(null);
+//                    transaction.commit();
+//
+//                    loadingMain.cancel();
+//                } else {
+//                    loadingMain.cancel();
+//
+//                    // Handle the case when the response indicates an error
+//                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+//                }
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//
+//                loadingMain.cancel();
+//
+//                // Handle the case when there's a JSON parsing error
+//                Toast.makeText(getContext(), "JSON Parsing Error", Toast.LENGTH_SHORT).show();
+//            }
+//        }, error -> {
+//            error.printStackTrace();
+//
+//            loadingMain.cancel();
+//
+//            // Handle the case when there's a network error
+//            Toast.makeText(getContext(), "Network Error", Toast.LENGTH_SHORT).show();
+//        }) {
+//            String judul = txt_judul.getText().toString();
+//            @Nullable
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                Map<String, String> headers = new HashMap<>();
+//                headers.put("HTTP-TOKEN", "KgncmLUc7qvicKI1OjaLYLkPi");
+//                return headers;
+//            }
+//
+//            @Nullable
+//            @Override
+//            protected Map<String, String> getParams() throws AuthFailureError {
+//                Map<String,String> params = new HashMap<>();
+//                params.put("id_dospem", id_dosen);
+//                params.put("judul", judul);
+//                return params;
+//            }
+//        };
+//
+//        RequestQueue queue = Volley.newRequestQueue(requireContext());
+//        queue.add(request);
+//    }
 
-                if (status_code == 200 && message.equals("Success")) {
-                    JSONObject dataJudul = res.getJSONObject("response");
-
-                    id_dosen = dataJudul.getString("id_dospem");
-                    id_pj = dataJudul.getString("id_pengajuan_judul");
-                    String nama_dosen = dataJudul.getString("nama_dospem");
-                    String judul = dataJudul.getString("judul");
-                    String review = dataJudul.getString("review");
-                    String tanggal_pengajuan = dataJudul.getString("submit_date");
-                    String status_judul = dataJudul.getString("status_judul");
-
-                    if (status_judul.equals("Revision")) {
-                        title_review.setVisibility(View.VISIBLE);
-                        cardReview.setVisibility(View.VISIBLE);
-                        btn_pengajuan.setText("Ajukan Revisi Judul");
-
-                        txt_nama_dosen.setText(formatDosen(nama_dosen));
-                        txt_review_dospem.setText(review);
-                        txt_judul.setText(judul);
-                        tgl_pengajuan.setText("Pengajuan : " + formatDate(tanggal_pengajuan));
-
-                        btn_pengajuan.setOnClickListener(v-> {
-                            Handler handler = new Handler();
-                            handler.postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    pengajuanRevisiJudul();
-                                }
-                            }, 500);
-                        });
-                    }
-
-                    loadingMain.cancel();
-                } else {
-                    loadingMain.cancel();
-
-                    // Handle the case when the response indicates an error
-                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-
-                loadingMain.cancel();
-
-                // Handle the case when there's a JSON parsing error
-                Toast.makeText(getContext(), "JSON Parsing Error", Toast.LENGTH_SHORT).show();
-            }
-        }, error -> {
-            error.printStackTrace();
-
-            loadingMain.cancel();
-
-            // Handle the case when there's a network error
-            Toast.makeText(getContext(), "Network Error", Toast.LENGTH_SHORT).show();
-        }) {
-            String id_mahasiswa = String.valueOf(sharedPreferences.getInt("id_user", 0));
-
-            @Nullable
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> headers = new HashMap<>();
-                headers.put("HTTP-TOKEN", "KgncmLUc7qvicKI1OjaLYLkPi");
-                return headers;
-            }
-
-            @Nullable
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> params = new HashMap<>();
-                params.put("id_mhs", id_mahasiswa);
-                return params;
-            }
-        };
-
-        RequestQueue queue = Volley.newRequestQueue(requireContext());
-        queue.add(request);
-    }
-
-    private void pengajuanJudul() {
-        StringRequest request = new StringRequest(Request.Method.POST, Constant.PENGAJUAN_JUDUL, response -> {
-            try {
-                JSONObject res = new JSONObject(response);
-
-                int status_code = res.getInt("status_code");
-                String message = res.getString("message");
-
-                if (status_code == 200 && message.equals("Success")) {
-                    String detail_message = res.getString("response");
-
-                    Toast.makeText(getContext(), detail_message, Toast.LENGTH_SHORT).show();
-
-                    // Redirect Into Waiting
-                    FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
-                    transaction.setReorderingAllowed(true);
-                    transaction.replace(R.id.fragment_container_progress, MsgWaitingFragment.class, null);
-                    transaction.addToBackStack(null);
-                    transaction.commit();
-
-                    loadingMain.cancel();
-                } else {
-                    loadingMain.cancel();
-
-                    // Handle the case when the response indicates an error
-                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-
-                loadingMain.cancel();
-
-                // Handle the case when there's a JSON parsing error
-                Toast.makeText(getContext(), "JSON Parsing Error", Toast.LENGTH_SHORT).show();
-            }
-        }, error -> {
-            error.printStackTrace();
-
-            loadingMain.cancel();
-
-            // Handle the case when there's a network error
-            Toast.makeText(getContext(), "Network Error", Toast.LENGTH_SHORT).show();
-        }) {
-            String judul = txt_judul.getText().toString();
-            @Nullable
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> headers = new HashMap<>();
-                headers.put("HTTP-TOKEN", "KgncmLUc7qvicKI1OjaLYLkPi");
-                return headers;
-            }
-
-            @Nullable
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> params = new HashMap<>();
-                params.put("id_dospem", id_dosen);
-                params.put("judul", judul);
-                return params;
-            }
-        };
-
-        RequestQueue queue = Volley.newRequestQueue(requireContext());
-        queue.add(request);
-    }
-
-    private void pengajuanRevisiJudul() {
-        StringRequest request = new StringRequest(Request.Method.POST, Constant.PENGAJUAN_REVISI_JUDUL, response -> {
-            try {
-                JSONObject res = new JSONObject(response);
-
-                int status_code = res.getInt("status_code");
-                String message = res.getString("message");
-
-                if (status_code == 200 && message.equals("Success")) {
-                    String detail_message = res.getString("response");
-
-                    Toast.makeText(getContext(), detail_message, Toast.LENGTH_SHORT).show();
-
-                    // Redirect Into Waiting
-                    FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
-                    transaction.setReorderingAllowed(true);
-                    transaction.replace(R.id.fragment_container_progress, MsgWaitingFragment.class, null);
-                    transaction.addToBackStack(null);
-                    transaction.commit();
-
-                    loadingMain.cancel();
-                } else {
-                    loadingMain.cancel();
-
-                    // Handle the case when the response indicates an error
-                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-
-                loadingMain.cancel();
-
-                // Handle the case when there's a JSON parsing error
-                Toast.makeText(getContext(), "JSON Parsing Error", Toast.LENGTH_SHORT).show();
-            }
-        }, error -> {
-            error.printStackTrace();
-
-            loadingMain.cancel();
-
-            // Handle the case when there's a network error
-            Toast.makeText(getContext(), "Network Error", Toast.LENGTH_SHORT).show();
-        }) {
-            String judul = txt_judul.getText().toString();
-            @Nullable
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> headers = new HashMap<>();
-                headers.put("HTTP-TOKEN", "KgncmLUc7qvicKI1OjaLYLkPi");
-                return headers;
-            }
-
-            @Nullable
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> params = new HashMap<>();
-                params.put("id_pj", id_pj);
-                params.put("judul", judul);
-                return params;
-            }
-        };
-
-        RequestQueue queue = Volley.newRequestQueue(requireContext());
-        queue.add(request);
-    }
+//    private void pengajuanRevisiJudul() {
+//        StringRequest request = new StringRequest(Request.Method.POST, Constant.PENGAJUAN_REVISI_JUDUL, response -> {
+//            try {
+//                JSONObject res = new JSONObject(response);
+//
+//                int status_code = res.getInt("status_code");
+//                String message = res.getString("message");
+//
+//                if (status_code == 200 && message.equals("Success")) {
+//                    String detail_message = res.getString("response");
+//
+//                    Toast.makeText(getContext(), detail_message, Toast.LENGTH_SHORT).show();
+//
+//                    // Redirect Into Waiting
+//                    FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
+//                    transaction.setReorderingAllowed(true);
+//                    transaction.replace(R.id.fragment_container_progress, MsgWaitingFragment.class, null);
+//                    transaction.addToBackStack(null);
+//                    transaction.commit();
+//
+//                    loadingMain.cancel();
+//                } else {
+//                    loadingMain.cancel();
+//
+//                    // Handle the case when the response indicates an error
+//                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+//                }
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//
+//                loadingMain.cancel();
+//
+//                // Handle the case when there's a JSON parsing error
+//                Toast.makeText(getContext(), "JSON Parsing Error", Toast.LENGTH_SHORT).show();
+//            }
+//        }, error -> {
+//            error.printStackTrace();
+//
+//            loadingMain.cancel();
+//
+//            // Handle the case when there's a network error
+//            Toast.makeText(getContext(), "Network Error", Toast.LENGTH_SHORT).show();
+//        }) {
+//            String judul = txt_judul.getText().toString();
+//            @Nullable
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                Map<String, String> headers = new HashMap<>();
+//                headers.put("HTTP-TOKEN", "KgncmLUc7qvicKI1OjaLYLkPi");
+//                return headers;
+//            }
+//
+//            @Nullable
+//            @Override
+//            protected Map<String, String> getParams() throws AuthFailureError {
+//                Map<String,String> params = new HashMap<>();
+//                params.put("id_pj", id_pj);
+//                params.put("judul", judul);
+//                return params;
+//            }
+//        };
+//
+//        RequestQueue queue = Volley.newRequestQueue(requireContext());
+//        queue.add(request);
+//    }
 }
