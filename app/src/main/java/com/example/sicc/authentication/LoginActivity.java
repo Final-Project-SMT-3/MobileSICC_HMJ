@@ -185,7 +185,7 @@ public class LoginActivity extends AppCompatActivity {
                         SharedPreferences userPref = getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = userPref.edit();
                         editor.putInt("id_user", userData.getInt("id"));
-                        editor.putString("nama", userData.getString("name"));
+                        editor.putString("nama_ketua", userData.getString("name"));
                         editor.putString("email", userData.getString("email"));
                         editor.putString("role", userData.getString("role"));
                         editor.putBoolean("isLogin", true);

@@ -50,7 +50,7 @@ public class SearchLombaActivity extends AppCompatActivity {
         searchView.clearFocus();
         recyclerView = findViewById(R.id.recyclerView_Lomba);
 
-//        getDataLomba();
+        getDataLomba();
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -71,68 +71,61 @@ public class SearchLombaActivity extends AppCompatActivity {
         });
     }
 
-//    private void getDataLomba() {
-//        arrayList = new ArrayList<>();
-//
-//        StringRequest request = new StringRequest(Request.Method.GET, Constant.LOMBA, response -> {
-//            try {
-//                JSONObject res = new JSONObject(response);
-//
-//                int statusCode = res.getInt("status_code");
-//                String message = res.getString("message");
-//
-//                if (statusCode == 200 && message.equals("Success")) {
-//                    JSONArray dataLomba = res.getJSONArray("response");
-//
-//                    for (int i = 0; i < dataLomba.length(); i++) {
-//                        JSONObject objectLomba = dataLomba.getJSONObject(i);
-//
-//                        Lomba lomba = new Lomba();
-//
-//                        lomba.setId_lomba(objectLomba.getInt("id"));
-//                        lomba.setNama_lomba(objectLomba.getString("nama_lomba"));
-//                        lomba.setFoto_lomba(objectLomba.getJSONArray("detailLomba").getJSONObject(0).optString("foto", "-"));
-//                        lomba.setJenis_lomba(objectLomba.getJSONArray("detailPelaksanaan").
-//                                getJSONObject(0).optString("info", "-"));
-//
-//                        arrayList.add(lomba);
-//                    }
-//
-//
-//                    adapter = new LombaSearchAdapter(this, arrayList);
-//                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-//                    recyclerView.setLayoutManager(layoutManager);
-//                    recyclerView.setAdapter(adapter);
-//                } else {
-//                    // Handle the case when the response indicates an error
-//
-//                    Toast.makeText(this.getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-//                }
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//
-//                // Handle the case when there's a JSON parsing error
-//
-//                Toast.makeText(this.getApplicationContext(), "JSON Parsing Error", Toast.LENGTH_SHORT).show();
-//            }
-//        }, error -> {
-//            error.printStackTrace();
-//
-//            // Handle the case when there's a network error
-//
-//            Toast.makeText(this.getApplicationContext(), "Network Error", Toast.LENGTH_SHORT).show();
-//        }) {
-//            @Override
-//            public Map<String, String> getHeaders() throws AuthFailureError {
-//                Map<String, String> headers = new HashMap<>();
-//                headers.put("HTTP-TOKEN", "KgncmLUc7qvicKI1OjaLYLkPi");
-//                return headers;
-//            }
-//        };
-//
-//        RequestQueue queue = Volley.newRequestQueue(this.getApplicationContext());
-//        queue.add(request);
-//    }
+    private void getDataLomba() {
+        arrayList = new ArrayList<>();
+
+        StringRequest request = new StringRequest(Request.Method.GET, Constant.LOMBA, response -> {
+            try {
+                JSONObject res = new JSONObject(response);
+
+                int statusCode = res.getInt("status_code");
+                String message = res.getString("message");
+
+                if (statusCode == 200 && message.equals("Success")) {
+                    JSONArray dataLomba = res.getJSONArray("response");
+
+                    for (int i = 0; i < dataLomba.length(); i++) {
+                        JSONObject objectLomba = dataLomba.getJSONObject(i);
+
+                        Lomba lomba = new Lomba();
+
+                        lomba.setId_lomba(objectLomba.getInt("id"));
+                        lomba.setNama_lomba(objectLomba.getString("nama_lomba"));
+                        lomba.setFoto_lomba(objectLomba.getJSONArray("detail_lomba").getJSONObject(0).optString("foto", "-"));
+                        lomba.setJenis_lomba(objectLomba.getJSONArray("pelaksanaan_lomba").
+                                getJSONObject(0).optString("info", "-"));
+
+                        arrayList.add(lomba);
+                    }
+
+
+                    adapter = new LombaSearchAdapter(this, arrayList);
+                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+                    recyclerView.setLayoutManager(layoutManager);
+                    recyclerView.setAdapter(adapter);
+                } else {
+                    // Handle the case when the response indicates an error
+
+                    Toast.makeText(this.getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+
+                // Handle the case when there's a JSON parsing error
+
+                Toast.makeText(this.getApplicationContext(), "JSON Parsing Error", Toast.LENGTH_SHORT).show();
+            }
+        }, error -> {
+            error.printStackTrace();
+
+            // Handle the case when there's a network error
+
+            Toast.makeText(this.getApplicationContext(), "Network Error", Toast.LENGTH_SHORT).show();
+        });
+
+        RequestQueue queue = Volley.newRequestQueue(this.getApplicationContext());
+        queue.add(request);
+    }
 
     private void filterResults(String searchText) {
         adapter.getFilter().filter(searchText);

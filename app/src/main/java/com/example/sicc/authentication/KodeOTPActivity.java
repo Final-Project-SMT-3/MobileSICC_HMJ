@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -38,6 +39,7 @@ public class KodeOTPActivity extends AppCompatActivity {
     private PinView pinView;
     private long backPressedTime = 0;
     private LoadingMain loadingMain;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,7 @@ public class KodeOTPActivity extends AppCompatActivity {
         btn_back = findViewById(R.id.btn_back);
         btn_konfirmasi = findViewById(R.id.btn_Confirm);
         pinView = findViewById(R.id.txt_codeOTP);
+        sharedPreferences = getApplicationContext().getSharedPreferences("email_reset", Context.MODE_PRIVATE);
         loadingMain = new LoadingMain(this);
 
         Handler handler = new Handler();
@@ -67,7 +70,7 @@ public class KodeOTPActivity extends AppCompatActivity {
                     if (!pinView.getText().toString().isEmpty()) {
                         loadingMain.show();
 
-//                        cekCodeOTP();
+                        cekCodeOTP();
                     } else {
                         Toast.makeText(getApplicationContext(), "Masukan Kode OTP Yang Kami Kirim Di Email Anda", Toast.LENGTH_SHORT).show();
                     }
@@ -95,7 +98,7 @@ public class KodeOTPActivity extends AppCompatActivity {
                         public void run() {
                             loadingMain.show();
 
-//                            cekCodeOTP();
+                            cekCodeOTP();
                         }
                     }, 500);
                 }
@@ -108,61 +111,62 @@ public class KodeOTPActivity extends AppCompatActivity {
         });
     }
 
-//    private void cekCodeOTP() {
-//        StringRequest request = new StringRequest(Request.Method.POST, Constant.CEK_OTP, response -> {
-//            try {
-//                JSONObject res = new JSONObject(response);
-//
-//                int statusCode = res.getInt("status_code");
-//                String message = res.getString("message");
-//
-//                if (statusCode == 200 && message.equals("Success")) {
-//
-//                    startActivity(new Intent(KodeOTPActivity.this, UbahPasswordActivity.class));
-//                    Animatoo.INSTANCE.animateSlideLeft(this);
-//                    finish();
-//
-//                    loadingMain.cancel();
-//                } else {
-//                    // Handle the case when the response indicates an error
-//
-//                    loadingMain.cancel();
-//
-//                    Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-//                }
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//
-//                loadingMain.cancel();
-//
-//                Toast.makeText(this, "JSON Parsing Error", Toast.LENGTH_SHORT).show();
-//            }
-//        }, error -> {
-//            error.printStackTrace();
-//
-//            loadingMain.cancel();
-//
-//            Toast.makeText(this, "Network Error", Toast.LENGTH_SHORT).show();
-//        }) {
-//            @Override
-//            public Map<String, String> getHeaders() {
-//                Map<String, String> headers = new HashMap<>();
-//                headers.put("HTTP-TOKEN", "KgncmLUc7qvicKI1OjaLYLkPi");
-//                return headers;
-//            }
-//
-//            @Override
-//            protected Map<String,String> getParams(){
-//                Map<String,String> params = new HashMap<String, String>();
-//                params.put("otp", pinView.getText().toString());
-//                return params;
-//            }
-//        };
-//
-//        RequestQueue requestQueue = Volley.newRequestQueue(this);
-//        request.setRetryPolicy(new DefaultRetryPolicy(30000, 5, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-//        requestQueue.add(request);
-//    }
+    private void cekCodeOTP() {
+        StringRequest request = new StringRequest(Request.Method.POST, Constant.CEK_OTP, response -> {
+            try {
+                JSONObject res = new JSONObject(response);
+
+                int statusCode = res.getInt("status_code");
+                String message = res.getString("message");
+
+                if (statusCode == 200 && message.equals("Success")) {
+
+                    SharedPreferences userPref = getSharedPreferences("code_otp", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = userPref.edit();
+                    editor.putString("code_otp", pinView.getText().toString().trim());
+                    editor.apply();
+
+                    startActivity(new Intent(KodeOTPActivity.this, UbahPasswordActivity.class));
+                    Animatoo.INSTANCE.animateSlideLeft(this);
+                    finish();
+
+                    loadingMain.cancel();
+                } else {
+                    // Handle the case when the response indicates an error
+
+                    loadingMain.cancel();
+
+                    Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+
+                loadingMain.cancel();
+
+                Toast.makeText(this, "JSON Parsing Error", Toast.LENGTH_SHORT).show();
+            }
+        }, error -> {
+            error.printStackTrace();
+
+            loadingMain.cancel();
+
+            Toast.makeText(this, "Network Error", Toast.LENGTH_SHORT).show();
+        }) {
+            String email = sharedPreferences.getString("email", "-");
+
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("email", email);
+                params.put("otp", pinView.getText().toString());
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        request.setRetryPolicy(new DefaultRetryPolicy(30000, 5, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        requestQueue.add(request);
+    }
 
     @Override
     public void onBackPressed() {

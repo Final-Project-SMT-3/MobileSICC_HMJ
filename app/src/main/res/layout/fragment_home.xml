@@ -100,7 +100,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_information"
                 android:layout_width="match_parent"
-                android:layout_height="190dp"
+                android:layout_height="160dp"
                 app:cardElevation="5dp"
                 app:cardCornerRadius="10dp"
                 app:cardBackgroundColor="@color/colorPrimary"
@@ -171,7 +171,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:gravity="center"
-                        android:layout_marginTop="11dp"
+                        android:layout_marginTop="15dp"
                         android:layout_marginStart="15dp"
                         android:layout_marginEnd="15dp"
                         android:orientation="horizontal">
@@ -236,35 +236,6 @@
                         </androidx.cardview.widget.CardView>
 
                     </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginEnd="15dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Dosen Pembimbing :"
-                            android:textSize="13sp"
-                            android:textColor="@color/white_gray"
-                            android:fontFamily="@font/poppinsmedium" />
-
-                        <TextView
-                            android:id="@+id/nama_dospem"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text=""
-                            android:textSize="13sp"
-                            android:textColor="@color/white_gray"
-                            android:fontFamily="@font/poppinsmedium"
-                            android:layout_marginStart="5dp"/>
-
-                    </LinearLayout>
-
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
